@@ -1,5 +1,4 @@
 用户手册WHC version 0.0.6 
-
 一、基础环境准备
 
 1、创建钱包
@@ -11,7 +10,7 @@
 2、燃烧BCH->WHC
     
     #燃烧操作
-    root@iZhp3gsd1ofz82zei2wx49Z:~# wormholed-cli whc_burnbchgetwhc 20
+    root@iZhp3gsd1ofz82zei2wx49Z:~# wormholed-cli whc_burnbchgetwhc 10
     6b8b98f7248f96b168b8127e3eb31cabb00fd6a5eed5df6d012816d7b4335974
     
     #查询交易信息（确认后）
