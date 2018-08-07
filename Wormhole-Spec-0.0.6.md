@@ -745,6 +745,12 @@ tokenID(Property ID) |Currency identifier|5
 >   0000000c:tokenID
 
 示例交易：65fbd27bd1219b6c820aff9c43b2e175530cb0af0bbf14532fff132888af4906
+
+## 如何升级
+1. 下载0.0.6版本的代码：https://github.com/copernet/wormhole/releases/tag/Earth-0.0.6-pre-release
+2. 初次运行0.0.6版本的代码，使用如下命令：`wormholed -startclean=1 -daemon`
+3. 当0.0.6版本启动成功后，再次重启时，使用如下命令：`wormholed -daemon`
+
 --------
                                             `Wormhole 姚永芯`
                                                     2018.08.06
