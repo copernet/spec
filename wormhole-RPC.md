@@ -33,31 +33,21 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 *   该地址存在活跃众筹时，返回活跃众筹资产的信息
 *   不存在活跃众筹，返回`{}`.
 示例如下
->wormholed-cli whc_getactivecrowd  qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q
-
->{
- 
-> "propertyid": 168,
-  
->  "name": "bcext",
-  
->  "category": "bcext development",
-  
->  "subcategory": "gcash cashwallet cashutil neutrino",
-  
->  "data": "contribute to bitcoin-abc",
-  
->  "url": "https://github.com/bcext",
-  
->  "precision": 8,
-  
->  "issuer": "bitcoincash:qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q",
-  
->  "creationtxid": "1f2a39a5fce4e2ce877b611925ef4c6eedb805c1337edd8f1d4bab49e2fe2449",
-  
->  "totaltokens": "100000000.12345678"
-  
->}
+```
+wormholed-cli whc_getactivecrowd  qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q
+{ 
+ "propertyid": 168,  
+  "name": "bcext",  
+  "category": "bcext development",  
+  "subcategory": "gcash cashwallet cashutil neutrino",  
+  "data": "contribute to bitcoin-abc",  
+  "url": "https://github.com/bcext",  
+  "precision": 8,  
+  "issuer": "bitcoincash:qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q",  
+  "creationtxid": "1f2a39a5fce4e2ce877b611925ef4c6eedb805c1337edd8f1d4bab49e2fe2449",  
+  "totaltokens": "100000000.12345678"
+}
+```
 
 返回值字段描述
 
@@ -85,32 +75,21 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 *   存在金额非0的token，返回该token的金额信息；否则返回`{}`.
 
 示例如下
-
->   wormholed-cli whc_getallbalancesforaddress qr3pzyxl33vdhga54rvh80s62pjznl9eyu9k7q9tmv
-
->[
-
->       {
-
->         "propertyid": 1,
-        
->         "balance": "14.00000000",
-
->         "reserved": "0.00000000"
-
->       },
-
->       {
-
->         "propertyid": 3,
-
->         "balance": "500",
-
->         "reserved": "0"
-
->       }
-
->]
+```
+wormholed-cli whc_getallbalancesforaddress qr3pzyxl33vdhga54rvh80s62pjznl9eyu9k7q9tmv
+[
+       {
+         "propertyid": 1,        
+         "balance": "14.00000000",
+         "reserved": "0.00000000"
+       },
+       {
+         "propertyid": 3,
+         "balance": "500",
+         "reserved": "0"
+       }
+]
+```
 
 返回值字段描述
 
@@ -131,31 +110,21 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 *   含有该资产的地址列表
 
 示例如下
->   wormholed-cli whc_getallbalancesforid 1
-
->[
-
->   {
-
->       "address": "bitcoincash:qrpcu87d3y83jg6pjhxrk7ys2225rp9m25nypfvtvk",
-
->       "balance": "0.00003000",
-
->       "reserved": "0.00000000"
-
->   },
-
->   {
-
->       "address": "bitcoincash:qzf6rh7z40963a9jhh8agmnexw486g205upjjhsfzl",
-
->       "balance": "100.00000000",
-
->       "reserved": "0.00000000"
-
->   }
-
->]
+```
+wormholed-cli whc_getallbalancesforid 1
+[
+   {
+       "address": "bitcoincash:qrpcu87d3y83jg6pjhxrk7ys2225rp9m25nypfvtvk",
+       "balance": "0.00003000",
+       "reserved": "0.00000000"
+   },
+   {
+       "address": "bitcoincash:qzf6rh7z40963a9jhh8agmnexw486g205upjjhsfzl",
+       "balance": "100.00000000",
+       "reserved": "0.00000000"
+   }
+]
+```
 
 返回值字段描述
 
@@ -174,19 +143,15 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：资产在系统中存在的状态哈希
 
 示例如下
->   wormholed-cli whc_getbalanceshash 1
-
->{
-
->  "block": 542347,
-
->  "blockhash": "000000000000000000f6d63c8adeff1f4bc6fe3618d73f74813c05f08761060a",
-
->  "propertyid": 1,
-
->  "balanceshash": "f4a051549368b79409b25ad5c3dba4a9e8b0434996d88be8281969f204b35dee"
-
->}
+```
+wormholed-cli whc_getbalanceshash 1
+{
+  "block": 542347,
+  "blockhash": "000000000000000000f6d63c8adeff1f4bc6fe3618d73f74813c05f08761060a",
+  "propertyid": 1,
+  "balanceshash": "f4a051549368b79409b25ad5c3dba4a9e8b0434996d88be8281969f204b35dee"
+}
+```
 
 返回值字段描述
 
@@ -208,15 +173,13 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 
 返回值：指定地址的指定资产的金额信息
 示例如下
->   wormholed-cli whc_getbalance qqmrktdkuj0qtu0dyef0h2xkn7u6stycuvk70k0ups 1
-
->{
-
->  "balance": "5.00000000",
-
->  "reserved": "0.00000000"
-
->}
+```
+wormholed-cli whc_getbalance qqmrktdkuj0qtu0dyef0h2xkn7u6stycuvk70k0ups 1
+{
+  "balance": "5.00000000",
+  "reserved": "0.00000000"
+}
+```
 
 返回值字段描述
 
@@ -237,51 +200,31 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：返回众筹资产的信息
 
 示例如下
->    wormholed-cli  whc_getcrowdsale  168 true
-
->{
-
->  "propertyid": 168,
-
->  "name": "bcext",
-
->  "active": true,
-
->  "issuer": "bitcoincash:qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q",
-
->  "propertyiddesired": 1,
-
->  "precision": "8",
-
->  "tokensperunit": "1000.11111111",
-
->  "earlybonus": 10,
-
->  "starttime": 1533266569,
-
->  "deadline": 1534733523,
-
->  "amountraised": "1.12345000",
-
->  "tokensissued": "100000000.12345678",
-
->  "addedissuertokens": "0.00000000",
-
->  "participanttransactions": [
-
->    {
-
->      "txid": "ebdc302cddb8fad9e8e11a210af7c01e57b4cf3c883b1ff7d504b4a3791177da",
-
->      "amountsent": "1.12345000",
-
->      "participanttokens": "1393.76317766"
-
->    }
-
->  ]
-
->}
+```
+wormholed-cli  whc_getcrowdsale  168 true
+{
+  "propertyid": 168,
+  "name": "bcext",
+  "active": true,
+  "issuer": "bitcoincash:qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q",
+  "propertyiddesired": 1,
+  "precision": "8",
+  "tokensperunit": "1000.11111111",
+  "earlybonus": 10,
+  "starttime": 1533266569,
+  "deadline": 1534733523,
+  "amountraised": "1.12345000",
+  "tokensissued": "100000000.12345678",
+  "addedissuertokens": "0.00000000",
+  "participanttransactions": [
+    {
+      "txid": "ebdc302cddb8fad9e8e11a210af7c01e57b4cf3c883b1ff7d504b4a3791177da",
+      "amountsent": "1.12345000",
+      "participanttokens": "1393.76317766"
+    }
+  ]
+}
+```
 
 返回值字段描述
 
@@ -313,17 +256,14 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：系统状态的哈希
 
 示例如下
->   wormholed-cli whc_getcurrentconsensushash
-
->{
-
->  "block": 542354,
-
->  "blockhash": "00000000000000000104a3002e3ddf7ccc835751e09ef3335a22078b129c2c71",
-
->  "consensushash": "95e4e7fa0d92f84b18ec45ad9b39fdafcc5200ba8175227d7d571864aa5948c9"
-
->}
+```
+wormholed-cli whc_getcurrentconsensushash
+{
+  "block": 542354,
+  "blockhash": "00000000000000000104a3002e3ddf7ccc835751e09ef3335a22078b129c2c71",
+  "consensushash": "95e4e7fa0d92f84b18ec45ad9b39fdafcc5200ba8175227d7d571864aa5948c9"
+}
+```
 
 返回值字段描述
 
@@ -341,41 +281,26 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：管理资产的增发或销毁信息
 
 示例如下
->   wormholed-cli whc_getgrants 166
-
->{
-
->  "propertyid": 166,
-
->  "name": "blockchain extension development",
-
->  "issuer": "bitcoincash:qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj6a9s",
-
->  "creationtxid": "a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66",
-
->  "totaltokens": "0.00000",
-
->  "issuances": [
-
->    {
-
->        "txid":
-
->        "grant":
-
->    }
-
->    {
-
->        "txid":
-
->        "revoke":
-
->    }
-
->  ]
-
->}
+```
+wormholed-cli whc_getgrants 166
+{
+  "propertyid": 166,
+  "name": "blockchain extension development",
+  "issuer": "bitcoincash:qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj6a9s",
+  "creationtxid": "a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66",
+  "totaltokens": "0.00000",
+  "issuances": [
+    {
+        "txid":
+        "grant":
+    }
+    {
+        "txid":
+        "revoke":
+    }
+  ]
+}
+```
 
 返回值字段描述
 
@@ -400,15 +325,13 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：指定交易中wormhole协议的数据
 
 示例如下
->   wormholed-cli whc_getpayload a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66
-
->{
-
->  "payload": "00000036010005000000006263657874207265706f7369746f7279006763617368206361736877616c6c657420636173687574696c206e65757472696e6f00626c6f636b636861696e20657874656e73696f6e20646576656c6f706d656e740068747470733a2f2f6769746875622e636f6d2f626365787400666f72207468652066757475726500",
-
->  "payloadsize": 136
-
->}
+```
+wormholed-cli whc_getpayload a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66
+{
+  "payload": "00000036010005000000006263657874207265706f7369746f7279006763617368206361736877616c6c657420636173687574696c206e65757472696e6f00626c6f636b636861696e20657874656e73696f6e20646576656c6f706d656e740068747470733a2f2f6769746875622e636f6d2f626365787400666f72207468652066757475726500",
+  "payloadsize": 136
+}
+```
 
 返回值字段描述
 
@@ -426,36 +349,23 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：该资产的详细信息
 
 示例如下
->   wormholed-cli whc_getproperty 168
-
->{
-
->  "propertyid": 168,
-
->  "name": "bcext",
-
->  "category": "bcext development",
-
->  "subcategory": "gcash cashwallet cashutil neutrino",
-
->  "data": "contribute to bitcoin-abc",
-
->  "url": "https://github.com/bcext",
-
->  "precision": 8,
-
->  "issuer": "bitcoincash:qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q",
-
->  "creationtxid": "1f2a39a5fce4e2ce877b611925ef4c6eedb805c1337edd8f1d4bab49e2fe2449",
-
->  "fixedissuance": false,
-
->  "managedissuance": false,
-
->  "totaltokens": "100000000.12345678"
-
->}
-
+```
+wormholed-cli whc_getproperty 168
+{
+  "propertyid": 168,
+  "name": "bcext",
+  "category": "bcext development",
+  "subcategory": "gcash cashwallet cashutil neutrino",
+  "data": "contribute to bitcoin-abc",
+  "url": "https://github.com/bcext",
+  "precision": 8,
+  "issuer": "bitcoincash:qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q",
+  "creationtxid": "1f2a39a5fce4e2ce877b611925ef4c6eedb805c1337edd8f1d4bab49e2fe2449",
+  "fixedissuance": false,
+  "managedissuance": false,
+  "totaltokens": "100000000.12345678"
+}
+```
 
 返回值字段描述
 
@@ -485,52 +395,31 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：空投的详细信息
 
 示例如下
->   wormholed-cli whc_getsto 403ec9b6f8b142485ea514d52bc4c782f008021a261f637028a28e1a64681d1b
-
->{
-
->  "txid": "403ec9b6f8b142485ea514d52bc4c782f008021a261f637028a28e1a64681d1b",
-
->  "fee": "268",
-
->  "sendingaddress": "bchtest:qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5",
-
->  "ismine": false,
-
->  "version": 0,
-
->  "type_int": 3,
-
->  "type": "Send To Owners",
-
->  "propertyid": 12,
-
->  "precision": "1",
-
->  "amount": "50.0",
-
->  "totalstofee": "0",
-
->  "recipients": [
-
->  ],
-
->  "valid": false,
-
->  "invalidreason": "Unknown error",
-
->  "blockhash": "000000000000037252bf77bba30e5599b20239eb8f9f68c8b18c238688a27f6b",
-
->  "blocktime": 1531904498,
-
->  "positioninblock": 999999,
-
->  "block": 1247269,
-
->  "confirmations": 3368
-
->}
-
+```
+wormholed-cli whc_getsto 403ec9b6f8b142485ea514d52bc4c782f008021a261f637028a28e1a64681d1b
+{
+  "txid": "403ec9b6f8b142485ea514d52bc4c782f008021a261f637028a28e1a64681d1b",
+  "fee": "268",
+  "sendingaddress": "bchtest:qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5",
+  "ismine": false,
+  "version": 0,
+  "type_int": 3,
+  "type": "Send To Owners",
+  "propertyid": 12,
+  "precision": "1",
+  "amount": "50.0",
+  "totalstofee": "0",
+  "recipients": [
+  ],
+  "valid": false,
+  "invalidreason": "Unknown error",
+  "blockhash": "000000000000037252bf77bba30e5599b20239eb8f9f68c8b18c238688a27f6b",
+  "blocktime": 1531904498,
+  "positioninblock": 999999,
+  "block": 1247269,
+  "confirmations": 3368
+}
+```
 
 返回值字段描述
 
@@ -567,55 +456,33 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：如果为wormhole交易，则返回它的详细信息
 
 示例如下
->   wormholed-cli whc_gettransaction a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66
-
->{
-
->  "txid": "a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66",
-
->  "fee": "390",
-
->  "sendingaddress": "bitcoincash:qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj6a9s",
-
->  "ismine": false,
-
->  "version": 0,
-
->  "type_int": 54,
-
->  "type": "Create Property - Manual",
-
->  "propertyid": 166,
-
->  "precision": "5",
-
->  "ecosystem": "main",
-
->  "category": "bcext repository",
-
->  "subcategory": "gcash cashwallet cashutil neutrino",
-
->  "propertyname": "blockchain extension development",
-
->  "data": "for the future",
-
->  "url": "https://github.com/bcext",
-
->  "amount": "0.00000",
-
->  "valid": true,
-
->  "blockhash": "0000000000000000009179a89e5ef71fabac5404c61a11cc60a21c1d6caefb7e",
-
->  "blocktime": 1533194387,
-
->  "positioninblock": 1553,
-
->  "block": 541634,
-
->  "confirmations": 729
-
->}
+```
+wormholed-cli whc_gettransaction a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66
+{
+  "txid": "a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66",
+  "fee": "390",
+  "sendingaddress": "bitcoincash:qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj6a9s",
+  "ismine": false,
+  "version": 0,
+  "type_int": 54,
+  "type": "Create Property - Manual",
+  "propertyid": 166,
+  "precision": "5",
+  "ecosystem": "main",
+  "category": "bcext repository",
+  "subcategory": "gcash cashwallet cashutil neutrino",
+  "propertyname": "blockchain extension development",
+  "data": "for the future",
+  "url": "https://github.com/bcext",
+  "amount": "0.00000",
+  "valid": true,
+  "blockhash": "0000000000000000009179a89e5ef71fabac5404c61a11cc60a21c1d6caefb7e",
+  "blocktime": 1533194387,
+  "positioninblock": 1553,
+  "block": 541634,
+  "confirmations": 729
+}
+```
 
 返回值字段描述
 
@@ -649,25 +516,18 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：wormhole的交易哈希列表
 
 示例如下
->   wormholed-cli whc_listblocktransactions 541634
-
->[
-
->  "599e5126759a98c977fce4056b14628f4e175d757d090ed11809c9f0474e6d55",
-
->  "fa072ca373c6a38248207eab6a4e85933792628188f6ba6eb99a0fa719d8e808",
-
->  "ec451d67689ed2d990652a013b1af87edce694f5675c11b5063c89889f5fa8ed",
-
->  "548a10ca6c0b36bed39a78e4d47636fa16ccd3b9ba0dadb5882deb4933f83336",
-
->  "72d266f60e6c7ddb64b5009b59bc263da4ee1be89257b1fd1625a3c674b23795",
-
->  "a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66",
-
->  "0956f48b0b097df6d3aa2d34acfe75a362a185fdfe32f90b5683f178558d5569"
-
->]
+```
+wormholed-cli whc_listblocktransactions 541634
+[
+  "599e5126759a98c977fce4056b14628f4e175d757d090ed11809c9f0474e6d55",
+  "fa072ca373c6a38248207eab6a4e85933792628188f6ba6eb99a0fa719d8e808",
+  "ec451d67689ed2d990652a013b1af87edce694f5675c11b5063c89889f5fa8ed",
+  "548a10ca6c0b36bed39a78e4d47636fa16ccd3b9ba0dadb5882deb4933f83336",
+  "72d266f60e6c7ddb64b5009b59bc263da4ee1be89257b1fd1625a3c674b23795",
+  "a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387944cb78ed9d66",
+  "0956f48b0b097df6d3aa2d34acfe75a362a185fdfe32f90b5683f178558d5569"
+]
+```
 
 ### whc_listpendingtransactions
 描述：查询节点交易池中相关地址未确认的wormhole交易
@@ -679,11 +539,11 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：指定地址未确认的交易信息列表
 
 示例如下
->   wormholed-cli whc_listpendingtransactions qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj6a9s
-
->[
-
->]
+```
+wormholed-cli whc_listpendingtransactions qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj6a9s
+[
+]
+```
 
 ### whc_listproperties
 描述：列出整个系统的所有资产信息
@@ -693,65 +553,38 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 返回值：系统的所有资产列表
 
 示例如下
->   wormholed-cli whc_listproperties
-
->[
-
->  {
-
->    "propertyid": 1,
-
->    "name": "WHC",
-
->    "category": "N/A",
-
->    "subcategory": "N/A",
-
->    "data": "WHC serve as the binding between Bitcoin cash, smart properties and contracts created on the Wormhole.",
-
->    "url": "http://www.wormhole.cash",
-
->    "precision": 0
-
->  },
-
->  {
-
->    "propertyid": 3,
-
->    "name": "BFT",
-
->    "category": "BitApp",
-
->    "subcategory": "Blockchain",
-
->    "data": "BitApp Founder Token",
-
->    "url": "ht\ntps://www.bitapp.pro",
-
->    "precision": 0
-
->  },
-
->  {
-
->    "propertyid": 4,
-
->    "name": "WHD",
-
->    "category": "group",
-
->    "subcategory": "coprenet",
-
->    "data": "the mainnet token issued",
-
->    "url": "www.wormhole.cash",
-
->    "precision": 8
-
->  }
-
->]
+```
+wormholed-cli whc_listproperties
+[
+  {
+    "propertyid": 1,
+    "name": "WHC",
+    "category": "N/A",
+    "subcategory": "N/A",
+    "data": "WHC serve as the binding between Bitcoin cash, smart properties and contracts created on the Wormhole.",
+    "url": "http://www.wormhole.cash",
+    "precision": 0
+  },
+  {
+    "propertyid": 3,
+    "name": "BFT",
+    "category": "BitApp",
+    "subcategory": "Blockchain",
+    "data": "BitApp Founder Token",
+    "url": "ht\ntps://www.bitapp.pro",
+    "precision": 0
+  },
+  {
+    "propertyid": 4,
+    "name": "WHD",
+    "category": "group",
+    "subcategory": "coprenet",
+    "data": "the mainnet token issued",
+    "url": "www.wormhole.cash",
+    "precision": 8
+  }
+]
+```
 
 ### whc_listtransactions
 描述：列出块链上与当前节点钱包地址相关的所有交易信息
@@ -768,12 +601,11 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易
 
 返回值：交易信息列表
 示例如下
->wormholed-cli  whc_listtransactions qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5
-
->[
-
->]
-
+```
+wormholed-cli  whc_listtransactions qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5
+[
+]
+```
 
 ## 创建wormhole交易
 方案一
