@@ -1,7 +1,4 @@
 
-
-## version : 0.0.6
-
 ## Wormhole协议的解释
 **WormHole**协议是通过以**bitcoin cash**交易作为载体；使用**bitcoin cash**脚本中特殊的操作码`OP_RETURN`，来将**WormHole**协议追加在该操作码后面。通俗来说：**WormHole**交易是一种特殊的**bitcoin cash**交易，与**bitcoin cash**交易采用相同的安全、确认模型。
 
