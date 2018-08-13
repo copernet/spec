@@ -1,5 +1,21 @@
 测试手册WHC version 0.0.6 
-一、基础环境准备
+
+一、测试环境搭建
+1. 软件下载：https://github.com/copernet/wormhole/releases/tag/Earth-0.0.6-pre-release
+2. 编译安装
+
+     Unix平台：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
+     
+     OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
+     
+     Windows平台：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
+3. 运行及数据同步
+
+     初次运行0.0.6版本的代码，使用如下命令：`wormholed -startclean=1 -daemon`
+     
+     当0.0.6版本启动成功后，下次关机重启时，使用如下命令：`wormholed -daemon`
+
+二、基础环境准备
 
 1、创建钱包
     
@@ -44,7 +60,7 @@
       "reserved": "0.00000000"
     }
     
-二、众筹相关操作
+三、众筹相关操作
 
 1、u1用户发起众筹
     
@@ -311,7 +327,7 @@
       }
     ]
     
-三、创建管理资产
+四、创建管理资产
     
 1、创建资产
     
@@ -584,7 +600,7 @@
     root@iZhp3gsd1ofz82zei2wx49Z:~# wormholed-cli whc_getallbalancesforaddress qpzua24x08gp2czcftm87zt3yut65ahn2g549g05jz
     [
     ]
-四、创建固定数量资产
+五、创建固定数量资产
 
 1、创建资产
 
