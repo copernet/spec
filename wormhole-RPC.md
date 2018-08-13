@@ -1,4 +1,4 @@
-## 数据查询
+## 表一：数据查询
 
 RPC |feature |
 ---|----
@@ -11,7 +11,7 @@ whc_getbalanceshash | 获取本节点当前高度下指定资产的状态哈希
 whc_getcrowdsale | 获取众筹资产的详细信息
 whc_getcurrentconsensushash | 获取本节点当前高度下wormhole系统的状态哈希
 whc_getgrants | 获取指定管理资产的增大，销毁信息
-whc_getpayload | 获取指定交易的wormhole协议数据
+whc_getpayload | 获取指定交易的wormhole载荷数据
 whc_getproperty | 获取指定资产的信息
 whc_getsto | 获取指定空投交易的详细信息
 whc_gettransaction | 获取指定交易的wormhole协议信息
@@ -20,6 +20,39 @@ whc_listpendingtransactions | 获取节点待确认的wormhole交易列表
 whc_listproperties | 列出wormhole系统中的所有token
 whc_listtransactions | 列出与节点钱包中的wormhole交易
 
+
+### whc_getinfo
+解释：获取当前wormhole节点的基本信息
+
+调用：`wormholed-cli whc_getinfo`
+
+返回值：当前wormhole节点的基本信息
+
+示例如下
+```
+wormholed-cli whc_getinfo
+{
+  "wormholeversion_int": 6000,
+  "wormholeversion": "0.0.6",
+  "bitcoincoreversion": "0.17.2",
+  "block": 543198,
+  "blocktime": 1534136847,
+  "blocktransactions": 0,
+  "totaltransactions": 1099,
+  "alerts": [
+  ]
+}
+```
+
+返回值字段描述
+* wormholeversion_int : wormhole 节点的版本
+* wormholeversion ：wormhole 节点的版本
+* bitcoincoreversion ：bitcoin-abc 的版本
+* block ：节点最新的区块高度
+* blocktime：节点最新的区块时间戳
+* blocktransactions ：当前最新的区块中包含的wormhole交易个数
+* totaltransactions ：当前高度下，块链中所有wormhole交易的个数
+* alerts ：节点规则的警告信息
 
 ### whc_getactivecrowd
 解释：获取指定地址的活跃众筹
@@ -316,7 +349,7 @@ wormholed-cli whc_getgrants 166
 
 
 ### whc_getpayload
-描述：获取wormhole的交易的协议数据
+描述：获取指定交易的wormhole载荷数据
 
 调用：`wormholed-cli whc_getpayload txid`
 
@@ -607,10 +640,21 @@ wormholed-cli  whc_listtransactions qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5
 ]
 ```
 
-## 创建wormhole交易
-方案一
+## 交易创建
+下述提供两种方案来创建交易
 
-*   下述的RPC调用，要求wormhole节点必须有一个可以使用的钱包。
+方案一：调用表二中的RPC，可以直接创建wormhole交易；这系列RPC调用对节点有如下要求
+*   要求wormhole节点必须有一个可以使用的钱包
+*   钱包中必须有足够的BCH和WHC，可以用来从创建交易
+*   优点是：调用接口简单，可以供节点用户直接使用
+*   缺点是：必须在当前节点有一个 含有BCH和WHC的钱包
+
+方案二：通过表三和表四RPC的组合调用，也可以用来创建wormhole交易
+*   本调用方案可以用来开发钱包等应用，通过调用服务器端的RPC服务，生成未签名的交易；然后钱包进行签名，向外发送签名后的交易
+*   优点是：不要求调用节点必须含有钱包，不用担心资产遗失问题；允许线下签名，广播交易
+*   缺点是：调用流程稍加繁琐
+
+## 表二 ：创建wormhole交易
 
 RPC |feature |
 ---|----
@@ -640,9 +684,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_burnbchgetwhc 1.5
->   153438e063d2533f6337d86b9ab7494cf907c4e927c3cef7a9358504cb049cf6
+```
+wormholed-cli whc_burnbchgetwhc 1.5
 
+153438e063d2533f6337d86b9ab7494cf907c4e927c3cef7a9358504cb049cf6
+```
 
 
 ### whc_sendissuancefixed
@@ -665,9 +711,11 @@ whc_sendchangeissuer | 修改资产的发行者
 
 返回值：生成的交易哈希
 示例如下
->   wormholed-cli whc_sendissuancefixed  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 10082936279.232
->   1d059313c873018a2f0dfe855ba1dde0ce19ec50db51eca42236baa1b8c8d6f4
+```
+wormholed-cli whc_sendissuancefixed  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 10082936279.232
 
+1d059313c873018a2f0dfe855ba1dde0ce19ec50db51eca42236baa1b8c8d6f4
+```
 
 ### whc_sendissuancemanaged
 描述：发行可管理的token
@@ -689,9 +737,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_sendissuancemanaged  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world"
->   ae878af640344f3c8fae85ed4d37eb0f2a77a2553a0cb7645ff7c92d23d89768
+```
+wormholed-cli whc_sendissuancemanaged  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world"
 
+ae878af640344f3c8fae85ed4d37eb0f2a77a2553a0cb7645ff7c92d23d89768
+```
 
 ### whc_sendissuancecrowdsale
 描述：发行可众筹的token
@@ -719,9 +769,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_sendissuancecrowdsale  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 1 1002 1536565622 1 0 21231242131
->   e7d2c232a91a3c1855cbfed05bf75e31041676898b37fa93420308cb3ff7a666
+```
+wormholed-cli whc_sendissuancecrowdsale  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 1 1002 1536565622 1 0 21231242131
 
+e7d2c232a91a3c1855cbfed05bf75e31041676898b37fa93420308cb3ff7a666
+```
 
 ### whc_particrowsale 
 描述：参与众筹
@@ -739,9 +791,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_particrowsale qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 100
->   d0a21fd05ed0e2f23f594d77b8ecec96a94ad1dec2785b658e4f705504766cda
+```
+wormholed-cli whc_particrowsale qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 100
 
+d0a21fd05ed0e2f23f594d77b8ecec96a94ad1dec2785b658e4f705504766cda
+```
 
 ### whc_sendclosecrowdsale
 描述：关闭众筹
@@ -756,9 +810,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_sendclosecrowdsale qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 11
->   967328ba4b60876e0b1039e7e4ac77c2d7678ac98e968599786a68df18f353cf
+```
+wormholed-cli whc_sendclosecrowdsale qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 11
 
+967328ba4b60876e0b1039e7e4ac77c2d7678ac98e968599786a68df18f353cf
+```
 
 ### whc_sendgrant
 描述：增发管理资产的token数量
@@ -776,9 +832,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli whc_sendgrant qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 115 1242
->    ed76f90ef3950cac5198045a009483dc90d3ce8a4c8d491d86127b1b3f55a555
+```
+wormholed-cli whc_sendgrant qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 115 1242
 
+ed76f90ef3950cac5198045a009483dc90d3ce8a4c8d491d86127b1b3f55a555
+```
 
 
 ### whc_sendrevoke
@@ -796,9 +854,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli whc_sendrevoke qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 115 100
->    91c56172524fe11fabb7f954cf893a7c42be31e79f549031d11b89a5ea7d4581
+```
+wormholed-cli whc_sendrevoke qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 115 100
 
+91c56172524fe11fabb7f954cf893a7c42be31e79f549031d11b89a5ea7d4581
+```
 
 ### whc_send
 描述：转账
@@ -817,9 +877,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_send qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 115 100
->   d87ae34ed64e23087228eba458af1ebaf94f0db04912c59f6531f2b8c5c72f91
+```
+wormholed-cli whc_send qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 115 100
 
+d87ae34ed64e23087228eba458af1ebaf94f0db04912c59f6531f2b8c5c72f91
+```
 
 ### whc_sendsto
 描述：空投
@@ -837,9 +899,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_sendsto  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 115 1000 qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1
->   bf3d30fc9c9424bdc6e38fc55320bad6cda9488e74296fc8dfb06cb2d9ee0fd9
+```
+wormholed-cli whc_sendsto  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 115 1000 qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1
 
+bf3d30fc9c9424bdc6e38fc55320bad6cda9488e74296fc8dfb06cb2d9ee0fd9
+```
 
 
 ### whc_sendall 
@@ -858,8 +922,11 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_sendall qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 1
->   cb93fbe852955201b757a790a73bb964728dd4309a449b2e46e67c9f69292909
+```
+wormholed-cli whc_sendall qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 1
+
+cb93fbe852955201b757a790a73bb964728dd4309a449b2e46e67c9f69292909
+```
 
 ### whc_sendchangeissuer 
 描述：修改资产的发行者
@@ -875,12 +942,14 @@ whc_sendchangeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli whc_sendchangeissuer qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 115
->    d1fb2ee670e3489e80f9fbfbd9e001dfb4ed64d5107354e7b74ceb0398625fb1
+```
+wormholed-cli whc_sendchangeissuer qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 115
+
+d1fb2ee670e3489e80f9fbfbd9e001dfb4ed64d5107354e7b74ceb0398625fb1
+```
 
 
-
-## 创建wormhole协议的载荷数据
+## 表三 ：创建wormhole协议的载荷数据
 
 RPC |feature |
 ---|----
@@ -905,8 +974,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的wormhole 协议载荷数据
 
 示例如下
->    wormholed-cli whc_createpayload_burnbch
->    00000044
+```
+wormholed-cli whc_createpayload_burnbch
+
+00000044
+```
 
 ### whc_createpayload_issuancefixed
 描述：发行固定属性的token
@@ -928,8 +1000,10 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的wormhole 协议载荷数据
 
 示例如下
->    wormholed-cli whc_createpayload_issuancefixed  1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 10082936279.232
->    0000003201000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c64000000092b9dd5d0c0
+```
+wormholed-cli whc_createpayload_issuancefixed  1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 10082936279.232
+    0000003201000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c64000000092b9dd5d0c0
+```
 
 ### whc_createpayload_issuancemanaged
 描述：发行可管理的token
@@ -950,8 +1024,10 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_createpayload_issuancemanaged   1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world"
->   0000003601000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c6400
+```
+wormholed-cli whc_createpayload_issuancemanaged   1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world"
+   0000003601000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c6400
+```
 
 ### whc_createpayload_issuancecrowdsale
 描述：发行可众筹的token
@@ -978,8 +1054,10 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli whc_createpayload_issuancecrowdsale   1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 1 1002 1536565622 1 0 21231242131
->    0000003301000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c640000000001000000175462aa00000000005b96217601000000134f48a53638
+```
+wormholed-cli whc_createpayload_issuancecrowdsale   1 3 0 "company" "compute" "luzhiyao" "www.ludete.com" "hello world" 1 1002 1536565622 1 0 21231242131
+    0000003301000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c640000000001000000175462aa00000000005b96217601000000134f48a53638
+```
 
 ### whc_createpayload_particrowdsale
 描述：参与众筹
@@ -993,10 +1071,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_createpayload_particrowdsale    100
+```
+wormholed-cli whc_createpayload_particrowdsale    100
 
->   000000010000000100000002540be400
-
+000000010000000100000002540be400
+```
 
 ### whc_createpayload_closecrowdsale
 描述：关闭众筹
@@ -1010,10 +1089,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_createpayload_closecrowdsale  11
+```
+wormholed-cli whc_createpayload_closecrowdsale  11
 
->   000000350000000b
-
+000000350000000b
+```
 
 
 ### whc_createpayload_grant
@@ -1030,10 +1110,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_createpayload_grant  115 1242
+```
+wormholed-cli whc_createpayload_grant  115 1242
 
->   0000003700000073000000000012f39000
-
+0000003700000073000000000012f39000
+```
 
 ### whc_createpayload_revoke
 描述：销毁管理资产的token数量
@@ -1049,9 +1130,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli whc_createpayload_revoke  115 100
+```
+wormholed-cli whc_createpayload_revoke  115 100
 
->    000000380000007300000000000186a000
+000000380000007300000000000186a000
+```
 
 ### whc_createpayload_simplesend
 描述：转账
@@ -1070,9 +1153,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli whc_createpayload_simplesend   115 100
+```
+wormholed-cli whc_createpayload_simplesend   115 100
 
->    000000000000007300000000000186a0
+000000000000007300000000000186a0
+```
 
 ### whc_createpayload_sto
 描述：空投
@@ -1090,9 +1175,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_createpayload_sto   115 1000  1
+```
+wormholed-cli whc_createpayload_sto   115 1000  1
 
->   000000030000007300000000000f424000000001
+000000030000007300000000000f424000000001
+```
 
 ### whc_createpayload_sendall
 描述：发送指定地址的所有token至另一个地址
@@ -1108,9 +1195,11 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->   wormholed-cli whc_createpayload_sendall   1
+```
+wormholed-cli whc_createpayload_sendall   1
 
->   0000000401
+0000000401
+```
 
 ### whc_createpayload_changeissuer
 描述：修改资产的发行者
@@ -1126,12 +1215,13 @@ whc_createpayload_changeissuer | 修改资产的发行者
 返回值：生成的交易哈希
 
 示例如下
->    wormholed-cli  whc_createpayload_changeissuer   115
+```
+wormholed-cli  whc_createpayload_changeissuer   115
 
->    0000004600000073
+0000004600000073
+```
 
-
-## 创建交易
+## 表四 ：创建交易
 
 RPC |feature |
 ---|----
@@ -1155,9 +1245,11 @@ whc_decodetransaction | 解析wormhole的原始交易
 返回值：添加交易输入后的交易数据
 
 示例如下
->    wormholed-cli  whc_createrawtx_input   "" "d1fb2ee670e3489e80f9fbfbd9e001dfb4ed64d5107354e7b74ceb0398625fb1" 2
->    0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0000000000
+```
+wormholed-cli  whc_createrawtx_input   "" "d1fb2ee670e3489e80f9fbfbd9e001dfb4ed64d5107354e7b74ceb0398625fb1" 2
 
+0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0000000000
+```
 
 ### whc_createrawtx_opreturn
 描述：将wormhole协议的载荷数据作为新输出的脚本追加在未签名交易中
@@ -1172,8 +1264,10 @@ whc_decodetransaction | 解析wormhole的原始交易
 返回值：添加交易输出后的交易数据
 
 示例如下
->   wormholed-cli whc_createrawtx_opreturn 0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0000000000 0000004600000073
->   0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0100000000000000000e6a0c08776863000000460000007300000000
+```
+wormholed-cli whc_createrawtx_opreturn 0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0000000000 0000004600000073
+   0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0100000000000000000e6a0c08776863000000460000007300000000
+```
 
 ### whc_createrawtx_reference
 描述：向未签名交易追加一个交易输出
@@ -1189,9 +1283,11 @@ whc_decodetransaction | 解析wormhole的原始交易
 返回值：添加交易输出后的交易数据
 
 示例如下
->   wormholed-cli whc_createrawtx_reference 0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0100000000000000000e6a0c08776863000000460000007300000000 qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1.24
->   0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0200000000000000000e6a0c08776863000000460000007300176407000000001976a9149e763b620e844d5e926206ba534d2a4b979fb15188ac00000000
+```
+wormholed-cli whc_createrawtx_reference 0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0100000000000000000e6a0c08776863000000460000007300000000 qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 1.24
 
+0200000001b15f629803eb4cb7e7547310d564edb4df01e0d9fbfbf9809e48e370e62efbd10200000000ffffffff0200000000000000000e6a0c08776863000000460000007300176407000000001976a9149e763b620e844d5e926206ba534d2a4b979fb15188ac00000000
+```
 
 ### whc_createrawtx_change
 描述：向未签名交易输出集合的指定位置追加一个交易输出
@@ -1209,14 +1305,15 @@ whc_decodetransaction | 解析wormhole的原始交易
 返回值：添加交易输出后的交易数据
 
 示例如下
->   wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d83a0c360633ea8308fbf6d5fc10a779670400000000ffffffff025c0d00000000000047512102f3e471222bb57a7d416c82bf81c627bfcd2bdc47f36e763ae69935bba4601ece21021580b888ff56feb27f17f08802ebed26258c23697d6a462d43fc13b565fda2dd52aeaa0a0000000000001976a914946cb2e08075bcbaf157e47bcb67eb2b2339d24288ac00000000" "[{\"txid\":\"6779a710fcd5f6fb0883ea3306360c3ad8c0a3c5de902768ec57ef3104e65eb1\",\"vout\":4,\"scriptPubKey\":\"76a9147b25205fd98d462880a3e5b0541235831ae959e588ac\",\"value\":0.00068257}]" "qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq" 0.00003500 1
->   0100000001b15ee60431ef57ec682790dec5a3c0d83a0c360633ea8308fbf6d5fc10a779670400000000ffffffff035c0d00000000000047512102f3e471222bb57a7d416c82bf81c627bfcd2bdc47f36e763ae69935bba4601ece21021580b888ff56feb27f17f08802ebed26258c23697d6a462d43fc13b565fda2dd52aeefe40000000000001976a9149e763b620e844d5e926206ba534d2a4b979fb15188acaa0a0000000000001976a914946cb2e08075bcbaf157e47bcb67eb2b2339d24288ac00000000
+```
+wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d83a0c360633ea8308fbf6d5fc10a779670400000000ffffffff025c0d00000000000047512102f3e471222bb57a7d416c82bf81c627bfcd2bdc47f36e763ae69935bba4601ece21021580b888ff56feb27f17f08802ebed26258c23697d6a462d43fc13b565fda2dd52aeaa0a0000000000001976a914946cb2e08075bcbaf157e47bcb67eb2b2339d24288ac00000000" "[{\"txid\":\"6779a710fcd5f6fb0883ea3306360c3ad8c0a3c5de902768ec57ef3104e65eb1\",\"vout\":4,\"scriptPubKey\":\"76a9147b25205fd98d462880a3e5b0541235831ae959e588ac\",\"value\":0.00068257}]" "qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq" 0.00003500 1
+
+0100000001b15ee60431ef57ec682790dec5a3c0d83a0c360633ea8308fbf6d5fc10a779670400000000ffffffff035c0d00000000000047512102f3e471222bb57a7d416c82bf81c627bfcd2bdc47f36e763ae69935bba4601ece21021580b888ff56feb27f17f08802ebed26258c23697d6a462d43fc13b565fda2dd52aeefe40000000000001976a9149e763b620e844d5e926206ba534d2a4b979fb15188acaa0a0000000000001976a914946cb2e08075bcbaf157e47bcb67eb2b2339d24288ac00000000
+```
 
 
 
-
-## RPC的调用流程
-下述调用方案可以用来开发钱包等应用，通过调用服务器端的RPC服务，生成未签名的交易；然后钱包进行签名，向外发送签名后的交易。
+## 表三，表四 RPC组合调用流程
 
 ### 燃烧BCH，获取基础货币RPC调用流程
 1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
@@ -1226,6 +1323,29 @@ whc_decodetransaction | 解析wormhole的原始交易
 5. 创建输出，进行找零： `wormholed-cli whc_createrawtx_reference`  (这步可以省略，多余的金额会全部作为交易费)
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
+
+示例如下
+```
+1. wormholed-cli whc_createrawtx_input "" cda3e90e9ad1cd73ef793263d4b38a2ff6b80c149c04b7faf5540aac35d837d4 2
+返回值：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0000000000
+2. wormholed-cli whc_createrawtx_reference "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0000000000" "bchtest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqdmwgvnjkt8whc" 2
+返回值：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0100c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000
+3. wormholed-cli whc_createpayload_burnbch
+返回值：00000044
+4. wormholed-cli whc_createrawtx_opreturn "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0100c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000" "00000044"
+返回值：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0200c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a08087768630000004400000000
+5. wormholed-cli whc_createrawtx_reference "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0200c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a08087768630000004400000000" "qpnprg0h9y8ts3p9257f3sfe7j040yemqql84kh26q" 2.999
+返回值：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000
+6. wormholed-cli signrawtransaction 0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000
+返回值：
+{
+  "hex": "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd020000006b483045022100a70f30364283c1382d179f85a1f2b5a0bc26e8d11d6ccbd9dce4bde02bb6fc3e02202d3876e4db506de74bc387e7fa6f57e6d8f84188f0e6e3ffa1ee2656d5213104412102cfdb34fee8eb0f17e5fe731094036327e645803050797620f46fc718dc5479d3ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000",
+  "complete": true
+}
+7. wormholed-cli sendrawtransaction 0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd020000006b483045022100a70f30364283c1382d179f85a1f2b5a0bc26e8d11d6ccbd9dce4bde02bb6fc3e02202d3876e4db506de74bc387e7fa6f57e6d8f84188f0e6e3ffa1ee2656d5213104412102cfdb34fee8eb0f17e5fe731094036327e645803050797620f46fc718dc5479d3ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000
+返回值 ：2b932bf1e73a31e87ce30be3a4f86b9d68beb9e61e9badf399474b95c32180eb
+
+```
 
 ### 转账
 1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
