@@ -15,7 +15,7 @@
     * OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
     * Windows平台：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
 2. 初次运行0.0.6版本的代码，使用如下命令：`wormholed -startclean=1 -daemon`
-3. 当0.0.6版本启动成功后，下次关机重启时，使用如下命令：`wormholed -daemon`
+3. 当0.0.6版本启动，且数据同步完成后，下次软件重启时，使用如下命令：`wormholed -daemon`
 
 ## RPC接口的变动
 
