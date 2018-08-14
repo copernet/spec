@@ -22,7 +22,7 @@ Wormhole节点接收的交易
 
 ### 节点运行
 
-![wormhole-core.png][https://github.com/copernet/spec/blob/master/image/wormhole-core.png]
+![wormhole-core.png](https://github.com/copernet/spec/raw/master/image/wormhole-core.png)
 
 Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节点)通信，接收区块及交易消息；当从网络中收到一个新区块时：进行如下操作
 *   先使用`Bitcoin Cash`协议检测该区块及块中的所有交易，符合协议规则，就继续向下执行，否则，丢弃该区块；
@@ -50,7 +50,8 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 引用篇文章[Wormhole协议弥补了UTXO模型智能合约的缺失](https://mp.weixin.qq.com/s/dNxkG1yria-C5EPCGPh-Xw)
 
 示例：当创建了一笔Wormhole交易，处理流程如下：
-![Wormhole-tx运行流程][https://github.com/copernet/spec/blob/master/image/Wormhole-tx.png]
+
+![Wormhole-tx运行流程](https://github.com/copernet/spec/raw/master/image/Wormhole-tx.png)
 
 
 ### WHC基础货币
@@ -106,7 +107,8 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 
 ## 未来方向
 Wormhole 路线图 : `https://github.com/copernet/spec/blob/master/whcwhitepaper.md#wormhole路线图`
-Wormhole未来的架构图：https://github.com/copernet/spec/blob/master/image/Wormhole-Architecture.png
+
+![Wormhole未来的架构图](https://github.com/copernet/spec/raw/master/image/Wormhole-Architecture.png)
 
 ## 结论
 智能合约的缺失一直是基于UTXO模型的公链的一大弱点，`Wormhole`协议可以在完全复用UTXO的安全可靠等特性的情况下，增加了账户模型，来实现智能合约，将会给Bitcoin Cash带来更多的可能性。
