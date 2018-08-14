@@ -7,12 +7,12 @@ whc_getactivecrowd | 获取指定地址的活跃众筹
 whc_getallbalancesforaddress | 获取指定地址所有种类的token金额
 whc_getallbalancesforid | 获取wormhole系统中含有指定token的所有地址及金额信息
 whc_getbalance | 获取指定地址上指定token的金额信息
-whc_getbalanceshash | 获取本节点当前高度下指定资产的状态哈希
-whc_getcrowdsale | 获取众筹资产的详细信息
+whc_getbalanceshash | 获取本节点当前高度下指定token的状态哈希
+whc_getcrowdsale | 获取众筹token的详细信息
 whc_getcurrentconsensushash | 获取本节点当前高度下wormhole系统的状态哈希
-whc_getgrants | 获取指定管理资产的增大，销毁信息
+whc_getgrants | 获取指定管理token的增发，销毁信息
 whc_getpayload | 获取指定交易的wormhole载荷数据
-whc_getproperty | 获取指定资产的信息
+whc_getproperty | 获取指定token的信息
 whc_getsto | 获取指定空投交易的详细信息
 whc_gettransaction | 获取指定交易的wormhole协议信息
 whc_listblocktransactions | 获取指定区块中的wormhole交易列表
@@ -63,7 +63,7 @@ wormholed-cli whc_getinfo
 
 返回值
 
-*   该地址存在活跃众筹时，返回活跃众筹资产的信息
+*   该地址存在活跃众筹时，返回活跃众筹token的信息
 *   不存在活跃众筹，返回`{}`.
 示例如下
 ```
@@ -84,16 +84,16 @@ wormholed-cli whc_getactivecrowd  qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q
 
 返回值字段描述
 
-*   propertyid : 资产ID
-*   name : 资产名称
-*   category : 资产类别
-*   subcategory : 资产子类别
-*   data : 资产信息
-*   url : 资产的URL
-*   precision : 资产精度
+*   propertyid : tokenID
+*   name : token名称
+*   category : token类别
+*   subcategory : token子类别
+*   data : token信息
+*   url : token的URL
+*   precision : token精度
 *   issuer : 发行者
-*   creationtxid : 创建该资产的交易ID
-*   totaltokens : 总共发行的众筹资产数量
+*   creationtxid : 创建该token的交易ID
+*   totaltokens : 总共发行的众筹token数量
 
 
 ### whc_getallbalancesforaddress
@@ -126,21 +126,21 @@ wormholed-cli whc_getallbalancesforaddress qr3pzyxl33vdhga54rvh80s62pjznl9eyu9k7
 
 返回值字段描述
 
-*   propertyid : 资产ID
+*   propertyid : tokenID
 *   balance : 可用余额
 *   reserved : 冻结余额，当前版本不可用
 
 
 ### whc_getallbalancesforid
-解释：获取当前块链中含有指定资产的所有地址及该资产的金额信息
+解释：获取当前块链中含有指定token的所有地址及该token的金额信息
 
 调用：`wormholed-cli whc_getallbalancesforid property`
 
-参数：`property` : 资产ID
+参数：`property` : tokenID
 
 返回值
 
-*   含有该资产的地址列表
+*   含有该token的地址列表
 
 示例如下
 ```
@@ -167,13 +167,13 @@ wormholed-cli whc_getallbalancesforid 1
 
 
 ###  whc_getbalanceshash
-描述：返回当前节点最高区块状态下，指定资产在系统中存在的状态哈希
+描述：返回当前节点最高区块状态下，指定token在系统中存在的状态哈希
 
 调用：`wormholed-cli whc_getbalanceshash 1`
 
-参数：指定资产ID
+参数：指定的tokenID
 
-返回值：资产在系统中存在的状态哈希
+返回值：token在系统中存在的状态哈希
 
 示例如下
 ```
@@ -190,21 +190,21 @@ wormholed-cli whc_getbalanceshash 1
 
 *   block : 当前节点的最高区块号
 *   blockhash : 该区块的哈希
-*   propertyid : 资产ID
-*   balanceshash : 资产在系统中存在的状态哈希
+*   propertyid : tokenID
+*   balanceshash : token在系统中存在的状态哈希
 
 
 ### whc_getbalance
-描述：返回指定地址，指定资产的金额信息
+描述：返回指定地址，指定token的金额信息
 
 调用：`wormholed-cli whc_getbalance address propertyid`
 
 参数
 
 *   `address` ：指定的地址
-*   `propertyid` ：资产ID
+*   `propertyid` ：tokenID
 
-返回值：指定地址的指定资产的金额信息
+返回值：指定地址的指定token的金额信息
 示例如下
 ```
 wormholed-cli whc_getbalance qqmrktdkuj0qtu0dyef0h2xkn7u6stycuvk70k0ups 1
@@ -221,16 +221,16 @@ wormholed-cli whc_getbalance qqmrktdkuj0qtu0dyef0h2xkn7u6stycuvk70k0ups 1
 
 
 ### whc_getcrowdsale
-描述：获取众筹资产的信息
+描述：获取众筹token的信息
 
 调用：`wormholed-cli whc_getcrowdsale propertyid (verbose)`
 
 参数：
     
-*   propertyid ：众筹资产的ID
+*   propertyid ：众筹token的ID
 *   verbose ：true, 列出众筹参与的信息；false, 不列出众筹参与的信息
 
-返回值：返回众筹资产的信息
+返回值：返回众筹token的信息
 
 示例如下
 ```
@@ -261,18 +261,18 @@ wormholed-cli  whc_getcrowdsale  168 true
 
 返回值字段描述
 
-*   propertyid ：资产ID
-*   name ：资产名称
+*   propertyid ：tokenID
+*   name ：token名称
 *   active ：众筹是否处于活跃状态
 *   issuer ：众筹的发行者
-*   propertyiddesired ：募集的资产ID
-*   precision ：众筹资产的精度
+*   propertyiddesired ：募集的tokenID
+*   precision ：众筹token的精度
 *   tokensperunit ： 该众筹token的单价，即1WHC等于多少token。
 *   earlybonus ：早鸟奖励
 *   starttime ： 该众筹开始的时间
 *   deadline ： 该众筹截止时间
 *   amountraised ：已募集到的资金
-*   tokensissued ： 众筹资产发行的数量
+*   tokensissued ： 众筹token发行的数量
 *   addedissuertokens ：当众筹关闭时，未售完的众筹数量，这些数量的token 会计入发行者的账户地址
 *   participanttransactions ：众筹参与者的信息
         
@@ -305,13 +305,13 @@ wormholed-cli whc_getcurrentconsensushash
 *   consensushash : 系统状态的哈希
 
 ### whc_getgrants
-描述：返回管理资产的增发或销毁信息
+描述：返回管理token的增发或销毁信息
 
 调用：`wormholed-cli whc_getgrants propertyid`
 
-参数：资产ID
+参数：tokenID
 
-返回值：管理资产的增发或销毁信息
+返回值：管理token的增发或销毁信息
 
 示例如下
 ```
@@ -337,12 +337,12 @@ wormholed-cli whc_getgrants 166
 
 返回值字段描述
 
-*   propertyid ： 资产ID
-*   name ：资产名称
-*   issuer ：资产发行者
-*   creationtxid ：创建该笔资产的交易ID
+*   propertyid ： tokenID
+*   name ：token名称
+*   issuer ：token发行者
+*   creationtxid ：创建该笔token的交易ID
 *   totaltokens ： 当前token的发行量
-*   issuances ：资产管理的信息
+*   issuances ：token管理的信息
     * txid ：增发或销毁的交易ID
     * grant：增发的token数量
     * revoke：销毁的token数量
@@ -373,13 +373,13 @@ wormholed-cli whc_getpayload a82b29d69538268fb67df384b9be7128456724e6fa69e4eb387
 
 
 ### whc_getproperty
-描述：获取指定资产信息
+描述：获取指定token信息
 
 调用：`wormholed-cli whc_getproperty propertyid`
 
-参数：资产ID
+参数：tokenID
 
-返回值：该资产的详细信息
+返回值：该token的详细信息
 
 示例如下
 ```
@@ -402,18 +402,18 @@ wormholed-cli whc_getproperty 168
 
 返回值字段描述
 
-*   propertyid ：资产ID
-*   name ：资产名称
-*   category : 资产类别
-*   subcategory : 资产子类别
-*   data : 资产信息
-*   url : 资产的URL
-*   precision : 资产精度
+*   propertyid ：tokenID
+*   name ：token名称
+*   category : token类别
+*   subcategory : token子类别
+*   data : token信息
+*   url : token的URL
+*   precision : token精度
 *   issuer : 发行者
-*   fixedissuance : 是否属于固定资产
-*   managedissuance : 是否属于可管理资产
-*   creationtxid : 创建该资产的交易ID
-*   totaltokens : 总共发行的众筹资产数量
+*   fixedissuance : 是否属于固定属性token
+*   managedissuance : 是否属于可管理token
+*   creationtxid : 创建该token的交易ID
+*   totaltokens : 总共发行的众筹token数量
 
 
 ### whc_getsto
@@ -463,8 +463,8 @@ wormholed-cli whc_getsto 403ec9b6f8b142485ea514d52bc4c782f008021a261f637028a28e1
 *   version ：空投类型的版本号
 *   type_int ：空投交易类型
 *   type ： 空投交易类型
-*   propertyid ：空投的资产ID
-*   precision ：空投的资产精度
+*   propertyid ：空投的tokenID
+*   precision ：空投的token精度
 *   amount ：空投的金额
 *   totalstofee ： 这笔空投花费的手续费
 *   valid ：是否有效的空投交易
@@ -526,10 +526,10 @@ wormholed-cli whc_gettransaction a82b29d69538268fb67df384b9be7128456724e6fa69e4e
 *   version ：wormhole类型的版本号
 *   type_int ：wormhole的交易类型
 *   wormholed-cli ： wormhole的交易类型
-*   propertyid ：如为创建资产类型的交易，标识资产ID
-*   precision ：资产精度
-*   ecosystem ：该资产所在的生态体系
-*   category ： 创建的资产类别
+*   propertyid ：如为创建token类型的交易，标识tokenID
+*   precision ：精度
+*   ecosystem ：该token所在的生态体系
+*   category ： 创建的token类别
 *   amount ：创建的token数量
 *   valid ： 该笔wormhole交易是否有效
 *   blockhash ：该交易所在的区块哈希
@@ -579,11 +579,11 @@ wormholed-cli whc_listpendingtransactions qpadl79yr4hh0fym4gw73mxp3rm4325knqe7fj
 ```
 
 ### whc_listproperties
-描述：列出整个系统的所有资产信息
+描述：列出整个系统的所有token信息
 
 调用：`wormholed-cli whc_listproperties`
 
-返回值：系统的所有资产列表
+返回值：系统的所有token列表
 
 示例如下
 ```
@@ -651,7 +651,7 @@ wormholed-cli  whc_listtransactions qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5
 
 方案二：通过表三和表四RPC的组合调用，也可以用来创建wormhole交易
 *   本调用方案可以用来开发钱包等应用，通过调用服务器端的RPC服务，生成未签名的交易；然后钱包进行签名，向外发送签名后的交易
-*   优点是：不要求调用节点必须含有钱包，不用担心资产遗失问题；允许线下签名，广播交易
+*   优点是：不要求调用节点必须含有钱包，不用担心token遗失问题；允许线下签名，广播交易
 *   缺点是：调用流程稍加繁琐
 
 ## 表二 ：创建wormhole交易
@@ -664,12 +664,12 @@ whc_sendissuancemanaged | 发行可管理的token
 whc_sendissuancecrowdsale | 发行可众筹的token
 whc_particrowsale | 参与众筹
 whc_sendclosecrowdsale | 关闭众筹
-whc_sendgrant | 增发管理资产的token数量
-whc_sendrevoke | 销毁管理资产的token数量
+whc_sendgrant | 增发管理token的token数量
+whc_sendrevoke | 销毁管理token的token数量
 whc_send | 转账
 whc_sendsto | 空投
 whc_sendall | 发送指定地址的所有token至另一个地址
-whc_sendchangeissuer | 修改资产的发行者
+whc_sendchangeissuer | 修改token的发行者
 
 ### whc_burnbchgetwhc
 描述：燃烧BCH，获取WHC
@@ -694,13 +694,13 @@ wormholed-cli whc_burnbchgetwhc 1.5
 ### whc_sendissuancefixed
 描述：发行固定属性的token
 
-调用：`wormholed-cli whc_sendissuancefixed "fromaddress" ecosystem pricision previousid "category" "subcategory" "name" "url" "data" "totalNumber"`
+调用：`wormholed-cli whc_sendissuancefixed "fromaddress" ecosystem precision previousid "category" "subcategory" "name" "url" "data" "totalNumber"`
 
 参数
 
 *   fromaddress ：发行固定属性token的地址
 *   ecosystem ：token的生态体系；当前必须为1
-*   pricision ：token的资产精度
+*   precision ：token的精度
 *   previousid ：附加价值的tokenID；当前必须为0
 *   category ：token的类别
 *   subcategory ：token的子类别
@@ -720,13 +720,13 @@ wormholed-cli whc_sendissuancefixed  qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq 
 ### whc_sendissuancemanaged
 描述：发行可管理的token
 
-调用：`wormholed-cli whc_sendissuancemanaged "fromaddress" ecosystem pricision previousid "category" "subcategory" "name" "url" "data"`
+调用：`wormholed-cli whc_sendissuancemanaged "fromaddress" ecosystem precision previousid "category" "subcategory" "name" "url" "data"`
 
 参数
 
 *   fromaddress ：发行可管理token的地址
 *   ecosystem ：token的生态体系；当前必须为1
-*   pricision ：token的资产精度
+*   precision ：token的精度
 *   previousid ：附加价值的tokenID；当前必须为0
 *   category ：token的类别
 *   subcategory ：token的子类别
@@ -746,13 +746,13 @@ ae878af640344f3c8fae85ed4d37eb0f2a77a2553a0cb7645ff7c92d23d89768
 ### whc_sendissuancecrowdsale
 描述：发行可众筹的token
 
-调用：`wormholed-cli whc_sendissuancecrowdsale "fromaddress" ecosystem pricision previousid "category" "subcategory" "name" "url" "data" propertyiddesired tokensperunit deadline  earlybonus undefine totalNumber`
+调用：`wormholed-cli whc_sendissuancecrowdsale "fromaddress" ecosystem precision previousid "category" "subcategory" "name" "url" "data" propertyiddesired tokensperunit deadline  earlybonus undefine totalNumber`
 
 参数
 
 *   fromaddress ：发行可管理token的地址
 *   ecosystem ：token的生态体系；当前必须为1
-*   pricision ：token的资产精度
+*   precision ：token的精度
 *   previousid ：附加价值的tokenID；当前必须为0
 *   category ：token的类别
 *   subcategory ：token的子类别
@@ -817,7 +817,7 @@ wormholed-cli whc_sendclosecrowdsale qpalmy832fp9ytdlx444sehajljnm554dulckcvjl5 
 ```
 
 ### whc_sendgrant
-描述：增发管理资产的token数量
+描述：增发管理token的数量
 
 调用：`wormholed-cli whc_sendgrant "fromaddress" "toaddress" propertyid "amount" ( "memo" )`
 
@@ -840,7 +840,7 @@ ed76f90ef3950cac5198045a009483dc90d3ce8a4c8d491d86127b1b3f55a555
 
 
 ### whc_sendrevoke
-描述：销毁管理资产的token数量
+描述：销毁管理token的数量
 
 调用：`wormholed-cli whc_sendrevoke "fromaddress" propertyid "amount" ( "memo" )`
 
@@ -894,7 +894,7 @@ d87ae34ed64e23087228eba458af1ebaf94f0db04912c59f6531f2b8c5c72f91
 *   propertyid ：进行空投的tokenID
 *   amount ：空投的token数量
 *   redeemaddress ：赎回BCH地址；可选，默认为token发送者的地址
-*   distributionproperty ：接收空投的目标tokenID；可选，默认为空投资产的ID
+*   distributionproperty ：接收空投的目标tokenID；可选，默认为空投token的ID
 
 返回值：生成的交易哈希
 
@@ -929,7 +929,7 @@ cb93fbe852955201b757a790a73bb964728dd4309a449b2e46e67c9f69292909
 ```
 
 ### whc_sendchangeissuer 
-描述：修改资产的发行者
+描述：修改token的发行者
 
 调用：`wormholed-cli whc_sendchangeissuer "fromaddress" "toaddress" propertyid`
 
@@ -959,12 +959,12 @@ whc_createpayload_issuancemanaged | 发行可管理的token
 whc_createpayload_issuancecrowdsale | 发行可众筹的token
 whc_createpayload_particrowdsale | 参与众筹
 whc_createpayload_closecrowdsale | 关闭众筹
-whc_createpayload_grant |  增发管理资产的token数量
-whc_createpayload_revoke | 销毁管理资产的token数量
+whc_createpayload_grant |  增发管理token的数量
+whc_createpayload_revoke | 销毁管理token的数量
 whc_createpayload_simplesend | 转账
 whc_createpayload_sto | 空投
 whc_createpayload_sendall | 发送指定地址的所有token至另一个地址
-whc_createpayload_changeissuer | 修改资产的发行者
+whc_createpayload_changeissuer | 修改token的发行者
 
 ### whc_createpayload_burnbch
 描述：燃烧BCH，获取WHC
@@ -983,12 +983,12 @@ wormholed-cli whc_createpayload_burnbch
 ### whc_createpayload_issuancefixed
 描述：发行固定属性的token
 
-调用：`wormholed-cli whc_createpayload_issuancefixed ecosystem pricision previousid "category" "subcategory" "name" "url" "data" "totalNumber"`
+调用：`wormholed-cli whc_createpayload_issuancefixed ecosystem precision previousid "category" "subcategory" "name" "url" "data" "totalNumber"`
 
 参数
 
 *   ecosystem ：token的生态体系；当前必须为1
-*   pricision ：token的资产精度
+*   precision ：token的精度
 *   previousid ：附加价值的tokenID；当前必须为0
 *   category ：token的类别
 *   subcategory ：token的子类别
@@ -1009,12 +1009,12 @@ wormholed-cli whc_createpayload_issuancefixed  1 3 0 "company" "compute" "luzhiy
 ### whc_createpayload_issuancemanaged
 描述：发行可管理的token
 
-调用：`wormholed-cli whc_createpayload_issuancemanaged  ecosystem pricision previousid "category" "subcategory" "name" "url" "data"`
+调用：`wormholed-cli whc_createpayload_issuancemanaged  ecosystem precision previousid "category" "subcategory" "name" "url" "data"`
 
 参数
 
 *   ecosystem ：token的生态体系；当前必须为1
-*   pricision ：token的资产精度
+*   precision ：token的精度
 *   previousid ：附加价值的tokenID；当前必须为0
 *   category ：token的类别
 *   subcategory ：token的子类别
@@ -1034,12 +1034,12 @@ wormholed-cli whc_createpayload_issuancemanaged   1 3 0 "company" "compute" "luz
 ### whc_createpayload_issuancecrowdsale
 描述：发行可众筹的token
 
-调用：`wormholed-cli whc_createpayload_issuancecrowdsale ecosystem pricision previousid "category" "subcategory" "name" "url" "data" propertyiddesired tokensperunit deadline  earlybonus undefine totalNumber`
+调用：`wormholed-cli whc_createpayload_issuancecrowdsale ecosystem precision previousid "category" "subcategory" "name" "url" "data" propertyiddesired tokensperunit deadline  earlybonus undefine totalNumber`
 
 参数
 
 *   ecosystem ：token的生态体系；当前必须为1
-*   pricision ：token的资产精度
+*   precision ：token的精度
 *   previousid ：附加价值的tokenID；当前必须为0
 *   category ：token的类别
 *   subcategory ：token的子类别
@@ -1100,7 +1100,7 @@ wormholed-cli whc_createpayload_closecrowdsale  11
 
 
 ### whc_createpayload_grant
-描述：增发管理资产的token数量
+描述：增发管理token的数量
 
 调用：`wormholed-cli whc_createpayload_grant  propertyid "amount" ( "memo" )`
 
@@ -1120,7 +1120,7 @@ wormholed-cli whc_createpayload_grant  115 1242
 ```
 
 ### whc_createpayload_revoke
-描述：销毁管理资产的token数量
+描述：销毁管理token的数量
 
 调用：`wormholed-cli whc_createpayload_revoke  propertyid "amount" ( "memo" )`
 
@@ -1173,7 +1173,7 @@ wormholed-cli whc_createpayload_simplesend   115 100
 *   propertyid ：进行空投的tokenID
 *   amount ：空投的token数量
 *   redeemaddress ：赎回BCH地址；可选，默认为token发送者的地址
-*   distributionproperty ：接收空投的目标tokenID；可选，默认为空投资产的ID
+*   distributionproperty ：接收空投的目标tokenID；可选，默认为空投token的ID
 
 返回值：生成的交易哈希
 
@@ -1205,7 +1205,7 @@ wormholed-cli whc_createpayload_sendall   1
 ```
 
 ### whc_createpayload_changeissuer
-描述：修改资产的发行者
+描述：修改token的发行者
 
 调用：`wormholed-cli whc_createpayload_changeissuer  propertyid`
 
@@ -1360,7 +1360,7 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
-### 转移指定账户的所有的资产
+### 转移指定账户的所有的token
 1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
 2. 创建发送token的载荷数据：    `wormholed-cli whc_createpayload_sendall`
 3. 创建交易输出，将创建的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
@@ -1374,7 +1374,7 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 2. 生成创建固定token的载荷数据： `wormholed-cli whc_createpayload_issuancefixed`
 3. 创建交易输出，将创建的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
 4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference`
-结果：此时创建新资产会在 第一个交易输入的地址上(即：在第一步引入)。
+结果：此时创建的新token会在 第一个交易输入的地址上(即：在第一步引入)。
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
@@ -1383,7 +1383,7 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 2. 生成创建众筹token的载荷数据： `wormholed-cli whc_createpayload_issuancecrowdsale`
 3. 创建交易输出，将创建的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
 4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference`
-结果：此时创建新资产会在 第一个交易输入的地址上(即：在第一步引入)。
+结果：此时创建的新token会在 第一个交易输入的地址上(即：在第一步引入)。
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
@@ -1413,16 +1413,16 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
-### 增发资产
+### 增发token
 1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
 2. 生成增发token的载荷数据： `wormholed-cli whc_createpayload_grant`
 3. 创建交易输出，将创建的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
 4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference`
-5. 创建增发地址的输出：`wormholed-cli whc_createrawtx_reference`；如果向资产的发行者地址增发，这步可以省略
+5. 创建增发地址的输出：`wormholed-cli whc_createrawtx_reference`；如果向token的发行者地址增发，这步可以省略
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
-### 销毁资产
+### 销毁token
 1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
 2. 生成销毁token的载荷数据： `wormholed-cli whc_createpayload_revoke `
 3. 创建交易输出，将生成的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
@@ -1431,7 +1431,7 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
 ### 进行空投
-1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `(注意：第一个输入必须含有足够的空投资产)
+1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `(注意：第一个输入必须含有足够的空投token)
 2. 生成空投的载荷数据： `wormholed-cli whc_createpayload_sto`
 3. 创建交易输出，将生成的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
 4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference`
@@ -1439,11 +1439,11 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
 ### 更改token的发行者
-1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `(注意：第一个输入必须为资产的发行地址)
+1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `(注意：第一个输入必须为token的发行地址)
 2. 生成修改发行者的载荷数据： `wormholed-cli whc_createpayload_changeissuer`
 3. 创建交易输出，将生成的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
 4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference`
-5. 创建资产接收者输出：`wormholed-cli whc_createrawtx_reference`
+5. 创建token接收者输出：`wormholed-cli whc_createrawtx_reference`
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
