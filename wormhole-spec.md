@@ -47,7 +47,7 @@
 ### Field: Number of coins
 描述: 协议中用来存储Token的数量，示例如下:
 
-*   对于小数点后有精度的Token，该字段的值除以精度(`proprety pricision`)标识Token的数量；(如精度为1的Token，该字段存储的数值为10，标识Token的金额数量为1)
+*   对于小数点后有精度的Token，该字段的值除以精度(`proprety precision`)标识Token的数量；(如精度为1的Token，该字段存储的数值为10，标识Token的金额数量为1)
 *   对于不可分割的Token(即精度`property pricison`为0)，该字段的值就表示Token的金额；(如该字段存储的值为100，标识Token的金额数量为100)
 
 字节：int64_t; 8 bytes 
@@ -69,7 +69,7 @@
 0:BCH; 1:WHC; [3, 2,147,483,647]随后创建的TokenID，单调递增。
 
 
-### Field: Property Pricision
+### Field: Property Precision
 描述：Wormhole协议中资产的精度标识 
 
 字节：uint16_t; 2 bytes 
@@ -310,7 +310,7 @@ Filed | Type | Example|
 * `Property Name`字段不可以为NULL
 * `Ecosystem`字段必须为1
 * `Number of coins`创建的token总金额在范围之内
-* `property pricision`资产精度在范围之内
+* `property precision`资产精度在范围之内
 
 **WormHole** 该类型交易协议字段如下
 
@@ -320,7 +320,7 @@ Filed | Type | Example|
 版本(Transaction version) |Transaction version|0
 交易类型(Transaction type) |Transaction type|50
 生态体系(Ecosystem)|Ecosystem|1
-token精度(Property pricision)|Property Pricision|1
+token精度(Property precision)|Property Precision|1
 前tokenID(Previous Property ID) |Currency identifier|0
 token类别(Property Category)|String null-terminated|""
 token子类别(Property Subcategory)|String null-terminated|""
@@ -387,7 +387,7 @@ Filed | Type | Example|
 版本(Transaction version) |Transaction version|0
 交易类型(Transaction type) |Transaction type|50
 生态体系(Ecosystem)|Ecosystem|1
-Token精度(Property Pricision)|Pricision|1
+Token精度(Property Precision)|Precision|1
 前TokenID(Previous Property ID) |Currency identifier|0
 Token类别(Property Category)|String null-terminated|""
 Token子类别(Property Subcategory)|String null-terminated|""
@@ -411,7 +411,7 @@ Undefined |Integer one-byte | 必须为0
 0000: 版本
 0033: 交易类型
 01: 生态体系
-0002: Token Pricision
+0002: Token Precision
 00000000:前TokenID
 .... : 中间的为一些自定义数据
 00000001:众筹募集的TokenID
@@ -467,7 +467,7 @@ Filed | Type | Example|
 版本(Transaction version) |Transaction version|0
 交易类型(Transaction type) |Transaction type|50
 生态体系(Ecosystem)|Ecosystem|1
-token精度(Property Pricision)|Property Pricision|1
+token精度(Property Precision)|Property Precision|1
 前tokenID(Previous Property ID) |Currency identifier|0
 token类别(Property Category)|String null-terminated|""
 token子类别(Property Subcategory)|String null-terminated|""
@@ -485,7 +485,7 @@ token描述数据(Property Data)|String null-terminated|""
 0000: 版本
 0036: 交易类型
 01: 生态体系
-0001: token pricision
+0001: token precision
 00000000:前tokenID
 .... : 下面的为一些自定义数据
 ```
