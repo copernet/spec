@@ -6,6 +6,7 @@
 2. 开放了众筹功能
 3. 修复了0.0.5中BUG: `由于节点重启，导致数据混乱的问题`
 4. 增加了一个RPC，获取指定地址的活跃众筹: `whc_getactivecrowd`
+5. 协议变动
 
 
 ## 如何升级
@@ -15,7 +16,7 @@
     * OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
     * Windows平台：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
 2. 初次运行0.0.6版本的代码，使用如下命令：`wormholed -startclean=1 -daemon`
-3. 当0.0.6版本启动，且数据同步完成后，下次软件重启时，使用如下命令：`wormholed -daemon`
+3. 当0.0.6版本启动成功后，下次关机重启时，使用如下命令：`wormholed -daemon`
 
 ## RPC接口的变动
 
@@ -42,7 +43,12 @@
 
 ### whc_gettransaction
 返回值中：WHC的金额以`WHC`为单位。
+返回值字段中：`propertytype`字段变为`precision`
 
 ## 修复的BUG
 commit news：https://github.com/copernet/wormhole/commit/fcee4574a5f4113ade5b3dbceca6f868f135b33a
 
+## 协议变动
+1. 协议中：`Property type` 字段变为`Property Precision`
+    * 该`Property Precision`字段的详细信息见：https://github.com/copernet/spec/blob/master/wormhole-spec.md#field-property-precision
+2. 资产中：`divisible` 该字段去掉
