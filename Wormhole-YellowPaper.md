@@ -12,7 +12,7 @@
 ## Wormhole 节点
 
 ### 节点认知
-[Wormhole](https://github.com/copernet/Wormhole.git)(https://github.com/copernet/Wormhole.git) 节点是[Bitcoin Cash](https://github.com/Bitcoin-ABC/bitcoin-abc.git) 节点的超集，是在`Bitcoin Cash`客户端上增加了Wormhole协议的实现。
+[Wormhole](https://github.com/copernet/Wormhole.git)节点是[Bitcoin Cash](https://github.com/Bitcoin-ABC/bitcoin-abc.git) 节点的超集，是在`Bitcoin Cash`客户端上增加了Wormhole协议的实现。
 
 `Wormhole`客户端既可以作为一个`Wormhole`全节点使用，同时也可以作为`Bitcoin Cash`全节点使用，它实现了**Bitcoin Cash**协议与**Wormhole**协议。
 
@@ -42,17 +42,12 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 
 基于上述前提：只要是正确的`Bitcoin Cash`交易，`Wormhole`节点就会接收，并打包验证，因此区块链上会存在状态失败的`Wormhole`交易。
 
-### `Wormhole`账户与`Bitcoin Cash`地址
-`Wormhole`协议采用的是账户模型，每个`Bitcoin Cash`地址是一个账户，每个账户可以含有多种类型的Token。
-
-账户模型弥补了`Bitcoin Cash` UTXO模型智能合约的缺失，给`Bitcoin Cash`增加了无限的可能。
-
-引用篇文章[Wormhole协议弥补了UTXO模型智能合约的缺失](https://mp.weixin.qq.com/s/dNxkG1yria-C5EPCGPh-Xw)
-
 示例：当创建了一笔Wormhole交易，处理流程如下：
 
 ![Wormhole-tx运行流程](https://github.com/copernet/spec/raw/master/image/Wormhole-tx.png)
 
+### `Wormhole`账户与`Bitcoin Cash`地址
+`Wormhole`协议采用的是账户模型，每个`Bitcoin Cash`地址是一个账户，每个账户可以含有多种类型的Token。
 
 ### WHC基础货币
 `Wormhole`系统创建了一种基础货币`WHC`，为未来智能合约`Gas`收费，链上去中心化交易所，以及创建各种Token提供交易媒介。
@@ -107,8 +102,6 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 
 ## 未来方向
 Wormhole 路线图 : `https://github.com/copernet/spec/blob/master/whcwhitepaper.md#wormhole路线图`
-
-![Wormhole未来的架构图](https://github.com/copernet/spec/raw/master/image/Wormhole-Architecture.png)
 
 ## 结论
 智能合约的缺失一直是基于UTXO模型的公链的一大弱点，`Wormhole`协议可以在完全复用UTXO的安全可靠等特性的情况下，增加了账户模型，来实现智能合约，将会给Bitcoin Cash带来更多的可能性。
