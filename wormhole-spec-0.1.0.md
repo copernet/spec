@@ -18,8 +18,8 @@
 ## RPC接口的变动
 ### whc_gettransaction
 对于参与众筹交易
-*   增加了一个字段`actualInvested`，标识众筹实际花费的WHC金额
-*   原`amount`字段，标识参与众筹输入的WHC金额
+   *   增加了一个字段`actualInvested`，标识众筹实际花费的WHC金额
+   *   原`amount`字段，标识参与众筹输入的WHC金额
 
 ### 修改参与众筹RPC名称拼写错误
 0.1.0 版本前；RPC名称为：`whc_createpayload_particrwosale`
@@ -27,10 +27,11 @@
 
 
 ## 修复RPC接口的BUG
+
 ### whc_decodetransaction
-在0.1.0 版本中修复该RPC接口的BUG；
-    * commit信息：https://github.com/copernet/wormhole/commit/59b4cef865765d4fcfc340c32893185492eb5810
-    * 该BUG导致的情况：当调用该RPC解码一个错误的BCH交易时，由于数组越界，造成节点宕机。
+在0.1.0 版本中修复该RPC接口的BUG
+   * commit信息：https://github.com/copernet/wormhole/commit/59b4cef865765d4fcfc340c32893185492eb5810
+   * 该BUG导致的情况：当调用该RPC解码一个错误的BCH交易时，由于数组越界，造成节点宕机
 
 ## WHC 的Token精度
 WHC 的token精度 由0变为8.
