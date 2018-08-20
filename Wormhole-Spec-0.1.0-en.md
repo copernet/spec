@@ -25,8 +25,9 @@ Crowdfunding transaction
 
 
 
-### Change the spelling error of RPC involved in crowding funding 
+### Change the spelling error of RPC involved in crowdingfunding 
 Before Version 0.1.0: RPC was named as `whc_createpayload_particrwosale`
+
 Version 0.1.0: RPC is named as `whc_createpayload_particrowdsale`
  
  
@@ -49,5 +50,5 @@ The WHC token precision has changed from 0 to 8
 3.	Wormhole Spec :  https://github.com/copernet/spec/blob/master/wormhole-spec.md
 4.	RPC-API : https://github.com/copernet/spec/blob/master/wormhole-RPC.md
 5.	Test-Cases : https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.0.6.md
-    * We have changed the name of RPC involved in `crowdfunding`, the rest will follow the test book of Version 0.06 
+    * We have changed the name of RPC involved in crowdfunding, the rest will follow the test book of Version 0.06 
  
