@@ -1,13 +1,13 @@
 
 ## Wormhole协议的解释
-**WormHole**协议是通过以**bitcoin cash**交易作为载体；使用**bitcoin cash**脚本中特殊的操作码`OP_RETURN`，来将**WormHole**协议追加在该操作码后面。通俗来说：**WormHole**交易是一种特殊的**bitcoin cash**交易，与**bitcoin cash**交易采用相同的安全、确认模型。
+**Wormhole**协议是通过以**bitcoin cash**交易作为载体；使用**bitcoin cash**脚本中特殊的操作码`OP_RETURN`，来将**Wormhole**协议追加在该操作码后面。通俗来说：**Wormhole**交易是一种特殊的**bitcoin cash**交易，与**bitcoin cash**交易采用相同的安全、确认模型。
 
-[**WormHole**全节点客户端](https://github.com/copernet/wormhole)是[bitcoin-abc核心客户端](https://github.com/Bitcoin-ABC/bitcoin-abc)的超集，具有**bitcoin cash**协议+**WormHole**协议两种功能。
+[**Wormhole**全节点客户端](https://github.com/copernet/wormhole)是[bitcoin-abc核心客户端](https://github.com/Bitcoin-ABC/bitcoin-abc)的超集，具有**bitcoin cash**协议+**Wormhole**协议两种功能。
 
-**WormHole**交易在核心客户端的处理流程:
-接收到区块后---》**bitcoin cash** 模块确认该交易的合法性---》**WormHole**模块来确认**WormHole**交易的合法性。
+**Wormhole**交易在核心客户端的处理流程:
+接收到区块后---》**bitcoin cash** 模块确认该交易的合法性---》**Wormhole**模块来确认**Wormhole**交易的合法性。
 
-**WormHole**协议采用的是账户模型，每个**bitcoin cash** 地址是一个账户，每个账户地址可以含有多种token。
+**Wormhole**协议采用的是账户模型，每个**bitcoin cash** 地址是一个账户，每个账户地址可以含有多种token。
 
 
 ## 协议字段定义
@@ -18,7 +18,7 @@
 字节：uint16_t; 2 bytes
 
 ### Field: Transaction type
-描述：**WormHole**协议当前提供的功能
+描述：**Wormhole**协议当前提供的功能
 
 字节：uint16_t; 2 bytes
 
@@ -94,15 +94,15 @@
 
 字节：uint64_t; 8 bytes
 
-## WormHole协议的具体规范
+## Wormhole协议的具体规范
 
-**WormHole**协议对交易输入、输出顺序的要求
+**Wormhole**协议对交易输入、输出顺序的要求
 
-在**WormHole**系统中，对顺序的要求主要分为两类：
+在**Wormhole**系统中，对顺序的要求主要分为两类：
 
 category | txin | txout 
 ----|----|----
-WHC的发行交易(68)|第一个交易输入(索引为0)为发送者|第一个交易输出(索引为0)为燃烧输出，第二个输出(索引为1)为**WormHole**协议|
+WHC的发行交易(68)|第一个交易输入(索引为0)为发送者|第一个交易输出(索引为0)为燃烧输出，第二个输出(索引为1)为**Wormhole**协议|
 其他类型的交易|第一个交易输入(索引为0)为发送者|最后一个交易输出(索引最大)为接收者|
 
 
@@ -123,15 +123,15 @@ WHC的发行交易(68)|第一个交易输入(索引为0)为发送者|第一个�
 **1BCH = 100WHC; 1WHC = 10000,0000C**
 
 通过燃烧BCH获取WHC的交易规范:
-对交易输入的规定：**WormHole**引擎默认第一个交易输入(即索引为0)作为获取WHC的账户地址。
+对交易输入的规定：**Wormhole**引擎默认第一个交易输入(即索引为0)作为获取WHC的账户地址。
 
-对交易输出的规定：**WormHole**引擎默认：第一个交易输出必须为燃烧输出(即索引为0)；第二个输出为**WormHole**协议的数据；第三个输出为多余的BCH赎回地址输出(这个输出可以忽略)；一个正确的燃烧交易，最少含有两个输出。
+对交易输出的规定：**Wormhole**引擎默认：第一个交易输出必须为燃烧输出(即索引为0)；第二个输出为**Wormhole**协议的数据；第三个输出为多余的BCH赎回地址输出(这个输出可以忽略)；一个正确的燃烧交易，最少含有两个输出。
 
 对燃烧金额的规定：最少燃烧1BCH。
 
-交易规范中主要涉及：**交易输入、输出的顺序，燃烧金额，**WormHole**载荷数据**
+交易规范中主要涉及：**交易输入、输出的顺序，燃烧金额，**Wormhole**载荷数据**
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -139,16 +139,16 @@ Filed | Type | Example|
 版本(Transaction version) | Transaction version | 0
 交易类型(Transaction type) | Transaction type | 68
 
-除**WormHole**协议的字段限制之外，存在以下情况的也为无效的**WormHole**交易
+除**Wormhole**协议的字段限制之外，存在以下情况的也为无效的**Wormhole**交易
 * 燃烧BCH的输出不在索引为0的位置
-* 索引为1的位置不是**WormHole**的燃烧协议数据
+* 索引为1的位置不是**Wormhole**的燃烧协议数据
 * 燃烧的BCH金额小于1BCH
 
-**WormHole**的有效载荷数据：6a080877686300000044
+**Wormhole**的有效载荷数据：6a080877686300000044
 解释如下：
 ```
-6a: OP_RETURN; 08: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 08: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0044: 交易类型
 ```
@@ -247,7 +247,7 @@ TokenID(Property ID) | Currency identifier| 1(WHC)
 
 空投会收取一定的燃料费，以WHC计价，每场空投消耗的手续费为：接收空投的人数*系统单价(1C);
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -258,17 +258,17 @@ Filed | Type | Example|
 空投金额(Amount to transfer)|Amount to transfer | 15000000000(150WHC)
 目的tokenID(Property ID) |Currency identifier | 1
 
-除**WormHole**协议的字段限制之外，存在以下情况的也为无效的**WormHole**交易
+除**Wormhole**协议的字段限制之外，存在以下情况的也为无效的**Wormhole**交易
 * 发送者的地址上可使用的金额小于空投的金额
 * 指定的token不存在，或者tokenID为0
 * 发送者的地址上没有足够的WHC支付燃料费
 * 发送者地址上含有所有的目的token
 
-**WormHole**的有效载荷数据：6a18087768630000000300000001000000037e11d600
+**Wormhole**的有效载荷数据：6a18087768630000000300000001000000037e11d600
 解释如下：
 ```
-6a: OP_RETURN; 18: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 18: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0003: 交易类型
 00000001: 空投tokenID
@@ -282,7 +282,7 @@ Filed | Type | Example|
 转移一个账户地址(A)的所有token至另一个账户地址(B)，此处资产不包含BCH.
 注意：**最后一个输出必须为token的接收者，第一个输入必须为token的发送者**
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -291,11 +291,11 @@ Filed | Type | Example|
 交易类型(Transaction type) |Transaction type  | 4
 生态体系(Ecosystem)| Ecosystem |1
 
-**WormHole**的有效载荷数据：6a09087768630000000401
+**Wormhole**的有效载荷数据：6a09087768630000000401
 解释如下：
 ```
-6a: OP_RETURN; 09: **WormHole**协议的数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 09: **Wormhole**协议的数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0004: 交易类型
 01: 生态体系
@@ -304,15 +304,15 @@ Filed | Type | Example|
 示例交易：6b6b04aed7ed091a9b1f89b9517064cb16cd5032f1b0994d93b6db2a5d20e871
 
 ### 创建固定数量的token(50)
-创建指定数量的token，一旦该交易被**WormHole**有效确认，创建者地址上会含有这些数量的token。
+创建指定数量的token，一旦该交易被**Wormhole**有效确认，创建者地址上会含有这些数量的token。
 
-除**WormHole**协议的字段限制之外，满足以下情况，该交易才被视为正确的**WormHole**交易。
+除**Wormhole**协议的字段限制之外，满足以下情况，该交易才被视为正确的**Wormhole**交易。
 * `Property Name`字段不可以为NULL
 * `Ecosystem`字段必须为1
 * `Number of coins`创建的token总金额在范围之内
 * `property precision`资产精度在范围之内
 
-**WormHole** 该类型交易协议字段如下
+**Wormhole** 该类型交易协议字段如下
 
 
 Filed | Type | Example|
@@ -330,12 +330,12 @@ token描述数据(Property Data)|String null-terminated|""
 创建的token数量(Number Properties)|Number of coins|10000
 
 
-**WormHole**的有效载荷数据：6a41087768630000003201000100000000746573740074657374320066697865642d746f6b656e0066697865642d746f6b656e006d7964617461000000000005f5e100
+**Wormhole**的有效载荷数据：6a41087768630000003201000100000000746573740074657374320066697865642d746f6b656e0066697865642d746f6b656e006d7964617461000000000005f5e100
 
 解释如下：
 ```
-6a: OP_RETURN; 41: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 41: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0032: 交易类型
 01: 生态体系
@@ -426,11 +426,11 @@ Undefined |Integer one-byte | 必须为0
 ### 强制关闭众筹(53)
 当众筹token处于活跃期时(即正在募集资金)，项目方基于token价值的考虑，需要提前结束众筹；可以通过构建一笔这样的交易，广播至块链。关闭众筹的操作不会对已经购买者的早鸟激励金造成任何影响。
 
-除**WormHole**协议的字段限制之外，存在以下情况的也为无效的**WormHole**交易
+除**Wormhole**协议的字段限制之外，存在以下情况的也为无效的**Wormhole**交易
 * 关闭一个已经被关闭的众筹token
 * 交易的发送者非众筹token的发行者
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -440,11 +440,11 @@ Filed | Type | Example|
 tokenID(Property ID) |Currency identifier|9
 
 
-**WormHole**的有效载荷数据：6a0c087768630000003500000005
+**Wormhole**的有效载荷数据：6a0c087768630000003500000005
 解释如下：
 ```
-6a: OP_RETURN; 0c: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 0c: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0035: 交易类型
 00000005: tokenID
@@ -455,11 +455,11 @@ tokenID(Property ID) |Currency identifier|9
 ### 创建可管理token(54)
 创建一种可以被发行者管理的token，第一个交易输入(索引为0)的地址为该token的发行者，此时发行者的地址上可使用的金额为0，可以通过额外的两种交易类型来增发该token金额(增发token)，或销毁该token金额(销毁token).
 
-除**WormHole**协议的字段限制之外，必须满足以下情况，该交易才被视为正确的**WormHole**交易。
+除**Wormhole**协议的字段限制之外，必须满足以下情况，该交易才被视为正确的**Wormhole**交易。
 * `Property Name`字段不可以为NULL
 * `Ecosystem`字段必须为1
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -476,12 +476,12 @@ token URL(Property URL)|String null-terminated|""
 token描述数据(Property Data)|String null-terminated|""
 
 
-**WormHole**的有效载荷数据：6a3608776863000000360100010000000048656c6c6f00576f726c64006c7564657465007777772e6c75646574652e636f6d00796f6e6700
+**Wormhole**的有效载荷数据：6a3608776863000000360100010000000048656c6c6f00576f726c64006c7564657465007777772e6c75646574652e636f6d00796f6e6700
 
 解释如下：
 ```
-6a: OP_RETURN; 36: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 36: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0036: 交易类型
 01: 生态体系
@@ -496,12 +496,12 @@ token描述数据(Property Data)|String null-terminated|""
 该交易类型用来配合可管理token，进行token金额的增发。在该增发交易被确认后，增发的token金额会被添加到接收者的可使用余额上。
 注意：token创建后，初始金额为0； 允许的最大总金额为：(1 << 63) -1
 
-除**WormHole**协议的字段限制之外，存在以下情况的也为无效的**WormHole**交易
+除**Wormhole**协议的字段限制之外，存在以下情况的也为无效的**Wormhole**交易
 * 增发的token类别不是可管理的类型的token
 * 该笔交易的发送者非 token的发行者
 * 累计token数量的总和超过了允许的最大金额。
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -513,12 +513,12 @@ tokenID(Property ID) |Currency identifier|5
 增发的信息(Memo)|String null-terminated| "reward"
 
 
-**WormHole**的有效载荷数据：6a1d08776863000000370000000c00000000000027107061792062696c6c00
+**Wormhole**的有效载荷数据：6a1d08776863000000370000000c00000000000027107061792062696c6c00
 
 解释如下：
 ```
-6a: OP_RETURN; 1d: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 1d: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0037: 交易类型
 0000000c:tokenID
@@ -530,12 +530,12 @@ tokenID(Property ID) |Currency identifier|5
 ### 销毁token(56)
 该交易类型用来配合可管理token，进行token金额的销毁。在该销毁token交易被确认后，销毁的token金额会从发送者的地址上扣除，同时系统上该token的总金额也会降低。
 
-除**WormHole**协议的字段限制之外，存在以下情况的也为无效的**WormHole**交易
+除**Wormhole**协议的字段限制之外，存在以下情况的也为无效的**Wormhole**交易
 * 销毁的token类别不是可管理的类型的token
 * 该笔交易的发送者非 token的发行者
 * 销毁的token数量超过了当前账户可以使用的token数量
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -546,12 +546,12 @@ tokenID(Property ID) |Currency identifier|5
 销毁的数量(Number Properties)|Number of coins|1000
 销毁的信息(Memo)|String null-terminated| "spend"
 
-**WormHole**的有效载荷数据：6a1508776863000000380000000c0000000000000bb800
+**Wormhole**的有效载荷数据：6a1508776863000000380000000c0000000000000bb800
 
 解释如下：
 ```
-6a: OP_RETURN; 15: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 15: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0038: 交易类型
 0000000c:tokenID
@@ -566,7 +566,7 @@ tokenID(Property ID) |Currency identifier|5
 对交易输入的规定：第一个交易输入为token的原始发行者
 对交易输出的规定：最后一个交易输出为修改后的token发行者
 
-除**WormHole**协议的字段限制之外，存在以下情况的也为无效的**WormHole**交易
+除**Wormhole**协议的字段限制之外，存在以下情况的也为无效的**Wormhole**交易
 
 *   不存在该笔资产
 *   发送者，接收者，任何一个账户有活跃的众筹时，转移资产的发行者都会失败；
@@ -574,7 +574,7 @@ tokenID(Property ID) |Currency identifier|5
 *   发送者，接收者地址相同；
 *   接收者为空；
 
-**WormHole** 该类型交易协议字段如下:
+**Wormhole** 该类型交易协议字段如下:
 
 
 Filed | Type | Example|
@@ -584,12 +584,12 @@ Filed | Type | Example|
 tokenID(Property ID) |Currency identifier|5
 
 
-**WormHole**的有效载荷数据：6a0c08776863000000460000000c
+**Wormhole**的有效载荷数据：6a0c08776863000000460000000c
 
 解释如下：
 ```
-6a: OP_RETURN; 15: WormHole协议的载荷数据长度； 
-08776863: WormHole协议的magic
+6a: OP_RETURN; 15: Wormhole协议的载荷数据长度； 
+08776863: Wormhole协议的magic
 0000: 版本
 0038: 交易类型
 0000000c:tokenID
