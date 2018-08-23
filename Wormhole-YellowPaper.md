@@ -60,6 +60,7 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 *   注意：
     *   直接向燃烧地址地址转账是不会生成`WHC`，会造成转账的`BCH`丢失；
     *   向燃烧地址转账的`BCH`金额 < 1 BCH 时，也不会生成`WHC`，会造成转账的`BCH`丢失；
+    *   燃烧交易允许存在多个交易输入，但成熟后的WHC只会计入第一个(即索引为0)交易输入的地址中。
 
 兑换比例如下：
 *   1 BCH = 100 WHC;   1 WHC = 100,000,000 C ;
@@ -68,6 +69,11 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 *   主网：bitcoincash:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqu08dsyxz98whc
 *   测试网：bchtest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqdmwgvnjkt8whc
 *   回归测试网：bchreg:pqqqqqqqqqqqqqqqqqqqqqqqqqqqqp0kvc457r8whc
+
+Wormhole系统部署的区块高度
+*   主网：540336
+*   测试网：1249116
+*   回归测试网：101
 
 `WHC`的成熟度：在创建燃烧交易后，相应的`WHC`不会立即达到发送者的账户，需要经过一定的确认时间(成熟度)，`WHC`才会到达发送者的账户。
 
