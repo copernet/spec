@@ -169,6 +169,6 @@ https://bitcoin.org/bitcoin.pdf, Oct 2008
 [3] OmniLayer https://github.com/OmniLayer/spec    
 [4] ERC20 Token Standard https://theethereum.wiki/w/index.php/ERC20_Token_Standard    
 [5] The Colored Coins Protocol https://github.com/Colored-Coins/Colored-Coins-Protocol-Specification/wiki    
-[6] Andrew Stone : Enable representative tokens via OP_GROUP on Bitcoin Cash  https://github.com/BitcoinUnlimited/BUIP/blob/master/077.mediawiki    
+[6] Andrew Stone : Enable representative tokens via OP_GROUP on Bitcoin Cash https://github.com/BitcoinUnlimited/BUIP/blob/master/077.mediawiki    
 [7] ERC-721 http://erc721.org/    
 
