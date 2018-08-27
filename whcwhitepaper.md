@@ -164,7 +164,7 @@ Earth阶段需要完成的工作:
 ## 参考文献 
 
 [1] Satoshi Nakamoto. Bitcoin: A Peer-to-peer Electronic Cash System. 
-https://bitcoin.org/bitcoin.pdf,Oct 2008.
+https://bitcoin.org/bitcoin.pdf, Oct 2008.
 [2] OP_RETURN https://en.bitcoin.it/wiki/OP_RETURN
 [3] OmniLayer https://github.com/OmniLayer/spec
 [4] ERC20 Token Standard https://theethereum.wiki/w/index.php/ERC20_Token_Standard
