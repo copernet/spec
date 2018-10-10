@@ -1,25 +1,27 @@
 ## 表一：数据查询
 
 RPC |feature |
----|----
-whc_getinfo | 获取wormhole节点的基础信息
-whc_getactivecrowd | 获取指定地址的活跃众筹
-whc_getallbalancesforaddress | 获取指定地址所有种类的token金额
-whc_getallbalancesforid | 获取wormhole系统中含有指定token的所有地址及金额信息
-whc_getbalance | 获取指定地址上指定token的金额信息
-whc_getbalanceshash | 获取本节点当前高度下指定token的状态哈希
-whc_getcrowdsale | 获取众筹token的详细信息
-whc_getcurrentconsensushash | 获取本节点当前高度下wormhole系统的状态哈希
-whc_getgrants | 获取指定管理token的增发，销毁信息
-whc_getpayload | 获取指定交易的wormhole载荷数据
-whc_getproperty | 获取指定token的信息
-whc_getsto | 获取指定空投交易的详细信息
-whc_gettransaction | 获取指定交易的wormhole协议信息
-whc_listblocktransactions | 获取指定区块中的wormhole交易列表
-whc_listpendingtransactions | 获取节点待确认的wormhole交易列表
-whc_listproperties | 列出wormhole系统中的所有token
-whc_listtransactions | 列出与节点钱包中的wormhole交易
-
+---|----|----
+whc_getinfo | 获取wormhole节点的基础信息|
+whc_getactivecrowd | 获取指定地址的活跃众筹|
+whc_getallbalancesforaddress | 获取指定地址所有种类的token金额|
+whc_getallbalancesforid | 获取wormhole系统中含有指定token的所有地址及金额信息|
+whc_getbalance | 获取指定地址上指定token的金额信息|
+whc_getbalanceshash | 获取本节点当前高度下指定token的状态哈希|
+whc_getcrowdsale | 获取众筹token的详细信息|
+whc_getcurrentconsensushash | 获取本节点当前高度下wormhole系统的状态哈希|
+whc_getgrants | 获取指定管理token的增发，销毁信息|
+whc_getpayload | 获取指定交易的wormhole载荷数据|
+whc_getproperty | 获取指定token的信息|
+whc_getsto | 获取指定空投交易的详细信息|
+whc_gettransaction | 获取指定交易的wormhole协议信息|
+whc_listblocktransactions | 获取指定区块中的wormhole交易列表|
+whc_listpendingtransactions | 获取节点待确认的wormhole交易列表|
+whc_listproperties | 列出wormhole系统中的所有token|
+whc_listtransactions | 列出与节点钱包中的wormhole交易|
+whc_getfrozenbalance | 获取指定地址指定token下的冻结资金信息 |
+whc_getfrozenbalanceforid | 获取指定token下的全部地址冻结资金信息 |
+whc_getfrozenbalanceforaddress | 获取指定地址下的全部种类token冻结信息 |
 
 ### whc_getinfo
 解释：获取当前wormhole节点的基本信息
@@ -274,13 +276,12 @@ wormholed-cli  whc_getcrowdsale  168 true
 *   amountraised ：已募集到的资金
 *   tokensissued ： 众筹token发行的数量
 *   addedissuertokens ：当众筹关闭时，未售完的众筹数量，这些数量的token 会计入发行者的账户地址
-*   participanttransactions ：众筹参与者的信息
-        
+* participanttransactions ：众筹参与者的信息
+          
     *   txid：参与众筹的交易ID
     *   amountsent：参与众筹的WHC金额
     *   participanttokens：购买到的众筹token数量
 
-    
 ### whc_getcurrentconsensushash
 描述：获取当前wormhole系统的状态哈希
 
@@ -477,7 +478,7 @@ wormholed-cli whc_getsto 403ec9b6f8b142485ea514d52bc4c782f008021a261f637028a28e1
 *   recipients ：这次空投接收者的信息
     *   address ：接收此次空投的地址
     *   amount ：接收的空投金额
- 
+
 
 ### whc_gettransaction
 描述：获取wormhole交易的信息
@@ -640,7 +641,81 @@ wormholed-cli  whc_listtransactions qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5
 ]
 ```
 
+### whc_getfrozenbalance
+
+解释：按地址与资产ID查询wormhole冻结资产余额
+
+调用：`wormholed-cli whc_getfrozenbalance "frozenaddress" propertyid    `
+
+参数：
+
+- frozenaddress：冻结资产地址，CashAddr格式
+- propertyid：资产ID
+
+返回值：冻结资产余额信息
+
+示例如下
+
+```java
+wormholed-cli whc_getfrozenbalance qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu 320
+{
+  "frozen": true,
+  "balance": "1900.00000000"
+}
+```
+
+返回值字段描述
+
+- frozen ：指定资产是否被冻结
+- balance ：被冻结资产余额
+
+### whc_getfrozenbalanceforid
+
+解释：按资产ID查询wormhole冻结资产余额
+
+调用：`wormholed-cli whc_getfrozenbalanceforid propertyid    `
+
+参数：
+
+- propertyid：资产ID
+
+返回值：冻结资产余额信息
+
+示例如下
+
+```java
+wormholed-cli whc_getfrozenbalanceforid 320
+[
+  {
+    "address": "bchtest:qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu",
+    "balance": "1900.00000000"
+  }
+]
+```
+
+返回值字段描述
+
+- address ：被冻结地址
+- balance ：被冻结资产余额
+
+### whc_getfrozenbalanceforaddress
+
+解释：按地址查询wormhole冻结资产余额
+
+调用：`wormholed-cli whc_getfrozenbalanceforaddress "address"    `
+
+参数：
+
+- address：待查询地址
+
+返回值：冻结资产余额信息
+
+示例如下
+
+
+
 ## 交易创建
+
 下述提供两种方案来创建交易
 
 方案一：调用表二中的RPC，可以直接创建wormhole交易；这系列RPC调用对节点有如下要求
@@ -670,6 +745,8 @@ whc_send | 转账
 whc_sendsto | 空投
 whc_sendall | 发送指定地址的所有token至另一个地址
 whc_sendchangeissuer | 修改token的发行者
+whc_sendfreeze | 冻结可管理token
+whc_sendunfreeze | 解冻可管理token
 
 ### whc_burnbchgetwhc
 描述：燃烧BCH，获取WHC
@@ -948,6 +1025,53 @@ wormholed-cli whc_sendchangeissuer qz08vwmzp6zy6h5jvgrt556d9f9e08a32y5eqaqztq qp
 d1fb2ee670e3489e80f9fbfbd9e001dfb4ed64d5107354e7b74ceb0398625fb1
 ```
 
+### whc_sendfreeze
+
+解释：构建并发送wormhole冻结资产交易
+
+调用：`wormholed-cli whc_sendfreeze "fromaddress" propertyid "amount" "frozenaddress"  `
+
+调用者：该资产发行者
+
+参数：
+
+- fromaddress：资产发行者地址，CashAddr格式
+- propertyid：资产ID
+- amount：资产数量；当前可为任意值
+- frozenaddress：冻结资产地址，CashAddr地址
+
+返回值：交易哈希值
+
+示例如下
+
+```java
+wormholed-cli whc_sendfreeze qpjua0mvqpnyxddavqys2j3d8wuewarmnvx3kqha2q 320 "100.0" qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu
+45a9e5702c7d5c9836d77a5f571059a2b50fe32e39bf7bf0c0d7951392cb4e0b
+```
+
+### whc_sendunfreeze
+
+解释：构建并发送wormhole解冻资产交易
+
+调用：`wormholed-cli whc_sendunfreeze "fromaddress" propertyid "amount" "frozenaddress"  `
+
+调用者：该资产发行者
+
+参数：
+
+- fromaddress：资产发行者地址，CashAddr格式
+- propertyid：资产ID
+- amount：资产数量；当前可为任意值
+- frozenaddress：冻结资产地址，CashAddr地址
+
+返回值：交易哈希值
+
+示例如下
+
+```java
+wormholed-cli whc_sendunfreeze qpjua0mvqpnyxddavqys2j3d8wuewarmnvx3kqha2q 320 "100.0" qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu
+4d7e239fbc1a71ce7b27ae7b6bc4c557131973505f0d1701377d0302177390f9
+```
 
 ## 表三 ：创建wormhole协议的载荷数据
 
@@ -965,6 +1089,8 @@ whc_createpayload_simplesend | 转账
 whc_createpayload_sto | 空投
 whc_createpayload_sendall | 发送指定地址的所有token至另一个地址
 whc_createpayload_changeissuer | 修改token的发行者
+whc_createpayload_freeze | 冻结资产交易载荷
+whc_createpayload_unfreeze | 解冻资产交易载荷
 
 ### whc_createpayload_burnbch
 描述：燃烧BCH，获取WHC
@@ -1015,7 +1141,7 @@ wormholed-cli whc_createpayload_issuancefixed  1 3 0 "company" "compute" "luzhiy
 
 *   ecosystem ：token的生态体系；当前必须为1
 *   precision ：token的精度
-*   previousid ：附加价值的tokenID；当前必须为0
+*   previousid ：资产冻结功能开关；默认为0，表示关闭冻结功能；置为1表示开启冻结功能
 *   category ：token的类别
 *   subcategory ：token的子类别
 *   name ：token的名称
@@ -1031,7 +1157,10 @@ wormholed-cli whc_createpayload_issuancemanaged   1 3 0 "company" "compute" "luz
 0000003601000300000000636f6d70616e7900636f6d70757465006c757a686979616f007777772e6c75646574652e636f6d0068656c6c6f20776f726c6400
 ```
 
+注意：自wormhole-0.1.1版本起，previousid字段重新解释为资产冻结开关，合法值为0，1。默认为0（兼容之前版本，即关闭冻结功能），新增值1表示开启资产冻结功能。
+
 ### whc_createpayload_issuancecrowdsale
+
 描述：发行可众筹的token
 
 调用：`wormholed-cli whc_createpayload_issuancecrowdsale ecosystem precision previousid "category" "subcategory" "name" "url" "data" propertyiddesired tokensperunit deadline  earlybonus undefine totalNumber`
@@ -1222,6 +1351,48 @@ wormholed-cli whc_createpayload_sendall   1
 wormholed-cli  whc_createpayload_changeissuer   115
 
 0000004600000073
+```
+
+### whc_createpayload_freeze
+
+解释：构建wormhole冻结资产交易载荷
+
+调用：`wormholed-cli whc_createpayload_freeze "toaddress" propertyid "amount"  `
+
+参数：
+
+- toaddress：待冻结地址，CashAddr格式
+- propertyid：资产ID
+- amount：资产数量；当前可为任意值
+
+返回值：16进制交易载荷
+
+示例如下
+
+```java
+wormholed-cli whc_createpayload_freeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu 320 "100"
+000000b90000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
+```
+
+### whc_createpayload_unfreeze
+
+解释：构建wormhole解冻资产交易载荷
+
+调用：`wormholed-cli whc_createpayload_unfreeze "toaddress" propertyid "amount"  `
+
+参数：
+
+- toaddress：待解冻地址，CashAddr格式
+- propertyid：资产ID
+- amount：资产数量；当前可为任意值
+
+返回值：16进制交易载荷
+
+示例如下
+
+```java
+wormholed-cli whc_createpayload_unfreeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu 320 "100"
+000000ba0000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
 ```
 
 ## 表四 ：创建交易
@@ -1447,3 +1618,20 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 6. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 7. 发送交易：`wormholed-cli sendrawtransaction`
 
+### 冻结token
+
+1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
+2. 生成冻结可管理token的载荷数据： `wormholed-cli whc_createpayload_freeze`
+3. 创建交易输出，将生成的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
+4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference` 
+5. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
+6. 发送交易：`wormholed-cli sendrawtransaction`
+
+### 解冻token
+
+1. 添加交易输入：   `wormholed-cli whc_createrawtx_input `
+2. 生成解冻可管理token的载荷数据： `wormholed-cli whc_createpayload_unfreeze`
+3. 创建交易输出，将生成的wormhole载荷数据添加进交易输出：   `wormholed-cli whc_createrawtx_opreturn`
+4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference` 
+5. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
+6. 发送交易：`wormholed-cli sendrawtransaction`
