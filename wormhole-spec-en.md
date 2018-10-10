@@ -1,4 +1,4 @@
-## WormHole Spec
+## Wormhole Spec
 
 ### Description of WormHole protocol
 
