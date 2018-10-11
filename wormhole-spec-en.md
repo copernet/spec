@@ -472,7 +472,7 @@ Example of Transaction?
 4037086b5d1c16e97bc791f242db4996241202a2ac3e9700b6098547b552ffc2
 
 
-Stop crowdfunding (53) 
+### Stop crowdfunding (53) 
 When the crowdfunding is active (i.e. raising funds), and the project team needs to stop the crowdfunding in order to keep the value of the token (or have other reasons to do so); it can be done by creating such a transaction and broadcast it to the Blockchain. The shutdown of crowdfunding will not affect the early bird bonus who already purchased the token.
 
 Except for the field restrictions of the WormHole protocol, WormHole transactions are also invalid in the following cases: 
@@ -490,7 +490,7 @@ TokenID (Property ID)|Currency identifier|9
 Note: Participate in the closed crowdfunding is invalid, the participant will not acquire any token, and the invested amount of WHC will be transferred to the address of the issuer. The redemption of such investment requires negotiation with the issuer. 
 
 
-Create manageable token (54)
+### Create manageable token (54)
 Creating a token that can be managed by the issuer. The address of the first transaction input (index 0) is the issuer of the token. At this time, the issuer's address has 0 available balance of the token, and two additional transaction types are used to issue a specific amount of the token (issue additional token), or destroy a specific amount of the token (destroy token).
 
  Except for the field restrictions of the WormHole protocol, the WormHole transaction is considered valid only if the following conditions are met:
@@ -501,6 +501,7 @@ Creating a token that can be managed by the issuer. The address of the first tra
 * Property Type field must be 1
 
 WormHole’s create manageable token transaction protocol field:
+
 Filed|Type|Example
 ----| ---| ---|
 Transaction version|Transaction version|0
