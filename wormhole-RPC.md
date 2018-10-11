@@ -1,7 +1,8 @@
 ## 表一：数据查询
 
+
 RPC |feature |
----|----|----
+---|----|
 whc_getinfo | 获取wormhole节点的基础信息|
 whc_getactivecrowd | 获取指定地址的活跃众筹|
 whc_getallbalancesforaddress | 获取指定地址所有种类的token金额|
@@ -22,6 +23,7 @@ whc_listtransactions | 列出与节点钱包中的wormhole交易|
 whc_getfrozenbalance | 获取指定地址指定token下的冻结资金信息 |
 whc_getfrozenbalanceforid | 获取指定token下的全部地址冻结资金信息 |
 whc_getfrozenbalanceforaddress | 获取指定地址下的全部种类token冻结信息 |
+
 
 ### whc_getinfo
 解释：获取当前wormhole节点的基本信息
