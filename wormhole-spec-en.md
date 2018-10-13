@@ -39,6 +39,8 @@ Valid values:
 56: destroy token 
 68: get WormHole system currency
 70: change the issuer of token
+185：freeze token
+186：unfreeze token
 ```
 #### Field: Ecosystem
 
@@ -102,7 +104,13 @@ Description: Unix timestamp field
 
 Bytes: uint64_t; 8 bytes
 
+#### Field: Freeze Feature Switch
 
+Description: Managed property freezing feature switch 
+
+Btyes: uint32_t; 4 bytes
+
+Valid values: 0,1
 
 ### Specifications of the WormHole protocol
 
@@ -503,12 +511,12 @@ Creating a token that can be managed by the issuer. The address of the first tra
 WormHole’s create manageable token transaction protocol field:
 
 Filed|Type|Example
-----| ---| ---|
+----| ---| ---
 Transaction version|Transaction version|0
 Transaction type|Transaction type|50
 Ecosystem|Ecosystem|1
 Token type (Property Type)|Property Type|1
-Previous tokenID (Previous Property ID)|Currency identifier|0
+Freeze feature switch (Freeze feature switch)|Freeze Feature Switch|0
 Toke category (Property Category)|String null-terminated|""
 Token subcategory (Property Subcategory)|String null-terminated|""
 Token name (Property Name)|String null-terminated|"ludete"
@@ -536,11 +544,12 @@ Explanation as follows:
 0036: Transaction type
 01: Ecosystem
 0001: Token type
-00000000: Previous token ID 
+00000000: Freeze feature switch 
 .... : Customized data
 ```
 Example of transaction?b85ffb2d38339b4432cd8dfe50861e05376665f1ffe08c4824dea934aadb20e1
-
+Tips:
+The Previous Property ID field is given a new interpretation after the version of wormhole 0.1.1, which renamed the property freeze feature switch, and the default value is 0, indicating that the freeze function is closed. A value of 1 indicates that property freezing is enabled.
 
 ### Issue additional token (55)
 This transaction type is used to service the manageable token by issuing additional token amounts. After the issuance transaction is confirmed, the additional token amount will be added to the recipient's available balance. Note: After the token is created, the initial amount is 0; the maximum legal amount is: (1 << 63) -1
@@ -584,7 +593,7 @@ Explanation as follows:
 0000000c: tokenID 
 0000000000002710: Amount of additional issued token
 .... : Customized data
- ```
+```
 Example of transaction?6a1d08776863000000370000000c00000000000027107061792062696c6c00
 
 
@@ -643,6 +652,7 @@ Except for the field restrictions of the WormHole protocol, WormHole transaction
 
 * The sender of the transaction is not the original issuer of the token
 * No new issuer address is specified.
+* The receiver address is frozen.
 WormHole’s change issuer of token transaction protocol field:
 
 Filed|Type|Example
@@ -673,3 +683,81 @@ Explanation as follows:
 ```
 Example of transaction?ce6877f4da9e627741cf087aa777917f5ecf5fb8ff47037b211140b68155d9eb
 
+### Freeze the manageable token(185)
+
+This transaction type is used to freeze a manageable token which is already issued in the system. Note that this transaction type freezes all balances of the token under the freeze address, and the freeze quantity field does not take effect for this version
+
+Conditions for transaction input: The first transaction input is the original issuer of the token 
+
+Except for the field restrictions of the WormHole protocol, WormHole transactions are also invalid in the following cases:
+
+- The token does not exist
+- The token is not a manageable property
+- The frozen address format is not a CashAddr address
+- The receiver address is same with the sender address
+
+| Filed                        | Type                | Example                                    |
+| ---------------------------- | ------------------- | ------------------------------------------ |
+| Transaction version(Transaction version)    | Transaction version | 0                                          |
+| Transaction type(Transaction type)   | Transaction type    | 185                                        |
+| tokenID(Property ID)         | Currency identifier | 320                                        |
+| Freeze amount(Freeze amount) | Number of coins     | 100                                        |
+| Frozen Address(Frozen Address)            | Address      | qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu |
+
+WormHole’s valid payload data: 6a4708776863000000b90000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
+
+Explanation as follows:
+
+```
+6a: OP_RETURN
+47: The data length of WormHole protocol
+08776863: Magic of WormHole protocol
+0000: Transaction version
+00b9: Transaction type
+00000140: tokenID
+00000002540be400: Freeze amount. Any value filled here will freeze the entire balance of the specified token under the address
+626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c6675: Frozen Address
+00: End of address string
+```
+
+Example of transaction: c6be48c6673f5d1f9c524317b274b445d0594e24fa882e89e2cb575f1b00aa7b
+
+### Unfreeze the manageable token(186)
+
+This transaction type is used to unfreeze a manageable token which is already issued in the system. Note that this transaction type unfreezes all balances of the token under the frozen address, and the unfreeze quantity field does not take effect for this version
+
+Conditions for transaction input: The first transaction input is the original issuer of the token 
+
+Except for the field restrictions of the WormHole protocol, WormHole transactions are also invalid in the following cases:
+
+- The token does not exist
+- The token is not a manageable property
+- The frozen address format is not a CashAddr address
+- The receiver address is same with the sender address
+
+| Filed                        | Type                | Example                                    |
+| ---------------------------- | ------------------- | ------------------------------------------ |
+| Transaction version (Transaction version)    | Transaction version | 0                                          |
+| Transaction type (Transaction type)   | Transaction type    | 186                                        |
+| tokenID (Property ID)         | Currency identifier | 320                                        |
+| Unfreeze amount (Unfreeze amount) | Number of coins     | 100                                        |
+| Frozen Address (Frozen Address)            | Frozen Address      | qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu |
+
+WormHole’s valid payload data:
+6a4708776863000000ba0000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
+
+Explanation as follows:
+
+```
+6a: OP_RETURN
+47: The data length of WormHole protocol
+08776863: Magic of WormHole protocol
+0000: Transaction version
+00b9: Transaction type
+00000140: tokenID
+00000002540be400: Unfreeze amount. Any value filled here will unfreeze the entire balance of the specified token under the address
+626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c6675: Frozen Address
+00: End of address string
+```
+
+Example of transaction: 78a35251b2f46157dc58e2769075f3a7abd8679af8eac04e8f0163e14144f63f

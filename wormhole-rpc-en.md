@@ -19,6 +19,9 @@ whc_listblocktransactions|	Get Wormhole transaction list from a specific block
 whc_listpendingtransactions|	Get pending Wormhole transaction list 
 whc_listproperties|	List all tokens in Wormhole system
 whc_listtransactions	|List Wormhole transactions in node’s wallet
+whc_getfrozenbalance  | Get frozen balance information of a specific token from a specific address
+whc_getfrozenbalanceforid | Get all frozen address and amount information of the specified token in the wormhole system
+whc_getfrozenbalanceforaddress | Get all types of frozen token balance from a specific address
 
 #### whc_getinfo
 Explanation: Get basic information about the current Wormhole node
@@ -540,19 +543,103 @@ Call: wormholed-cli whc_listtransactions (address, count, skip, startblock, endb
 Parameters: all parameters of the RPC are available
 
 * address : filtered address
+
 * count : the number of transactions acquired
+
 * skip : skip the first n transactions
+
 * startblock: the block number at the beginning of the transaction
+
 * endblock: the block number at the end of the transaction
+
 Return value: List of transaction information
 Examples are as follows:
+
 ```
 wormholed-cli  whc_listtransactions qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5
 [
 ]
 ```
 
+#### whc_getfrozenbalance
+
+Description: Return the frozen balance for the specific address and token
+Call: wormholed-cli whc_getfrozenbalance address propertyid
+parameter
+
+- address : the specified address
+
+- propertyid : tokenID
+
+Return value: Frozen amount information of the specified token of the specified address
+
+Examples are as follows:
+
+```
+wormholed-cli whc_getfrozenbalance qqmrktdkuj0qtu0dyef0h2xkn7u6stycuvk70k0ups 1
+{
+  "frozen": true,
+  "balance": "1900.00000000"
+}
+```
+
+Return value field description
+
+- frozen : Shows whether the asset is frozen
+- balance : frozen balance
+
+#### whc_getfrozenbalanceforid
+
+Description: Return the frozen balance for the specific token
+Call: wormholed-cli whc_getfrozenbalanceforid propertyid
+parameter
+
+- propertyid : tokenID
+Return value: Frozen amount information of the specified token
+Examples are as follows:
+
+```java
+wormholed-cli whc_getfrozenbalanceforid 320
+[
+  {
+    "address": "bchtest:qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu",
+    "balance": "1900.00000000"
+  }
+]
+```
+
+Return value field description
+
+- address : frozen address
+- balance : frozen balance
+
+#### whc_getfrozenbalanceforaddress
+
+Description: Return the frozen balance for the specific address
+Call: wormholed-cli whc_getfrozenbalanceforaddress address
+parameter
+
+- Address : address in CashAddr format
+Return value: Frozen amount information of the specified address
+Examples are as follows:
+
+```java
+wormholed-cli whc_getfrozenbalanceforaddress qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu
+[
+  {
+    "propertyid": 320,
+    "balance": "1900.00000000"
+  }
+]
+```
+
+Return value field description
+
+- propertyid : frozen property id
+- balance : frozen balance
+
 #### Create transaction
+
 The following two solutions are used to create a transaction.
 Solution 1: Call the RPC in Table 2 to create a Wormhole transaction directly; this series of RPC calls have the following requirements for the node:
 
@@ -583,6 +670,8 @@ whc_send|	transfer
 whc_sendsto|	airdrop
 whc_sendall	|Send all tokens in a specific address to another address
 whc_sendchangeissuer|	Change token issuer
+whc_sendfreeze | Freeze specific token in a specific address
+whc_sendunfreeze |  Unfreeze specific token in a specific address
 
 #### whc_burnbchgetwhc
 
@@ -851,7 +940,52 @@ d1fb2ee670e3489e80f9fbfbd9e001dfb4ed64d5107354e7b74ceb0398625fb1
 
 ```
 
+#### whc_sendfreeze
+
+Description: Freeze the token of a address
+
+Call: wormholed-cli  whc_sendfreeze  "fromaddress"  propertyid  "amount" "frozenaddress"
+
+parameter:
+
+- fromaddress :token issuer
+- propertyid : tokenID
+- amount：token amount, not available for now
+- frozenaddress : the  address to be frozen
+
+Return value: generated transaction hash
+
+Examples are as follows:
+
+```java
+wormholed-cli whc_sendfreeze qpjua0mvqpnyxddavqys2j3d8wuewarmnvx3kqha2q 320 "100.0" qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu
+45a9e5702c7d5c9836d77a5f571059a2b50fe32e39bf7bf0c0d7951392cb4e0b
+```
+
+#### whc_sendunfreeze
+
+Description: Unfreeze the token of a address
+
+Call: wormholed-cli  whc_sendunfreeze  "fromaddress"  propertyid  "amount" "frozenaddress"
+
+parameter:
+
+- fromaddress :token issuer
+- propertyid : tokenID
+- amount：token amount, not available for now
+- frozenaddress : the  address to be unfrozen
+
+Return value: generated transaction hash
+
+Examples are as follows:
+
+```java
+wormholed-cli whc_sendunfreeze qpjua0mvqpnyxddavqys2j3d8wuewarmnvx3kqha2q 320 "100.0" qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu
+4d7e239fbc1a71ce7b27ae7b6bc4c557131973505f0d1701377d0302177390f9
+```
+
 ### Table 3 ：Create Wormhole protocol payload data
+
 RPC	|feature|
 ---|----|
 whc_createpayload_burnbch|	Burn BCH, get WHC
@@ -866,6 +1000,8 @@ whc_createpayload_simplesend|	transfer
 whc_createpayload_sto|	airdrop
 whc_createpayload_sendall|	Send all tokens from a specific address to another address
 whc_createpayload_changeissuer|	Change the issuer of token
+whc_createpayload_freeze | Freeze the token of a address
+whc_createpayload_unfreeze | Unfreeze the token of a address
 
 #### whc_createpayload_burnbch
 
@@ -920,7 +1056,7 @@ parameter
 * name: token name 
 * url: token URL
 * data: self-defined token memo 
-* Return value：Created transaction hashes
+* Return value：the hex-encoded payload
 
 Example is as follows:
 ```
@@ -950,7 +1086,7 @@ parameter
 * undefined: undefined unit, must be 0 
 * totalNumber: total number of token 
 
-Return value：Created transaction hash
+Return value：the hex-encoded payload
 
 Example is as follows:
 ```
@@ -967,7 +1103,7 @@ Transfer：wormholed-cli whc_createpayload_particrowdsale "amount"
 parameter
 *	amount: amount of WHC for crowdfunding
 
-Return value：Created transaction hashes
+Return value：the hex-encoded payload
 
 Example is as follows:
 ```
@@ -984,7 +1120,7 @@ Transfer：wormholed-cli whc_createpayload_closecrowdsale propertyid
 parameter：
 *	propertyid: crowdfunding tokenID
 
-Return value：Created transaction hashes
+Return value：the hex-encoded payload
 
 Example is as follows:
 ```
@@ -1003,7 +1139,7 @@ parameter：
 *	amount: additionally issued token amount  
 *	memo: additionally issued token memo
 
-Return value：Created transaction hash
+Return value：the hex-encoded payload
 
 Example is as follows:
 ```
@@ -1022,7 +1158,7 @@ parameter：
 *	amount: destroyed token amount 
 *	memo: destroyed token memo
 
-Return value：Created transaction hash
+Return value：the hex-encoded payload
 
 Example is as follows:
 ```
@@ -1043,7 +1179,7 @@ parameter：
 * amount: transfer token amount
 * redeemaddress: BCH redeem address; optional, the default is the address of token sender 
 * referenceamount: BCH amount of token receiver; optional, the default is the  minimum amount in the system
-* Return value：Created transaction hash
+* Return value：the hex-encoded payload
 
 Example is as follows
 ```
@@ -1065,7 +1201,7 @@ parameter：
 * Amount: airdrop token amount 
 * Redeemaddress: BCH redeem address; optional, the default is the token sender address 
 * Distributionproperty: airdrop target token ID; optional, the default is the airdrop token ID
-* Return value：Created transaction hash
+* Return value：the hex-encoded payload
 
 Example is as follows
 ```
@@ -1084,7 +1220,7 @@ parameter：
 * Redeemaddress: BCH redeem address; optional, the default is the token sender address 
 * Referenceamount: token receiver BCH amount; optional, the default is the minimum amount of the system
 
-Return value：Created transaction hash
+Return value：the hex-encoded payload
 
 Example is as follows
 ```
@@ -1103,7 +1239,7 @@ parameter：
 * Toaddress: sender after change 
 * Propertyid:tokenID
 
-Return value：Created transaction hashes
+Return value：the hex-encoded payload
 
 Example is as follows
 ```
@@ -1111,6 +1247,48 @@ wormholed-cli  whc_createpayload_changeissuer   115
 
 0000004600000073
 
+```
+
+### whc_createpayload_freeze
+
+Description: Freeze the token of address
+
+Transfer：wormholed-cli whc_createpayload_freeze "toaddress"  propertyid  "amount" 
+
+parameter：
+
+- toaddress: the address to be frozen
+- propertyid: tokenID
+- amount: token amount, not available for now
+
+Return value：the hex-encoded payload
+
+Example is as follows
+
+```java
+wormholed-cli whc_createpayload_freeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu 320 "100"
+000000b90000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
+```
+
+### whc_createpayload_unfreeze
+
+Description: Unfreeze the token of address
+
+Transfer：wormholed-cli whc_createpayload_unfreeze "toaddress"  propertyid  "amount" 
+
+parameter：
+
+- toaddress: the address to be unfrozen
+- propertyid: tokenID
+- amount: token amount, not available for now
+
+Return value：the hex-encoded payload
+
+Example is as follows
+
+```java
+wormholed-cli whc_createpayload_unfreeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu 320 "100"
+000000ba0000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
 ```
 
 ### Table 4: Create Transaction 
