@@ -1,39 +1,39 @@
-测试手册WHC version 0.1.1 
+Test manual of wormhole version 0.1.1
 
-一、测试环境搭建
+一、Test environment build
 
-1. 软件下载：https://github.com/copernet/wormhole/releases/tag/Earth-0.1.1-pre-release
+1. Software download：https://github.com/copernet/wormhole/releases/tag/Earth-0.1.1-pre-release
 
-2. 编译安装
+2. Compile and Installation
 
-   Unix平台：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
+   Unix platform：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
 
-   OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
+   OSX platform：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
 
-   Windows平台：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
+   Windows platform：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
 
-3. 运行及数据同步
+3. Run and data synchronization
 
-   初次运行0.1.1版本的代码，使用如下命令：`wormholed -startclean=1 -daemon`
+   Run the version 0.1.1 using the following command for the first time：`wormholed -startclean=1 -daemon`
 
-   当0.1.1版本启动，且数据同步完成后，下次软件重启时，使用如下命令：`wormholed -daemon`
+   Use the following command when the software is restarted the next time after the data synchronization is completed for version 0.1.1：`wormholed -daemon`
 
-二、基础环境准备
+二、Basic environmental preparation
 
-基础环境准备包括地址生成，WHC的获取。
+Base environment preparation includes address generation, WHC acquisition.
 
-详见https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.0.6.md
+As shown in the https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.0.6.md
 
-三、资产冻结功能
+三、Property freezing function
 
-1、创建开启冻结功能的可管理资产
+1、Create managed property with freezing function enabled
 
 ```
 wormholed-cli whc_sendissuancemanaged qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 1 8 1 "freeze-coin" "frozentoken alfa" "www" "hello" ""
 643acc7e2bf17d16e4b9ad5e4c04a8491b2ceaec0aea3d2b3524c8fdab24f7f3
 ```
 
-2、查看交易信息
+2、View transaction information
 
 ```
 wormholed-cli whc_gettransaction 643acc7e2bf17d16e4b9ad5e4c04a8491b2ceaec0aea3d2b3524c8fdab24f7f3
@@ -63,27 +63,27 @@ wormholed-cli whc_gettransaction 643acc7e2bf17d16e4b9ad5e4c04a8491b2ceaec0aea3d2
 }
 ```
 
-3、增发资产
+3、Property grant
 
 ```
 wormholed-cli whc_sendgrant qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva "" 369 "10000"
 0d0f381bbfbbbe1642fc381c99912ee63d4c63eb54d410b6c0117080c8a9104d
 ```
 
-4、转账给待冻结地址
+4、Transfer the new token to specified address
 
 ```
 wormholed-cli whc_send qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk 369 "1000"
 3a1f14e9f7a3094e91e9770266827dacd4292cc2e87b639b8f0a4114d622f15b
 ```
 
-5、冻结资产
+5、Freeze the property of specified address
 
 ```
 wormholed-cli whc_sendfreeze qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369 "100" qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk67ea77b4223e02cec1eb2e98c043b16945050b119417db8cb73a48c0e9b1cfc4
 ```
 
-6、查看交易信息
+6、View transaction information
 
 ```
 wormholed-cli whc_gettransaction 67ea77b4223e02cec1eb2e98c043b16945050b119417db8cb73a48c0e9b1cfc4
@@ -105,14 +105,14 @@ wormholed-cli whc_gettransaction 67ea77b4223e02cec1eb2e98c043b16945050b119417db8
 }
 ```
 
-7、转移冻结资产
+7、transfer the frozen property 
 
 ```
 wormholed-cli whc_send qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369 100
 ce546e1c759999a13944641724aed3adcf8d3dd4c0727f450ca3e2e76ebea0cf
 ```
 
-8、交易报错：Sender is frozen for the property
+8、Transaction error：Sender is frozen for the property
 
 ```
 wormholed-cli whc_gettransaction ce546e1c759999a13944641724aed3adcf8d3dd4c0727f450ca3e2e76ebea0cf
@@ -138,14 +138,14 @@ wormholed-cli whc_gettransaction ce546e1c759999a13944641724aed3adcf8d3dd4c0727f4
 }
 ```
 
-9、重复冻结
+9、Repeated freeze
 
 ```
 wormholed-cli whc_sendfreeze qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369 "100" qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk
 21e8993e55b37eef77ba1e3fdb96fa675d07cfa119b7471f3d2a4ef27fc5902e
 ```
 
-10、交易信息
+10、transaction information
 
 ```
 wormholed-cli whc_gettransaction 21e8993e55b37eef77ba1e3fdb96fa675d07cfa119b7471f3d2a4ef27fc5902e
@@ -167,14 +167,14 @@ wormholed-cli whc_gettransaction 21e8993e55b37eef77ba1e3fdb96fa675d07cfa119b7471
 }
 ```
 
-11、转移管理权给未冻结地址 
+11、Transfer management to unfrozen address 
 
 ```
 wormholed-cli whc_sendchangeissuer qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva qpwyl4vh9np38qeqnu9t5zsn057yvvxv8cf3a7ezvg 369
 27c09f37aaa31478f9bebd6b43d39bf2f99f0faaf7b56e3480f911fedfa2756a
 ```
 
-12、原始发行者冻结资产
+12、The original issuer freezes the property
 
 ```
 wormholed-cli whc_sendfreeze qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369 "100" qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk
@@ -183,14 +183,14 @@ error message:
 Sender is not authorized to manage the property
 ```
 
-13、转账到冻结地址
+13、Transfer token to freeze address
 
 ```
 wormholed-cli whc_send  qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk 369 100
 2892bee8134090b66f701b918d3f7d5e1ff2f8d31c1e75b5f01431f6873bb4e6
 ```
 
-14、交易信息
+14、transaction information
 
 ```
 wormholed-cli whc_gettransaction 2892bee8134090b66f701b918d3f7d5e1ff2f8d31c1e75b5f01431f6873bb4e6
@@ -215,14 +215,14 @@ wormholed-cli whc_gettransaction 2892bee8134090b66f701b918d3f7d5e1ff2f8d31c1e75b
 } 
 ```
 
-15、新管理者冻结资产
+15、The new manager create freeze transaction
 
 ```
 wormholed-cli whc_sendfreeze qpwyl4vh9np38qeqnu9t5zsn057yvvxv8cf3a7ezvg 369 "100" qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk
 635638676f541d6323efbba55277aeb461c032c352bc4c48dba8bb7d0b053c8c
 ```
 
-16、查看交易信息
+16、transaction information
 
 ```
 wormholed-cli whc_gettransaction 635638676f541d6323efbba55277aeb461c032c352bc4c48dba8bb7d0b053c8c
@@ -244,14 +244,14 @@ wormholed-cli whc_gettransaction 635638676f541d6323efbba55277aeb461c032c352bc4c4
 }
 ```
 
-17、解冻交易
+17、unfreezing transaction
 
 ```
 wormholed-cli whc_sendunfreeze qpwyl4vh9np38qeqnu9t5zsn057yvvxv8cf3a7ezvg 369 "100" qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk
 bd1c3d58ab984b5d5689ace60821d3ad40ac82546f40e52120adc1703236e34f
 ```
 
-18、交易信息
+18、transaction information
 
 ```
 wormholed-cli whc_gettransaction bd1c3d58ab984b5d5689ace60821d3ad40ac82546f40e52120adc1703236e34f
@@ -273,14 +273,14 @@ wormholed-cli whc_gettransaction bd1c3d58ab984b5d5689ace60821d3ad40ac82546f40e52
 }
 ```
 
-19、转移管理权给解冻地址
+19、Transfer management to the unfreezing address
 
 ```
 wormholed-cli whc_sendchangeissuer qpwyl4vh9np38qeqnu9t5zsn057yvvxv8cf3a7ezvg qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk 369
 3cb4379191d1dbb15e3ab873f18e3688c22785c33a31cf216afd0157aeb99dc2
 ```
 
-20、查看交易信息
+20、View transaction information
 
 ```
 wormholed-cli whc_gettransaction 3cb4379191d1dbb15e3ab873f18e3688c22785c33a31cf216afd0157aeb99dc2
@@ -304,14 +304,14 @@ wormholed-cli whc_gettransaction 3cb4379191d1dbb15e3ab873f18e3688c22785c33a31cf2
 }
 ```
 
-21. 冻结交易
+21、freeze transaction
 
 ```
 wormholed-cli whc_sendfreeze qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk 369 "100" qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva
 6be2fe99c1e98c046f9d727a6295aec0fcfe5d7635cce5e8f9b491fd9934643f
 ```
 
-22、查看交易信息
+22、transaction information
 
 ```
 wormholed-cli whc_gettransaction 6be2fe99c1e98c046f9d727a6295aec0fcfe5d7635cce5e8f9b491fd9934643f
@@ -333,14 +333,14 @@ wormholed-cli whc_gettransaction 6be2fe99c1e98c046f9d727a6295aec0fcfe5d7635cce5e
 }
 ```
 
-23、转移管理权给冻结地址
+23、Transfer management to the frozen address
 
 ```
 wormholed-cli whc_sendchangeissuer qzhwj99z3dh6a9fa5349qrx2v964gpvqvutmqaastk qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369
 04b4cad43ba5c19aad0a7aa438cf8d94c3b30e7b3b6967c6efbf37798b870139
 ```
 
-24、查看交易信息
+24、View transaction information
 
 ```
 wormholed-cli whc_gettransaction 04b4cad43ba5c19aad0a7aa438cf8d94c3b30e7b3b6967c6efbf37798b870139
@@ -365,7 +365,7 @@ wormholed-cli whc_gettransaction 04b4cad43ba5c19aad0a7aa438cf8d94c3b30e7b3b6967c
 }
 ```
 
-25、查看余额
+25、View frozen token balances
 
 ```
 wormholed-cli whc_getfrozenbalance qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369
@@ -395,13 +395,13 @@ wormholed-cli whc_getfrozenbalanceforaddress qpfgew6hes5k9e40mzcngz86hrvc786f8yc
 ]
 ```
 
-26、重新启动, 不带-cleanstart 参数
+26、Reboot, no -cleanstart parameter
 
 ```
 wormholed -daemon
 ```
 
-27、查看余额
+27、View balance
 
 ```
 wormholed-cli whc_getfrozenbalance qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 369
@@ -410,3 +410,4 @@ wormholed-cli whc_getfrozenbalance qpfgew6hes5k9e40mzcngz86hrvc786f8ycu9snrva 36
   "balance": "8900.00000000"
 }
 ```
+

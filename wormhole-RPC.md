@@ -714,7 +714,20 @@ wormholed-cli whc_getfrozenbalanceforid 320
 
 示例如下
 
+```
+wormholed-cli whc_getfrozenbalanceforaddress qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flfu
+[
+  {
+    "propertyid": 320,
+    "balance": "1900.00000000"
+  }
+]
+```
 
+返回值字段描述
+
+- propertyid ：资产id
+- balance ：被冻结资产余额
 
 ## 交易创建
 

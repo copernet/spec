@@ -96,6 +96,14 @@
 
 字节：uint64_t; 8 bytes
 
+### Field: Freeze Feature Switch
+
+描述：资产冻结功能开关 
+
+字节：uint32_t; 4 bytes
+
+有效值: 0,1
+
 ## Wormhole协议的具体规范
 
 **Wormhole**协议对交易输入、输出顺序的要求
@@ -466,17 +474,17 @@ tokenID(Property ID) |Currency identifier|9
 
 
 Filed | Type | Example|
-----| ---| ---|
-版本(Transaction version) |Transaction version|0
-交易类型(Transaction type) |Transaction type|50
-生态体系(Ecosystem)|Ecosystem|1
-token精度(Property Precision)|Property Precision|1
-前tokenID(Previous Property ID) |Currency identifier|0
-token类别(Property Category)|String null-terminated|""
-token子类别(Property Subcategory)|String null-terminated|""
-token名称(Property Name)|String null-terminated|"ludete"
-token URL(Property URL)|String null-terminated|""
-token描述数据(Property Data)|String null-terminated|""
+----| ---| --- | --- 
+版本(Transaction version) |Transaction version|0|
+交易类型(Transaction type) |Transaction type|50|
+生态体系(Ecosystem)|Ecosystem|1|
+token精度(Property Precision)|Property Precision|1|
+冻结功能开关(Freeze Feature Switch) |Freeze Feature Switch|0|
+token类别(Property Category)|String null-terminated|""|
+token子类别(Property Subcategory)|String null-terminated|""|
+token名称(Property Name)|String null-terminated|"ludete"|
+token URL(Property URL)|String null-terminated|""|
+token描述数据(Property Data)|String null-terminated|""|
 
 **Wormhole**的有效载荷数据：6a3608776863000000360100010000000048656c6c6f00576f726c64006c7564657465007777772e6c75646574652e636f6d00796f6e6700
 
@@ -488,7 +496,7 @@ token描述数据(Property Data)|String null-terminated|""
 0036: 交易类型
 01: 生态体系
 0001: token precision
-00000000: 关闭资产冻结功能
+00000000: 冻结功能开关
 .... : 下面的为一些自定义数据
 ```
 示例交易: 7a42d544775aedd38c67fda3c20ba80af1385a9b65cb8e95e85024ec1732e3d4
@@ -579,6 +587,7 @@ tokenID(Property ID) |Currency identifier|5
 *   发送者非资产的原始发行者；
 *   发送者，接收者地址相同；
 *   接收者为空；
+*   接收者为冻结地址；
 
 **Wormhole** 该类型交易协议字段如下:
 
