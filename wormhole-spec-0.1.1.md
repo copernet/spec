@@ -12,7 +12,7 @@
 
 ## 如何升级
 
-1. 下载0.1.1版本的代码：https://github.com/copernet/wormhole/releases/tag/Earth-0.1.1-release
+1. 下载0.1.1版本的代码：https://github.com/copernet/wormhole/releases/tag/v0.1.1
 2. 安装，编译
    - Unix平台：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
    - OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
