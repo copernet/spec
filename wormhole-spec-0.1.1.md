@@ -7,6 +7,8 @@
 3. 修复BUG：众筹结束后，剩余token未发送给发行者
 
 4. 增加众筹集成测试
+5. 修复whc_decodetransaction RPC中的confirmations显示错误
+6. 在whc_gettransaction RPC中，对于未确认的参与众筹交易，添加了amount字段，标识用户输入多少WHC去参与众筹
 
 ## 如何升级
 
