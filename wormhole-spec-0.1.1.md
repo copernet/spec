@@ -34,7 +34,7 @@ wormhole v0.1.1将在块高度552892起对众筹总金额进行检查，其范�
 ## Wormhole Spec 文档
 
 1. 白皮书     https://github.com/copernet/spec/blob/master/whcwhitepaper.md
-2. 黄皮书     https://github.com/copernet/spec/blob/master/Wormhole-YellowPaper.md
+2. 黄皮书     https://github.com/copernet/spec/blob/master/wormhole-yellow-paper.md
 3. spec       https://github.com/copernet/spec/blob/master/wormhole-spec.md
 4. rpc手册    https://github.com/copernet/spec/blob/master/wormhole-RPC.md
 5. 测试手册   https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.1.1.md
