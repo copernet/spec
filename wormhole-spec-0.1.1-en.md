@@ -42,7 +42,7 @@ Fix the BUG that the remaining properties of crowdfunding are not sent to the is
 ## Wormhole Spec Docs
 
 1. white paper     https://github.com/copernet/spec/blob/master/whcwhitepaper.md
-2. Yellpw paper     https://github.com/copernet/spec/blob/master/Wormhole-YellowPaper.md
+2. Yellpw paper     https://github.com/copernet/spec/blob/master/wormhole-yellow-paper.md
 3. spec       https://github.com/copernet/spec/blob/master/wormhole-spec.md
 4. rpc manual   https://github.com/copernet/spec/blob/master/wormhole-RPC.md
 5. test manual   https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.1.1.md
