@@ -108,7 +108,7 @@ wormholed-cli whc_getactivecrowd  qq893ghdg697e5t5anh5fqpxwxxhw3akyu9l7wej0q
 参数：`address` : 指定查询地址
 
 返回值
-    
+​    
 *   存在金额非0的token，返回该token的金额信息；否则返回`{}`.
 
 示例如下
@@ -230,7 +230,7 @@ wormholed-cli whc_getbalance qqmrktdkuj0qtu0dyef0h2xkn7u6stycuvk70k0ups 1
 调用：`wormholed-cli whc_getcrowdsale propertyid (verbose)`
 
 参数：
-    
+​    
 *   propertyid ：众筹token的ID
 *   verbose ：true, 列出众筹参与的信息；false, 不列出众筹参与的信息
 
@@ -279,7 +279,7 @@ wormholed-cli  whc_getcrowdsale  168 true
 *   tokensissued ： 众筹token发行的数量
 *   addedissuertokens ：当众筹关闭时，未售完的众筹数量，这些数量的token 会计入发行者的账户地址
 * participanttransactions ：众筹参与者的信息
-          
+  ​        
     *   txid：参与众筹的交易ID
     *   amountsent：参与众筹的WHC金额
     *   participanttokens：购买到的众筹token数量
@@ -937,7 +937,7 @@ ed76f90ef3950cac5198045a009483dc90d3ce8a4c8d491d86127b1b3f55a555
 调用：`wormholed-cli whc_sendrevoke "fromaddress" propertyid "amount" ( "memo" )`
 
 参数：
-    
+​    
 *   fromaddress ：token的发行者地址
 *   propertyid ：可管理tokenID
 *   amount ：销毁的token数量
@@ -1269,7 +1269,7 @@ wormholed-cli whc_createpayload_grant  115 1242
 调用：`wormholed-cli whc_createpayload_revoke  propertyid "amount" ( "memo" )`
 
 参数：
-    
+​    
 *   propertyid ：可管理tokenID
 *   amount ：销毁的token数量
 *   memo ：销毁token的自定义信息
@@ -1650,3 +1650,6 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 4. 创建输出，进行找零：`wormholed-cli whc_createrawtx_reference` 
 5. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 6. 发送交易：`wormholed-cli sendrawtransaction`
+
+
+
