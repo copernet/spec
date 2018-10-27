@@ -19,31 +19,31 @@
 
 **whc_createpayload_freeze**
 
-解释：构建wormhole冻结资产交易载荷
+解释：构建Wormhole冻结资产交易载荷
 
 **whc_createpayload_unfreeze**
 
-解释：构建wormhole解冻资产交易载荷
+解释：构建Wormhole解冻资产交易载荷
 
 **whc_sendfreeze**
 
-解释：构建并发送wormhole冻结资产交易
+解释：构建并发送Wormhole冻结资产交易
 
 **whc_sendunfreeze**
 
-解释：构建并发送wormhole解冻资产交易
+解释：构建并发送Wormhole解冻资产交易
 
 **whc_getfrozenbalance**
 
-解释：按地址与资产ID查询wormhole冻结资产余额
+解释：按地址与资产ID查询Wormhole冻结资产余额
 
 **whc_getfrozenbalanceforid**
 
-解释：按资产ID查询wormhole冻结资产余额
+解释：按资产ID查询Wormhole冻结资产余额
 
 **whc_getfrozenbalanceforaddress**
 
-解释：按地址查询wormhole冻结资产余额
+解释：按地址查询Wormhole冻结资产余额
 
 ## 版本变动RPC接口
 

@@ -19,19 +19,19 @@ Version 0.1.2 adds the freezing and unfreezing function for managed property. Th
 
 **whc_createpayload_freeze**
 
-Description：create wormhole freezing property payload
+Description：create Wormhole freezing property payload
 
 **whc_createpayload_unfreeze**
 
-Description：create wormhole unfreezing property payload
+Description：create Wormhole unfreezing property payload
 
 **whc_sendfreeze**
 
-Description：create and send wormhole freezing property transaction
+Description：create and send Wormhole freezing property transaction
 
 **whc_sendunfreeze**
 
-Description：create and send wormhole unfreezing property transaction
+Description：create and send Wormhole unfreezing property transaction
 
 **whc_getfrozenbalance**
 
