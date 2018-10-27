@@ -2,7 +2,7 @@
 
 一、测试环境搭建
 
-1. 软件下载：https://github.com/copernet/wormhole/releases/tag/Earth-0.1.2-pre-release
+1. 软件下载：https://github.com/copernet/wormhole/releases/tag/v0.1.2
 
 2. 编译安装
 

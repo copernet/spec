@@ -5,7 +5,7 @@
 
 ## How to upgrade
 
-1. Download the code for version 0.1.2：https://github.com/copernet/wormhole/releases/tag/Earth-0.1.2-pre-release
+1. Download the code for version 0.1.2：https://github.com/copernet/wormhole/releases/tag/v0.1.2
 2. Install, compile
    - Unix platform：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
    - OSX platform：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
@@ -57,9 +57,9 @@ Version 0.1.2 reinterprets the *previousid* field. It represents the property fr
 
 ## Wormhole Spec documents
 
-1. White Paper     https://github.com/copernet/spec/blob/master/whcwhitepaper.md
-2. Yellow Paper     https://github.com/copernet/spec/blob/master/Wormhole-YellowPaper.md
-3. Spec       https://github.com/copernet/spec/blob/master/wormhole-spec.md
-4. RPC manual    https://github.com/copernet/spec/blob/master/wormhole-RPC.md
-5. Test manual   https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.1.2.md
+1. White Paper     https://github.com/copernet/spec/blob/master/whcwhitepaper-en.pdf
+2. Yellow Paper     https://github.com/copernet/spec/blob/master/wormhole-yellowpaper-en.md
+3. Spec       https://github.com/copernet/spec/blob/master/wormhole-spec-en.md
+4. RPC manual    https://github.com/copernet/spec/blob/master/wormhole-rpc-en.md
+5. Test manual   https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.1.2-en.md
 

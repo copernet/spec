@@ -5,7 +5,7 @@
 
 ## 如何升级
 
-1. 下载0.1.2版本的代码：https://github.com/copernet/wormhole/releases/tag/Earth-0.1.2-pre-release
+1. 下载0.1.2版本的代码：https://github.com/copernet/wormhole/releases/tag/v0.1.2
 2. 安装，编译
    - Unix平台：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
    - OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
@@ -58,7 +58,7 @@
 ## Wormhole Spec 文档
 
 1. 白皮书     https://github.com/copernet/spec/blob/master/whcwhitepaper.md
-2. 黄皮书     https://github.com/copernet/spec/blob/master/Wormhole-YellowPaper.md
+2. 黄皮书     https://github.com/copernet/spec/blob/master/wormhole-yellow-paper.md
 3. spec       https://github.com/copernet/spec/blob/master/wormhole-spec.md
 4. rpc手册    https://github.com/copernet/spec/blob/master/wormhole-RPC.md
 5. 测试手册   https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.1.2.md
