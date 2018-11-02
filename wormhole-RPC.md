@@ -1,28 +1,32 @@
 ## 表一：数据查询
 
 
-RPC |feature |
----|----|
-whc_getinfo | 获取wormhole节点的基础信息|
-whc_getactivecrowd | 获取指定地址的活跃众筹|
-whc_getallbalancesforaddress | 获取指定地址所有种类的token金额|
-whc_getallbalancesforid | 获取wormhole系统中含有指定token的所有地址及金额信息|
-whc_getbalance | 获取指定地址上指定token的金额信息|
-whc_getbalanceshash | 获取本节点当前高度下指定token的状态哈希|
-whc_getcrowdsale | 获取众筹token的详细信息|
-whc_getcurrentconsensushash | 获取本节点当前高度下wormhole系统的状态哈希|
-whc_getgrants | 获取指定管理token的增发，销毁信息|
-whc_getpayload | 获取指定交易的wormhole载荷数据|
-whc_getproperty | 获取指定token的信息|
-whc_getsto | 获取指定空投交易的详细信息|
-whc_gettransaction | 获取指定交易的wormhole协议信息|
-whc_listblocktransactions | 获取指定区块中的wormhole交易列表|
-whc_listpendingtransactions | 获取节点待确认的wormhole交易列表|
-whc_listproperties | 列出wormhole系统中的所有token|
-whc_listtransactions | 列出与节点钱包中的wormhole交易|
-whc_getfrozenbalance | 获取指定地址指定token下的冻结资金信息 |
-whc_getfrozenbalanceforid | 获取指定token下的全部地址冻结资金信息 |
-whc_getfrozenbalanceforaddress | 获取指定地址下的全部种类token冻结信息 |
+RPC |feature 
+---|----
+whc_getinfo | 获取wormhole节点的基础信息
+whc_getactivecrowd | 获取指定地址的活跃众筹
+whc_getallbalancesforaddress | 获取指定地址所有种类的token金额
+whc_getallbalancesforid | 获取wormhole系统中含有指定token的所有地址及金额信息
+whc_getbalance | 获取指定地址上指定token的金额信息
+whc_getbalanceshash | 获取本节点当前高度下指定token的状态哈希
+whc_getcrowdsale | 获取众筹token的详细信息
+whc_getcurrentconsensushash | 获取本节点当前高度下wormhole系统的状态哈希
+whc_getgrants | 获取指定管理token的增发，销毁信息
+whc_getpayload | 获取指定交易的wormhole载荷数据
+whc_getproperty | 获取指定token的信息
+whc_getsto | 获取指定空投交易的详细信息
+whc_gettransaction | 获取指定交易的wormhole协议信息
+whc_listblocktransactions | 获取指定区块中的wormhole交易列表
+whc_listpendingtransactions | 获取节点待确认的wormhole交易列表
+whc_listproperties | 列出wormhole系统中的所有token
+whc_listtransactions | 列出与节点钱包中的wormhole交易
+whc_getfrozenbalance | 获取指定地址指定token下的冻结资金信息 
+whc_getfrozenbalanceforid | 获取指定token下的全部地址冻结资金信息 
+whc_getfrozenbalanceforaddress | 获取指定地址下的全部种类token冻结信息 
+whc_getERC721PropertyNews | 获取指定ERC721 资产信息 
+whc_getERC721TokenNews | 获取指定ERC721 Token信息 
+whc_getERC721AddressTokens | 获取指定地址、指定资产下，含有的ERC721 Token 
+whc_getERC721PropertyDestroyTokens | 获取指定资产中被销毁的ERC721 Token 
 
 
 ### whc_getinfo
@@ -729,6 +733,132 @@ wormholed-cli whc_getfrozenbalanceforaddress qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5d
 - propertyid ：资产id
 - balance ：被冻结资产余额
 
+### whc_getERC721PropertyNews
+
+解释：获取指定的ERC721 资产信息
+
+调用：`wormholed-cli  whc_getERC721PropertyNews 0x01`
+
+参数：
+
+* propertyid ：ERC721资产ID
+
+返回值： 资产信息
+
+示例如下
+
+```
+wormholed-cli whc_getERC721PropertyNews 0x01
+{
+  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "owner": "bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx",
+  "creationtxid": "9e6691eb08a6e903be567b9209591b50f88d38a872fb0b9e08a3ab5285fbb1af",
+  "creationblock": "63a7ff1de8d5e72c720a325681b3475fd2c0d4450c60c65d8886f48fb6ae5c2b",
+  "name": "copernet",
+  "symbol": "ERC",
+  "data": "wormhole",
+  "propertyurl": "www.wormhole.cash",
+  "totalTokenNumber": 1000,
+  "haveIssuedNumber": 4,
+  "currentValidIssuedNumer": 2
+}
+```
+
+
+
+### whc_getERC721TokenNews
+
+解释：获取指定ERC721 Token信息
+
+调用：`wormholed-cli whc_getERC721TokenNews 0x01 0x01 `
+
+参数：
+
+* propertyid : ERC721 资产ID
+* tokenid : ERC721 Token ID 
+
+返回值：Token信息
+
+示例如下
+
+```
+wormholed-cli whc_getERC721TokenNews 0x01 0x01
+{
+  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "owner": "bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv",
+  "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241",
+  "creationblock": "4c472fd84343ff63da24d8e34e19bba5c3d891ec2cebff9b1fe25a242f7fa584",
+  "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
+  "tokenurl": "www.wormhole.cash"
+}
+```
+
+
+
+### whc_getERC721AddressTokens
+
+解释：获取指定地址、指定资产下，含有的ERC721 Token
+
+调用：`wormholed-cli whc_getERC721AddressTokens address propertyid `
+
+参数：
+
+* address ：查询的用户地址
+* propertyid : 查询的资产ID
+
+返回值：Token列表
+
+示例如下
+
+```
+wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01
+[
+  {
+    "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+    "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
+    "tokenurl": "www.wormhole.cash",
+    "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241"
+  }
+]
+```
+
+
+
+###whc_getERC721PropertyDestroyTokens
+
+解释：获取指定资产中被销毁的ERC721 Token
+
+调用：`wormholed-cli whc_getERC721PropertyDestroyTokens 0x01`
+
+参数： 
+
+* propertyid : 查询的ERC721资产ID
+
+返回值：销毁的Token列表
+
+示例如下
+
+```
+wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
+[
+  {
+    "tokenid": "0000000000000000000000000000000000000000000000000000000000000002",
+    "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
+    "tokenurl": "www.wormhole.cash",
+    "creationtxid": "20f114826983e2b3216020e503115bf345fcdee4596e0b0a1079bfd84ff7c927"
+  },
+  {
+    "tokenid": "0000000000000000000000000000000000000000000000000000000000000003",
+    "attribute": "0000000000000000000000000000000000000000000000000000000000000323",
+    "tokenurl": "www.copernet.com",
+    "creationtxid": "f65670326132ee343d0fd6b2ed1fe1d097dd72b33cbe041837ded9f939487cd9"
+  }
+]
+```
+
+
+
 ## 交易创建
 
 下述提供两种方案来创建交易
@@ -746,7 +876,7 @@ wormholed-cli whc_getfrozenbalanceforaddress qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5d
 
 ## 表二 ：创建wormhole交易
 
-RPC |feature |
+RPC |feature 
 ---|----
 whc_burnbchgetwhc | 燃烧BCH，获取WHC
 whc_sendissuancefixed | 发行固定属性的token
@@ -762,6 +892,10 @@ whc_sendall | 发送指定地址的所有token至另一个地址
 whc_sendchangeissuer | 修改token的发行者
 whc_sendfreeze | 冻结可管理token
 whc_sendunfreeze | 解冻可管理token
+whc_issuanceERC721property | 发行ERC721 资产 
+whc_issuanceERC721Token | 在指定ERC 721资产下，发行 Token 
+whc_transferERC721Token | 转移指定的ERC721 Token 
+whc_destroyERC721Token | 销毁指定的ERC721 Token 
 
 ### whc_burnbchgetwhc
 描述：燃烧BCH，获取WHC
@@ -1088,9 +1222,111 @@ wormholed-cli whc_sendunfreeze qpjua0mvqpnyxddavqys2j3d8wuewarmnvx3kqha2q 320 "1
 4d7e239fbc1a71ce7b27ae7b6bc4c557131973505f0d1701377d0302177390f9
 ```
 
+
+
+### whc_issuanceERC721property  
+
+解释：发行ERC721 资产
+
+调用：`wormholed-cli whc_issuanceERC721property "issueAddress" "name" "symbol" "data" "url" totalNumber`
+
+参数：
+
+* issueAddress：资产的发行者
+* name: 发行的资产名称
+* symbol：发行的资产符号
+* data: 发行的资产信息
+* url: 发行的资产URL
+
+返回值：交易哈希
+
+示例如下：
+
+```
+wormholed-cli whc_issuanceERC721property qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx s s s s 888
+8fa8ce4b2c0d45ffa3c280311d4e1fb1dfde061ef5272e73fa0366e79615f532
+```
+
+
+
+### whc_issuanceERC721Token  
+
+解释：在指定ERC 721资产下，发行 Token
+
+调用：`wormholed-cli whc_issuanceERC721Token "issueAddress" "receiveaddress" "propertyID" "tokenID" "tokenAttributes" "tokenURL"`
+
+参数：
+
+* issueAddress ：资产的发行者地址
+* receiveaddress ：Token的接收者地址
+* propertyID ：ERC721 资产ID (注意：它必须为16进制字符串)
+* tokenID ：ERC721 TokenID , 可选. (注意：它必须为16进制字符串)
+* tokenAttributes：Token属性 (注意：它必须为16进制字符串)
+* tokenURL：TokenURL 
+
+返回值：交易哈希
+
+示例如下：
+
+```
+wormholed-cli whc_issuanceERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01 0x01 0x023567 www.wormhole.cash
+e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
+```
+
+
+
+### whc_transferERC721Token  
+
+解释：转移指定的ERC721 Token
+
+调用：`wormholed-cli whc_transferERC721Token "ownerAddress" "receiveaddress" 0x01 0x01 `
+
+参数
+
+* ownerAddress ：Token的所有者
+* receiveaddress ：Token的接收者
+* propertyID ：ERC721资产ID
+* tokenID ：ERC721 TokenID
+
+返回值：交易哈希
+
+示例如下
+
+```
+wormholed-cli whc_transferERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx  bchreg:qraufn9sah7jecdv2xfcmjjrdj8u8l5f3ghvjmsncc 0x01 0x01 
+e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
+```
+
+
+
+### whc_destroyERC721Token  
+
+解释：销毁指定的ERC721 Token 
+
+调用：`wormholed-cli whc_destroyERC721Token "ownerAddress" 0x01 0x01`
+
+参数：
+
+* ownerAddress ：ERC721 Token的所有者
+* propertyID ：ERC721 资产ID
+* tokenID ：ERC721 TokenID
+
+返回值：交易哈希
+
+示例如下
+
+```
+ wormholed-cli whc_destroyERC721Token "qqzy3s0ueaxkf8hcffhtgkgew8c7f7g85um9a2g74r" "0x01" "0x02"
+ 33d27bca6703c0f837e8f51c8ebb3985d36f899349e84bccb78bff852a308c2b
+```
+
+
+
+
+
 ## 表三 ：创建wormhole协议的载荷数据
 
-RPC |feature |
+RPC |feature 
 ---|----
 whc_createpayload_burnbch | 燃烧BCH，获取WHC
 whc_createpayload_issuancefixed | 发行固定属性的token
@@ -1106,6 +1342,10 @@ whc_createpayload_sendall | 发送指定地址的所有token至另一个地址
 whc_createpayload_changeissuer | 修改token的发行者
 whc_createpayload_freeze | 冻结资产交易载荷
 whc_createpayload_unfreeze | 解冻资产交易载荷
+whc_createpayload_issueERC721property | 创建ERC721 资产 
+whc_createpayload_issueERC721token | 创建ERC721 Token 
+whc_createpayload_transferERC721token | 转移ERC721 Token 
+whc_createpayload_destroyERC721token | 销毁ERC721 Token 
 
 ### whc_createpayload_burnbch
 描述：燃烧BCH，获取WHC
@@ -1410,6 +1650,100 @@ wormholed-cli whc_createpayload_unfreeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6f
 000000ba0000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
 ```
 
+
+
+### whc_createpayload_issueERC721property 
+
+解释：创建ERC721 资产
+
+调用：`wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.ludete.com"  89977 `
+
+参数：
+
+* name : 创建的资产名称
+* symbol : 创建的资产符号
+* data : 创建的资产信息
+* url : 创建的资产url
+
+返回值：16进制的载荷数据
+
+示例如下
+
+```
+wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.ludete.com"  89977
+00000009016e616d650073796d626f6c0064617461007777772e6c75646574652e636f6d000000000000015f79
+```
+
+
+
+###whc_createpayload_issueERC721token 
+
+解释： 创建ERC721 Token
+
+调用：`wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"`
+
+参数：
+
+* propertyid : ERC721资产ID
+* tokenid : ERC721 Token ID 
+* tokenAttributes : Token 属性
+* tokenURL : Token的URL
+
+返回值：16进制的载荷数据
+
+示例如下
+
+```
+wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"
+00000009020100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000034020000000000000000000000000000000000000000000000000000000000007777772e6c75646574652e636f6d00
+```
+
+
+
+###whc_createpayload_transferERC721token
+
+解释：转移ERC721 Token
+
+调用：`wormholed-cli whc_createpayload_transferERC721token 0x01 0x01` 
+
+参数：
+
+* propertyid : ERC721资产ID
+* tokenid : ERC721 Token ID 
+
+返回值：16进制的载荷数据
+
+示例如下
+
+```
+wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
+000000090301000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+```
+
+
+
+###whc_createpayload_destroyERC721token
+
+解释： 销毁ERC721 Token
+
+调用：`wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01 `
+
+参数：
+
+* propertyid : ERC721资产ID
+* tokenid : ERC721 Token ID 
+
+返回值：16进制的载荷数据
+
+示例如下
+
+```
+wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01
+000000090401000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+```
+
+
+
 ## 表四 ：创建交易
 
 RPC |feature |
@@ -1651,5 +1985,47 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 5. 对创建的交易进行签名：`wormholed-cli signrawtransaction`
 6. 发送交易：`wormholed-cli sendrawtransaction`
 
+### 发行ERC721 资产
 
+1. 添加交易输入: `wormholed-cli whc_createrawtx_input`
+2. 创建发行ERC721资产的载荷数据: `wormholed-cli whc_createpayload_issueERC721property`
+3. 创建交易输出，将Wormhole的载荷数据添加到该交易输出中: `wormholed-cli whc_createrawtx_opreturn`
+4. 创建输出，进行找零: `wormholed-cli whc_createrawtx_reference`
+5. 对创建的交易进行签名: `wormholed-cli signrawtransaction`
+6. 发送交易: `wormholed-cli sendrawtransaction`
+
+
+
+### 发行ERC721 Token
+
+1. 添加交易输入: `wormholed-cli whc_createrawtx_input`
+2. 创建发行ERC721 Token的载荷数据: `wormholed-cli whc_createpayload_issueERC721token`
+3. 创建交易输出，将Wormhole的载荷数据添加到该交易输出中: `wormholed-cli whc_createrawtx_opreturn`
+4. 创建输出，进行找零: `wormholed-cli whc_createrawtx_reference`
+5. 创建输出，将Token发行至该地址: `wormholed-cli whc_createrawtx_reference`
+6. 对创建的交易进行签名: `wormholed-cli signrawtransaction`
+7. 发送交易: `wormholed-cli sendrawtransaction`
+
+
+
+### 转移 ERC721 Token
+
+1. 添加交易输入: `wormholed-cli whc_createrawtx_input`
+2. 创建转移ERC721 Token的载荷数据: `wormholed-cli whc_createpayload_transferERC721token`
+3. 创建交易输出，将Wormhole的载荷数据添加到该交易输出中: `wormholed-cli whc_createrawtx_opreturn`
+4. 创建输出，进行找零: `wormholed-cli whc_createrawtx_reference`
+5. 创建输出，将Token发行至该地址: `wormholed-cli whc_createrawtx_reference`
+6. 对创建的交易进行签名: `wormholed-cli signrawtransaction`
+7. 发送交易: `wormholed-cli sendrawtransaction`
+
+
+
+### 销毁 ERC721 Token
+
+1. 添加交易输入: `wormholed-cli whc_createrawtx_input`
+2. 创建销毁ERC721 Token的载荷数据: `wormholed-cli whc_createpayload_destroyERC721token`
+3. 创建交易输出，将Wormhole的载荷数据添加到该交易输出中: `wormholed-cli whc_createrawtx_opreturn`
+4. 创建输出，进行找零: `wormholed-cli whc_createrawtx_reference`
+5. 对创建的交易进行签名: `wormholed-cli signrawtransaction`
+6. 发送交易: `wormholed-cli sendrawtransaction`
 
