@@ -1,27 +1,31 @@
 ## Table 1：Data Query
 
 RPC |feature |
----|----|
-whc_getinfo|	Get Wormhole node basic information
-whc_getactivecrowd|	Get active crowdfunding from a specific address
-whc_getallbalancesforaddress|	Get all types of token balance from a specific address
-whc_getallbalancesforid	|Get all address and amount information of the specified token in the wormhole system
-whc_getbalance	|Get Balance information of a specific token from a specific address
-whc_getbalanceshash	|Get state hash of specific token at the current height of this node
-whc_getcrowdsale|	Get detailed information from crowdfunding token
-whc_getcurrentconsensushash	|Get state hash of Wormhole system at the current height in this node
-whc_getgrants|	Get additional issuance grants from a specific token, destroy information
-whc_getpayload|	Get Wormhole payload data from a specific transaction
-whc_getproperty	|Get information from a specific token
-whc_getsto	|Get detail information from a specific airdrop transaction
-whc_gettransaction	|Get Wormhole protocol information from a specific transaction
-whc_listblocktransactions|	Get Wormhole transaction list from a specific block
-whc_listpendingtransactions|	Get pending Wormhole transaction list 
-whc_listproperties|	List all tokens in Wormhole system
-whc_listtransactions	|List Wormhole transactions in node’s wallet
-whc_getfrozenbalance  | Get frozen balance information of a specific token from a specific address
-whc_getfrozenbalanceforid | Get all frozen address and amount information of the specified token in the wormhole system
-whc_getfrozenbalanceforaddress | Get all types of frozen token balance from a specific address
+---|----|----
+whc_getinfo|	Get Wormhole node basic information|
+whc_getactivecrowd|	Get active crowdfunding from a specific address|
+whc_getallbalancesforaddress|	Get all types of token balance from a specific address|
+whc_getallbalancesforid	|Get all address and amount information of the specified token in the wormhole system|
+whc_getbalance	|Get Balance information of a specific token from a specific address|
+whc_getbalanceshash	|Get state hash of specific token at the current height of this node|
+whc_getcrowdsale|	Get detailed information from crowdfunding token|
+whc_getcurrentconsensushash	|Get state hash of Wormhole system at the current height in this node|
+whc_getgrants|	Get additional issuance grants from a specific token, destroy information|
+whc_getpayload|	Get Wormhole payload data from a specific transaction|
+whc_getproperty	|Get information from a specific token|
+whc_getsto	|Get detail information from a specific airdrop transaction|
+whc_gettransaction	|Get Wormhole protocol information from a specific transaction|
+whc_listblocktransactions|	Get Wormhole transaction list from a specific block|
+whc_listpendingtransactions|	Get pending Wormhole transaction list |
+whc_listproperties|	List all tokens in Wormhole system|
+whc_listtransactions	|List Wormhole transactions in node’s wallet|
+whc_getfrozenbalance  | Get frozen balance information of a specific token from a specific address|
+whc_getfrozenbalanceforid | Get all frozen address and amount information of the specified token in the wormhole system|
+whc_getfrozenbalanceforaddress | Get all types of frozen token balance from a specific address|
+whc_getERC721PropertyNews | 获取指定ERC721 资产信息 |
+whc_getERC721TokenNews | 获取指定ERC721 Token信息 |
+whc_getERC721AddressTokens | 获取指定地址、指定资产下，含有的ERC721 Token |
+whc_getERC721PropertyDestroyTokens | 获取指定资产中被销毁的ERC721 Token |
 
 #### whc_getinfo
 Explanation: Get basic information about the current Wormhole node

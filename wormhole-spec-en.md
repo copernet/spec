@@ -112,6 +112,19 @@ Btyes: uint32_t; 4 bytes
 
 Valid values: 0,1
 
+#### Field: ERC721 Transaction Action
+
+Description：The actions involved in the ERC721 transaction
+
+Bytes: uint8_t; 1 byte 
+
+Valid values：
+
+- 1: Issue ERC721 property
+- 2: Issue ERC721 token under specific property 
+- 3: Transfer specific ERC 721 token
+- 4: Revoke specific ERC721 token
+
 ### Specifications of the WormHole protocol
 
 All of the following available solution 1: require a wallet that can be used on the server side. 
