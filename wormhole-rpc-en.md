@@ -1684,5 +1684,195 @@ wormholed-cli whc_createrawtx_change "0100000001b15ee60431ef57ec682790dec5a3c0d8
 0100000001b15ee60431ef57ec682790dec5a3c0d83a0c360633ea8308fbf6d5fc10a779670400000000ffffffff035c0d00000000000047512102f3e471222bb57a7d416c82bf81c627bfcd2bdc47f36e763ae69935bba4601ece21021580b888ff56feb27f17f08802ebed26258c23697d6a462d43fc13b565fda2dd52aeefe40000000000001976a9149e763b620e844d5e926206ba534d2a4b979fb15188acaa0a0000000000001976a914946cb2e08075bcbaf157e47bcb67eb2b2339d24288ac00000000
 ```
 
+## RPC combinations of Table 3, 4 
+
+### Get WHC by burning BCH
+1. Add input：   `wormholed-cli whc_createrawtx_input `
+2. Add output, transfer the WHC to burning address： `wormholed-cli whc_createrawtx_reference`
+3. create payload data：  `wormholed-cli whc_createpayload_burnbch`
+4. add output，add the created wormhole payload data to the transaction output： `wormholed-cli whc_createrawtx_opreturn`
+5. add output to receive changes： `wormholed-cli whc_createrawtx_reference`  (This step can be omitted, the extra amount will be used as transaction fee)
+6. Sign the transaction created：`wormholed-cli signrawtransaction`
+7. Send：`wormholed-cli sendrawtransaction`
+
+Example is as follows
+```
+1. wormholed-cli whc_createrawtx_input "" cda3e90e9ad1cd73ef793263d4b38a2ff6b80c149c04b7faf5540aac35d837d4 2
+return value：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0000000000
+2. wormholed-cli whc_createrawtx_reference "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0000000000" "bchtest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqdmwgvnjkt8whc" 2
+return value：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0100c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000
+3. wormholed-cli whc_createpayload_burnbch
+return value：00000044
+4. wormholed-cli whc_createrawtx_opreturn "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0100c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000" "00000044"
+return value：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0200c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a08087768630000004400000000
+5. wormholed-cli whc_createrawtx_reference "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0200c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a08087768630000004400000000" "qpnprg0h9y8ts3p9257f3sfe7j040yemqql84kh26q" 2.999
+return value：0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000
+6. wormholed-cli signrawtransaction 0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd0200000000ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000
+return value：
+{
+  "hex": "0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd020000006b483045022100a70f30364283c1382d179f85a1f2b5a0bc26e8d11d6ccbd9dce4bde02bb6fc3e02202d3876e4db506de74bc387e7fa6f57e6d8f84188f0e6e3ffa1ee2656d5213104412102cfdb34fee8eb0f17e5fe731094036327e645803050797620f46fc718dc5479d3ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000",
+  "complete": true
+}
+7. wormholed-cli sendrawtransaction 0200000001d437d835ac0a54f5fab7049c140cb8f62f8ab3d4633279ef73cdd19a0ee9a3cd020000006b483045022100a70f30364283c1382d179f85a1f2b5a0bc26e8d11d6ccbd9dce4bde02bb6fc3e02202d3876e4db506de74bc387e7fa6f57e6d8f84188f0e6e3ffa1ee2656d5213104412102cfdb34fee8eb0f17e5fe731094036327e645803050797620f46fc718dc5479d3ffffffff0300c2eb0b000000001976a9140000000000000000000000000000000000376e4388ac00000000000000000a6a080877686300000044601ce011000000001976a9146611a1f7290eb84425553c98c139f49f57933b0088ac00000000
+return value：2b932bf1e73a31e87ce30be3a4f86b9d68beb9e61e9badf399474b95c32180eb
+
+```
+
+### Transfer
+1. Add input:  `wormholed-cli whc_createrawtx_input `
+2. Create payload data：    `wormholed-cli whc_createpayload_simplesend`
+3. Add output, add the created wormhole payload data to the transaction output:  `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Add output to receive the token: `wormholed-cli whc_createrawtx_reference`
+6. Sign the transaction：`wormholed-cli signrawtransaction`
+7. Send: `wormholed-cli sendrawtransaction`
+
+### Transfer all tokens of the specific address
+1. Add input:  `wormholed-cli whc_createrawtx_input `
+2. Create payload data:  `wormholed-cli whc_createpayload_sendall`
+3. Add output, add the created wormhole payload data to the transaction output:   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes:`wormholed-cli whc_createrawtx_reference`（这步可以省略）
+5. Add output to receive the token:`wormholed-cli whc_createrawtx_reference`
+6. Sign the transaction：`wormholed-cli signrawtransaction`
+7. Send: `wormholed-cli sendrawtransaction`
+
+### Create property which has a fixed number of token 
+1. Add input: `wormholed-cli whc_createrawtx_input `
+2. Create payload data:  `wormholed-cli whc_createpayload_issuancefixed`
+3. Add output, add the created wormhole payload data to the transaction output:   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes:`wormholed-cli whc_createrawtx_reference`
+  Result: the new token created at this step will be at the address of step 1 
+5. Sign：`wormholed-cli signrawtransaction`
+6. Send：`wormholed-cli sendrawtransaction`
+
+### Create crowdsale property
+1. Add input:  `wormholed-cli whc_createrawtx_input `
+2. Create payload data： `wormholed-cli whc_createpayload_issuancecrowdsale`
+3. Add output, add the created wormhole payload data to the transaction output:  `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Sign: `wormholed-cli signrawtransaction`
+6. Send: `wormholed-cli sendrawtransaction`
+
+### Participate in crowdsale
+1. Add input:  `wormholed-cli whc_createrawtx_input `
+2. Create payload data: `wormholed-cli whc_createpayload_particrowdsale`
+3. Add output, add the created wormhole payload data to the transaction output:   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Create a crowdsale address output: `wormholed-cli whc_createrawtx_reference`
+6. Sign: `wormholed-cli signrawtransaction`
+7. Send: `wormholed-cli sendrawtransaction`
 
 
+### Close crowdsale
+1. Add input:  `wormholed-cli whc_createrawtx_input `
+2. Create payload data： `wormholed-cli whc_createpayload_closecrowdsale`
+3. Add output, add the created wormhole payload data to the transaction output:   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes:`wormholed-cli whc_createrawtx_reference`
+5. Sign:`wormholed-cli signrawtransaction`
+6. Send: `wormholed-cli sendrawtransaction`
+
+### Create manageale property
+1. Add input：   `wormholed-cli whc_createrawtx_input `
+2. Create payload data： `wormholed-cli whc_createpayload_issuancemanaged`
+3. Add output, add the created wormhole payload data to the transaction output:   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference` 
+5. Sign: `wormholed-cli signrawtransaction`
+6. Send: `wormholed-cli sendrawtransaction`
+
+### Grant token
+1. Add input:  `wormholed-cli whc_createrawtx_input `
+
+2. Create payload data： `wormholed-cli whc_createpayload_grant`
+
+3. Add output and add the created wormhole payload data to the transaction output:    `wormholed-cli whc_createrawtx_opreturn`
+
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+
+5. Create output to grant tokens to：`wormholed-cli whc_createrawtx_reference`
+
+   This step can be omitted if the token is issued to the issuer address
+
+6. Sign：`wormholed-cli signrawtransaction`
+
+7. Send：`wormholed-cli sendrawtransaction`
+
+### Revoke token
+1. Add input：   `wormholed-cli whc_createrawtx_input `
+2. Create payload data： `wormholed-cli whc_createpayload_revoke `
+3. Add output and add the created wormhole payload data to the transaction output:    `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Sign：`wormholed-cli signrawtransaction`
+6. Send：`wormholed-cli sendrawtransaction`
+
+### Send tokens to specific token holders 
+1. Add input：   `wormholed-cli whc_createrawtx_input `(注意：第一个输入必须含有足够的空投token)
+2. Create payload data： `wormholed-cli whc_createpayload_sto`
+3. Add output and add the created wormhole payload data to the transaction output:   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Sign：`wormholed-cli signrawtransaction`
+6. Send：`wormholed-cli sendrawtransaction`
+
+### Change token Issuer
+1. Add input:   `wormholed-cli whc_createrawtx_input `(注意：第一个输入必须为token的发行地址)
+2. Create payload data： `wormholed-cli whc_createpayload_changeissuer`
+3. Add output and add the created wormhole payload data to the transaction output：   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Add outpt which token Issuer changed to：`wormholed-cli whc_createrawtx_reference`
+6. Sign：`wormholed-cli signrawtransaction`
+7. Send：`wormholed-cli sendrawtransaction`
+
+### Freeze token
+
+1. Add input：   `wormholed-cli whc_createrawtx_input `
+2. Create payload data： `wormholed-cli whc_createpayload_freeze`
+3. Add output and add the created wormhole payload data to the transaction output：   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes：`wormholed-cli whc_createrawtx_reference` 
+5. Sign：`wormholed-cli signrawtransaction`
+6. Send：`wormholed-cli sendrawtransaction`
+
+### Unfreeze token
+
+1. Add input：   `wormholed-cli whc_createrawtx_input `
+2. Create payload data： `wormholed-cli whc_createpayload_unfreeze`
+3. Add output and add the created wormhole payload data to the transaction output：   `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes：`wormholed-cli whc_createrawtx_reference` 
+5. Sign：`wormholed-cli signrawtransaction`
+6. Send：`wormholed-cli sendrawtransaction`
+
+### Issue ERC721 property
+
+1. Add input: `wormholed-cli whc_createrawtx_input`
+2. Create payload data: `wormholed-cli whc_createpayload_issueERC721property`
+3. Add output and add the created wormhole payload data to the transaction output:  `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Sign: `wormholed-cli signrawtransaction`
+6. Send: `wormholed-cli sendrawtransaction`
+
+### Issue ERC721 token
+
+1. Add input: `wormholed-cli whc_createrawtx_input`
+2. Create payload data: `wormholed-cli whc_createpayload_issueERC721token`
+3. Add output and add the created wormhole payload data to the transaction output: `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Add output,  the created token is on this address: `wormholed-cli whc_createrawtx_reference`
+6. Sign: `wormholed-cli signrawtransaction`
+7. Send:  `wormholed-cli sendrawtransaction`
+
+### Transfer ERC721 Token
+
+1. Add input: `wormholed-cli whc_createrawtx_input`
+2. Create payload data: `wormholed-cli whc_createpayload_transferERC721token`
+3. Add output and add the created wormhole payload data to the transaction output:  `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Add output，transfer the token to this address: `wormholed-cli whc_createrawtx_reference`
+6. Sign: `wormholed-cli signrawtransaction`
+7. Send: `wormholed-cli sendrawtransaction`
+
+### Revoke ERC721 Token
+
+1. Add input: `wormholed-cli whc_createrawtx_input`
+2. Create payload data: `wormholed-cli whc_createpayload_destroyERC721token`
+3. Add output and add the created wormhole payload data to the transaction output: `wormholed-cli whc_createrawtx_opreturn`
+4. Add output to receive changes: `wormholed-cli whc_createrawtx_reference`
+5. Sign: `wormholed-cli signrawtransaction`
+6. Send: `wormholed-cli sendrawtransaction`
