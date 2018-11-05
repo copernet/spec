@@ -1,7 +1,8 @@
 ## Table 1：Data Query
 
-RPC |feature |
----|----|----
+
+RPC |feature 
+---|----
 whc_getinfo|	Get Wormhole node basic information|
 whc_getactivecrowd|	Get active crowdfunding from a specific address|
 whc_getallbalancesforaddress|	Get all types of token balance from a specific address|
@@ -779,8 +780,8 @@ Solution 2: Create Wormhole transactions through the combined calling of Table 3
 
 ### Table 2：Create Wormhole transaction
 
-RPC	|feature|
----|----|----
+RPC	|feature
+---|----
 whc_burnbchgetwhc|	Burn BCH，get WHC|
 whc_sendissuancefixed|	Issue fixed token|
 whc_sendissuancemanaged	|Issue manageable token|
@@ -1203,8 +1204,8 @@ Examples are as follows:
 
 ### Table 3 ：Create Wormhole protocol payload data
 
-RPC	|feature|
----|----|----
+RPC	|feature
+---|----
 whc_createpayload_burnbch|	Burn BCH, get WHC|
 whc_createpayload_issuancefixed	|Issue fixed token|
 whc_createpayload_issuancemanaged|	Issue manageable token|
@@ -1598,8 +1599,8 @@ wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01
 
 ### Table 4: Create Transaction 
 
-RPC|feature|
----|----|----
+RPC|feature
+---|----
 whc_createrawtx_input|	Append a transaction input to an unsigned transaction|
 whc_createrawtx_opreturn|	Append the payload data of the Wormhole protocol as a new output script to the unsigned transaction|
 whc_createrawtx_reference|	Append a transaction output to an unsigned transaction|
