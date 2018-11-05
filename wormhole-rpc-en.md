@@ -22,16 +22,17 @@ whc_listtransactions	|List Wormhole transactions in node’s wallet|
 whc_getfrozenbalance  | Get frozen balance information of a specific token from a specific address|
 whc_getfrozenbalanceforid | Get all frozen address and amount information of the specified token in the wormhole system|
 whc_getfrozenbalanceforaddress | Get all types of frozen token balance from a specific address|
-whc_getERC721PropertyNews | 获取指定ERC721 资产信息 |
-whc_getERC721TokenNews | 获取指定ERC721 Token信息 |
-whc_getERC721AddressTokens | 获取指定地址、指定资产下，含有的ERC721 Token |
-whc_getERC721PropertyDestroyTokens | 获取指定资产中被销毁的ERC721 Token |
+whc_getERC721PropertyNews | Get ERC721 property information |
+whc_getERC721TokenNews | Get ERC721 token information |
+whc_getERC721AddressTokens | Get the ERC721 token under the specified address and property |
+whc_getERC721PropertyDestroyTokens | Get the destroyed ERC721 tokens under the specified property |
 
 #### whc_getinfo
 Explanation: Get basic information about the current Wormhole node
 Call: wormholed-cli whc_getinfo
 Return value: basic information of the current Wormhole node
 Examples are as follows：
+
 ```
 wormholed-cli whc_getinfo
 {
@@ -642,6 +643,124 @@ Return value field description
 - propertyid : frozen property id
 - balance : frozen balance
 
+#### whc_getERC721PropertyNews
+
+Description：Get the specific ERC721 property information
+
+Call：`wormholed-cli  whc_getERC721PropertyNews 0x01`
+
+parameter：
+
+- propertyid ：ERC721 property id
+
+Return value: property information
+
+Examples are as follows:
+
+```
+wormholed-cli whc_getERC721PropertyNews 0x01
+{
+  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "owner": "bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx",
+  "creationtxid": "9e6691eb08a6e903be567b9209591b50f88d38a872fb0b9e08a3ab5285fbb1af",
+  "creationblock": "63a7ff1de8d5e72c720a325681b3475fd2c0d4450c60c65d8886f48fb6ae5c2b",
+  "name": "copernet",
+  "symbol": "ERC",
+  "data": "wormhole",
+  "propertyurl": "www.wormhole.cash",
+  "totalTokenNumber": 1000,
+  "haveIssuedNumber": 4,
+  "currentValidIssuedNumer": 2
+}
+```
+
+#### whc_getERC721TokenNews
+
+Description: Get ERC721 token information
+
+Call：`wormholed-cli whc_getERC721TokenNews 0x01 0x01 `
+
+parameter：
+
+* propertyid : ERC721 property id
+* tokenid : ERC721 Token id
+
+Return value: token information
+
+Examples are as follows:
+
+```
+wormholed-cli whc_getERC721TokenNews 0x01 0x01
+{
+  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "owner": "bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv",
+  "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241",
+  "creationblock": "4c472fd84343ff63da24d8e34e19bba5c3d891ec2cebff9b1fe25a242f7fa584",
+  "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
+  "tokenurl": "www.wormhole.cash"
+}
+```
+
+#### whc_getERC721AddressTokens
+
+Description：Get the ERC721 Token under the specified address and property
+
+Call：`wormholed-cli whc_getERC721AddressTokens address propertyid `
+
+parameter：
+
+* address: user address
+* propertyid : property id
+
+Return value：token list
+
+Examples are as follows:
+
+```
+wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01
+[
+  {
+    "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+    "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
+    "tokenurl": "www.wormhole.cash",
+    "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241"
+  }
+]
+```
+
+####whc_getERC721PropertyDestroyTokens
+
+Description：Get destroyed ERC721 tokens under the specific property 
+
+Call：`wormholed-cli whc_getERC721PropertyDestroyTokens 0x01`
+
+parameter： 
+
+* propertyid : ERC721 property id
+
+Return value：destroyed token list
+
+Examples are as follows:
+
+```
+wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
+[
+  {
+    "tokenid": "0000000000000000000000000000000000000000000000000000000000000002",
+    "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
+    "tokenurl": "www.wormhole.cash",
+    "creationtxid": "20f114826983e2b3216020e503115bf345fcdee4596e0b0a1079bfd84ff7c927"
+  },
+  {
+    "tokenid": "0000000000000000000000000000000000000000000000000000000000000003",
+    "attribute": "0000000000000000000000000000000000000000000000000000000000000323",
+    "tokenurl": "www.copernet.com",
+    "creationtxid": "f65670326132ee343d0fd6b2ed1fe1d097dd72b33cbe041837ded9f939487cd9"
+  }
+]
+```
+
 #### Create transaction
 
 The following two solutions are used to create a transaction.
@@ -661,21 +780,25 @@ Solution 2: Create Wormhole transactions through the combined calling of Table 3
 ### Table 2：Create Wormhole transaction
 
 RPC	|feature|
----|----|
-whc_burnbchgetwhc|	Burn BCH，get WHC
-whc_sendissuancefixed|	Issue fixed token
-whc_sendissuancemanaged	|Issue manageable token
-whc_sendissuancecrowdsale|	Issue crowdfunding token
-whc_particrowsale|	Participate in crowdfunding
-whc_sendclosecrowdsale|	Close crowdfunding
-whc_sendgrant|	Issue additional amount of manageable token
-whc_sendrevoke|	Destroy amount of manageable token
-whc_send|	transfer
-whc_sendsto|	airdrop
-whc_sendall	|Send all tokens in a specific address to another address
-whc_sendchangeissuer|	Change token issuer
-whc_sendfreeze | Freeze specific token in a specific address
-whc_sendunfreeze |  Unfreeze specific token in a specific address
+---|----|----
+whc_burnbchgetwhc|	Burn BCH，get WHC|
+whc_sendissuancefixed|	Issue fixed token|
+whc_sendissuancemanaged	|Issue manageable token|
+whc_sendissuancecrowdsale|	Issue crowdfunding token|
+whc_particrowsale|	Participate in crowdfunding|
+whc_sendclosecrowdsale|	Close crowdfunding|
+whc_sendgrant|	Issue additional amount of manageable token|
+whc_sendrevoke|	Destroy amount of manageable token|
+whc_send|	transfer|
+whc_sendsto|	airdrop|
+whc_sendall	|Send all tokens in a specific address to another address|
+whc_sendchangeissuer|	Change token issuer|
+whc_sendfreeze | Freeze specific token in a specific address|
+whc_sendunfreeze |  Unfreeze specific token in a specific address|
+whc_issuanceERC721property | Issue ERC721 property |
+whc_issuanceERC721Token | Issue ERC721 token under specific property |
+whc_transferERC721Token | Transfer specific ERC721 token |
+whc_destroyERC721Token | Revoke specific ERC721 token |
 
 #### whc_burnbchgetwhc
 
@@ -988,24 +1111,118 @@ wormholed-cli whc_sendunfreeze qpjua0mvqpnyxddavqys2j3d8wuewarmnvx3kqha2q 320 "1
 4d7e239fbc1a71ce7b27ae7b6bc4c557131973505f0d1701377d0302177390f9
 ```
 
+#### whc_issuanceERC721property  
+
+Description: Issue ERC721 property
+
+Call：`wormholed-cli whc_issuanceERC721property "issueAddress" "name" "symbol" "data" "url" totalNumber`
+
+Parameter：
+
+* issueAddress: issuer of property
+* name: propertye name
+* symbol: property symbol
+* data: property information
+* url:  property url
+
+Return value：transaction hash
+
+Examples are as follows:
+
+```
+wormholed-cli whc_issuanceERC721property qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx s s s s 888
+8fa8ce4b2c0d45ffa3c280311d4e1fb1dfde061ef5272e73fa0366e79615f532
+```
+
+#### whc_issuanceERC721Token  
+
+Description: Issue ERC721 token under the specific property
+
+Call：`wormholed-cli whc_issuanceERC721Token "issueAddress" "receiveaddress" "propertyID" "tokenID" "tokenAttributes" "tokenURL"`
+
+Parameter:
+
+* issueAddress: issuer address
+* receiveaddress: receiver address
+* propertyID: ERC721 property ID (Note: This field must be a hexadecimal string)
+* tokenID: ERC721 Token ID , optional. (Note: This field must be a hexadecimal string)
+* tokenAttributes: Token attributes (Note: This field must be a hexadecimal string)
+* tokenURL: Token url 
+
+Return value: transaction hash
+
+Examples are as follows:
+
+```
+wormholed-cli whc_issuanceERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01 0x01 0x023567 www.wormhole.cash
+e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
+```
+
+#### whc_transferERC721Token  
+
+Description: transfer specific ERC721 token
+
+Call：`wormholed-cli whc_transferERC721Token "ownerAddress" "receiveaddress" 0x01 0x01 `
+
+Parameter:
+
+* ownerAddress: Token owner
+* receiveaddress: Token receiver
+* propertyID: ERC721 property id
+* tokenID: ERC721 Token id
+
+Return value: transaction hash
+
+Examples are as follows:
+
+```
+wormholed-cli whc_transferERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx  bchreg:qraufn9sah7jecdv2xfcmjjrdj8u8l5f3ghvjmsncc 0x01 0x01 
+e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
+```
+
+#### whc_destroyERC721Token  
+
+Description: revoke specific ERC721 token 
+
+Call: `wormholed-cli whc_destroyERC721Token "ownerAddress" 0x01 0x01`
+
+Parametor: 
+
+* ownerAddress: ERC721 Token owner
+* propertyID: ERC721property id
+* tokenID: ERC721 token id
+
+Return value: transaction hash
+
+Examples are as follows:
+
+```
+ wormholed-cli whc_destroyERC721Token "qqzy3s0ueaxkf8hcffhtgkgew8c7f7g85um9a2g74r" "0x01" "0x02"
+ 33d27bca6703c0f837e8f51c8ebb3985d36f899349e84bccb78bff852a308c2b
+```
+
 ### Table 3 ：Create Wormhole protocol payload data
 
 RPC	|feature|
----|----|
-whc_createpayload_burnbch|	Burn BCH, get WHC
-whc_createpayload_issuancefixed	|Issue fixed token
-whc_createpayload_issuancemanaged|	Issue manageable token
-whc_createpayload_issuancecrowdsale|	Issue crowdfunding token
-whc_createpayload_particrowdsale|	Participate crowdfunding
-whc_createpayload_closecrowdsale|	Close crowdfunding
-whc_createpayload_grant|	Additionally issued amount of manageable token
-whc_createpayload_revoke|	Destroyed amount of manageable token
-whc_createpayload_simplesend|	transfer
-whc_createpayload_sto|	airdrop
-whc_createpayload_sendall|	Send all tokens from a specific address to another address
-whc_createpayload_changeissuer|	Change the issuer of token
-whc_createpayload_freeze | Freeze the token of a address
-whc_createpayload_unfreeze | Unfreeze the token of a address
+---|----|----
+whc_createpayload_burnbch|	Burn BCH, get WHC|
+whc_createpayload_issuancefixed	|Issue fixed token|
+whc_createpayload_issuancemanaged|	Issue manageable token|
+whc_createpayload_issuancecrowdsale|	Issue crowdfunding token|
+whc_createpayload_particrowdsale|	Participate crowdfunding|
+whc_createpayload_closecrowdsale|	Close crowdfunding|
+whc_createpayload_grant|	Additionally issued amount of manageable token|
+whc_createpayload_revoke|	Destroyed amount of manageable token|
+whc_createpayload_simplesend|	transfer|
+whc_createpayload_sto|	airdrop|
+whc_createpayload_sendall|	Send all tokens from a specific address to another address|
+whc_createpayload_changeissuer|	Change the issuer of token|
+whc_createpayload_freeze | Freeze the token of a address|
+whc_createpayload_unfreeze | Unfreeze the token of a address|
+whc_createpayload_issueERC721property | Create ERC721 property |
+whc_createpayload_issueERC721token | Create ERC721 token |
+whc_createpayload_transferERC721token | Transfer ERC721 token |
+whc_createpayload_destroyERC721token | Revoke ERC721 token |
 
 #### whc_createpayload_burnbch
 
@@ -1253,7 +1470,7 @@ wormholed-cli  whc_createpayload_changeissuer   115
 
 ```
 
-### whc_createpayload_freeze
+#### whc_createpayload_freeze
 
 Description: Freeze the token of address
 
@@ -1274,7 +1491,7 @@ wormholed-cli whc_createpayload_freeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6flf
 000000b90000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
 ```
 
-### whc_createpayload_unfreeze
+#### whc_createpayload_unfreeze
 
 Description: Unfreeze the token of address
 
@@ -1295,16 +1512,101 @@ wormholed-cli whc_createpayload_unfreeze qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5dgn6f
 000000ba0000014000000002540be400626368746573743a7171706a307975387739756b6737783468383378783761346e6a3866376d7373683564676e36666c667500
 ```
 
+#### whc_createpayload_issueERC721property 
+
+Description: create ERC721 property
+
+Call: `wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.ludete.com"  89977 `
+
+Parameter: 
+
+* name: property name
+* symbol: property symbol
+* data: property information 
+* url: property url
+
+Return value: the hex-encoded payload
+
+Example is as follows
+
+```
+wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.ludete.com"  89977
+00000009016e616d650073796d626f6c0064617461007777772e6c75646574652e636f6d000000000000015f79
+```
+
+####whc_createpayload_issueERC721token 
+
+Description: create ERC721 token
+
+Call: `wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"`
+
+Parameter:
+
+* propertyid : ERC721 property id
+* tokenid : ERC721 token id
+* tokenAttributes : Token attributes
+* tokenURL : Token url
+
+Return value: the hex-encoded payload
+
+Example is as follows
+
+```
+wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"
+00000009020100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000034020000000000000000000000000000000000000000000000000000000000007777772e6c75646574652e636f6d00
+```
+
+####whc_createpayload_transferERC721token
+
+Description: Transfer ERC721 token
+
+Call: `wormholed-cli whc_createpayload_transferERC721token 0x01 0x01` 
+
+Parameter:
+
+* propertyid : ERC721 property id
+* tokenid : ERC721 token id 
+
+Return value: the hex-encoded payload
+
+Example is as follows
+
+```
+wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
+000000090301000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+```
+
+####whc_createpayload_destroyERC721token
+
+Description: Revoke ERC721 token
+
+Call：`wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01 `
+
+Parameter:
+
+* propertyid: ERC721 property id
+* tokenid: ERC721 token id 
+
+Return value: the hex-encoded payload
+
+Example is as follows
+
+```
+wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01
+000000090401000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+```
+
 ### Table 4: Create Transaction 
 
 RPC|feature|
----|----
-whc_createrawtx_input|	Append a transaction input to an unsigned transaction
-whc_createrawtx_opreturn|	Append the payload data of the Wormhole protocol as a new output script to the unsigned transaction
-whc_createrawtx_reference|	Append a transaction output to an unsigned transaction
-whc_createrawtx_change|	Append a transaction output to the specified location of the unsigned transaction output collection
-whc_decodetransaction	|Parse the original transaction of the Wormhole
-whc_createrawtx_input|
+---|----|----
+whc_createrawtx_input|	Append a transaction input to an unsigned transaction|
+whc_createrawtx_opreturn|	Append the payload data of the Wormhole protocol as a new output script to the unsigned transaction|
+whc_createrawtx_reference|	Append a transaction output to an unsigned transaction|
+whc_createrawtx_change|	Append a transaction output to the specified location of the unsigned transaction output collection|
+whc_decodetransaction	|Parse the original transaction of the Wormhole|
+
+#### whc_createrawtx_input
 
 Description: Append a transaction output to an unsigned transaction 
 

@@ -31,6 +31,7 @@ Valid values:
 0: token transfer 
 3: token airdrop 
 4: transfer all tokens
+9: create ERC721 transactions
 50: create fixed-amount token 
 51: create crowdfunding token
 53: stop crowdfunding 
