@@ -742,13 +742,28 @@ Wormhole 系统中通过 `两个唯一标识符`来实现ERC721 功能。
 
 
 
+1. 新增加Wormhole 交易类型 : `WHC_TYPE_ERC721 (9)`，标识ERC721 交易.
+
+2. 新增加 `ERC721Action` 枚举类型， 标识ERC721 交易中相关的操作.
+
+   - ```
+     enum ERC721Action{
+         ISSUE_ERC721_PROPERTY = 1,
+         ISSUE_ERC721_TOKEN,
+         TRANSFER_REC721_TOKEN,
+         DESTROY_ERC721_TOKEN
+     };
+     ```
+
+
+
 #### ERC721 功能的启用高度
 
-主网：
+主网：   
 
 测试网：
 
-回归测试网：
+回归测试网：110
 
 
 
@@ -796,7 +811,7 @@ Wormhole 的有效载荷数据：`6a2a0877686300000009016572633732310048656c6c6f
 48656c6c6f00    //symbol    
 576f726c6400    //data
 6e6968616f00    //url    
-0000000000000064//Number = 100
+0000000000000064//Number = 100    
 ```
 
 示例交易：bae282fc480cece7ab6429ec439fdc92419c5db2fada2372a1647338c841f664

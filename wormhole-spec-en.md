@@ -799,6 +799,23 @@ ERC721 functionality is implemented in the Wormhole system with two unique ident
 
 ### The function of ERC721 implemented in Wormhole
 
+#### Implement the function of ERC721
+
+1. Newly added wormhole transaction type: `WHC_TYPE_ERC721 (9)`, identifies the ERC721 transaction.
+
+2. Newly added enumeration type: `ERC721Action` , identifies the operations involved in the ERC721 transaction.
+
+   - ```
+     enum ERC721Action{
+         ISSUE_ERC721_PROPERTY = 1,
+         ISSUE_ERC721_TOKEN,
+         TRANSFER_REC721_TOKEN,
+         DESTROY_ERC721_TOKEN
+     };
+     ```
+
+
+
 #### ERC721 function enable height
 
 Mainnet：
