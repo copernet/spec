@@ -3,30 +3,31 @@
 
 RPC |feature 
 ---|----
-whc_getinfo|	Get Wormhole node basic information|
-whc_getactivecrowd|	Get active crowdfunding from a specific address|
-whc_getallbalancesforaddress|	Get all types of token balance from a specific address|
-whc_getallbalancesforid	|Get all address and amount information of the specified token in the wormhole system|
-whc_getbalance	|Get Balance information of a specific token from a specific address|
-whc_getbalanceshash	|Get state hash of specific token at the current height of this node|
-whc_getcrowdsale|	Get detailed information from crowdfunding token|
-whc_getcurrentconsensushash	|Get state hash of Wormhole system at the current height in this node|
-whc_getgrants|	Get additional issuance grants from a specific token, destroy information|
-whc_getpayload|	Get Wormhole payload data from a specific transaction|
-whc_getproperty	|Get information from a specific token|
-whc_getsto	|Get detail information from a specific airdrop transaction|
-whc_gettransaction	|Get Wormhole protocol information from a specific transaction|
-whc_listblocktransactions|	Get Wormhole transaction list from a specific block|
-whc_listpendingtransactions|	Get pending Wormhole transaction list |
-whc_listproperties|	List all tokens in Wormhole system|
-whc_listtransactions	|List Wormhole transactions in node’s wallet|
-whc_getfrozenbalance  | Get frozen balance information of a specific token from a specific address|
-whc_getfrozenbalanceforid | Get all frozen address and amount information of the specified token in the wormhole system|
-whc_getfrozenbalanceforaddress | Get all types of frozen token balance from a specific address|
-whc_getERC721PropertyNews | Get ERC721 property information |
-whc_getERC721TokenNews | Get ERC721 token information |
-whc_getERC721AddressTokens | Get the ERC721 token under the specified address and property |
-whc_getERC721PropertyDestroyTokens | Get the destroyed ERC721 tokens under the specified property |
+whc_getinfo|	Get Wormhole node basic information
+whc_getactivecrowd|	Get active crowdfunding from a specific address
+whc_getallbalancesforaddress|	Get all types of token balance from a specific address
+whc_getallbalancesforid	|Get all address and amount information of the specified token in the wormhole system
+whc_getbalance	|Get Balance information of a specific token from a specific address
+whc_getbalanceshash	|Get state hash of specific token at the current height of this node
+whc_getcrowdsale|	Get detailed information from crowdfunding token
+whc_getcurrentconsensushash	|Get state hash of Wormhole system at the current height in this node
+whc_getgrants|	Get additional issuance grants from a specific token, destroy information
+whc_getpayload|	Get Wormhole payload data from a specific transaction
+whc_getproperty	|Get information from a specific token
+whc_getsto	|Get detail information from a specific airdrop transaction
+whc_gettransaction	|Get Wormhole protocol information from a specific transaction
+whc_listblocktransactions|	Get Wormhole transaction list from a specific block
+whc_listpendingtransactions|	Get pending Wormhole transaction list 
+whc_listproperties|	List all tokens in Wormhole system
+whc_listtransactions	|List Wormhole transactions in node’s wallet
+whc_getfrozenbalance  | Get frozen balance information of a specific token from a specific address
+whc_getfrozenbalanceforid | Get all frozen address and amount information of the specified token in the wormhole system
+whc_getfrozenbalanceforaddress | Get all types of frozen token balance from a specific address
+whc_getERC721PropertyNews | Get ERC721 property information 
+whc_getERC721TokenNews | Get ERC721 token information 
+whc_getERC721AddressTokens | Get the ERC721 token under the specified address and property 
+whc_getERC721PropertyDestroyTokens | Get the destroyed ERC721 tokens under the specified property 
+whc_ownerOfERC721Token | Query whether the Token's owner is the specified address 
 
 #### whc_getinfo
 Explanation: Get basic information about the current Wormhole node
@@ -761,6 +762,33 @@ wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
   }
 ]
 ```
+
+
+
+### whc_ownerOfERC721Token  
+
+Description：Query whether the Token's owner is the specified address
+
+Call：`wormholed-cli whc_ownerOfERC721Token 0x01 0x01 address`
+
+parameter：
+
+- propertyid : ERC721 property id
+- tokenid : ERC721 Token id
+- address : query address
+
+Return value：Whether the special ERC721 Token is owned or not by the address；true : own; false: don't own
+
+Examples are as follows:
+
+```
+wormholed-cli  whc_ownerOfERC721Token 0x01 0x01 qpekwx8g5n4xjgrkpnw5d4lhrgywr9jrngn8r8cvh2
+{
+  "own": false
+}
+```
+
+
 
 #### Create transaction
 

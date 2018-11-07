@@ -27,6 +27,7 @@ whc_getERC721PropertyNews | 获取指定ERC721 资产信息
 whc_getERC721TokenNews | 获取指定ERC721 Token信息 
 whc_getERC721AddressTokens | 获取指定地址、指定资产下，含有的ERC721 Token 
 whc_getERC721PropertyDestroyTokens | 获取指定资产中被销毁的ERC721 Token 
+whc_ownerOfERC721Token | 查询该Token的所有者 是否为指定地址 
 
 
 ### whc_getinfo
@@ -855,6 +856,31 @@ wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
     "creationtxid": "f65670326132ee343d0fd6b2ed1fe1d097dd72b33cbe041837ded9f939487cd9"
   }
 ]
+```
+
+
+
+### whc_ownerOfERC721Token  
+
+解释：查询该Token的所有者 是否为指定地址
+
+调用：`wormholed-cli whc_ownerOfERC721Token 0x01 0x01 address`
+
+参数：
+
+* propertyid : ERC721 资产ID
+* tokenid : ERC721 Token ID 
+* address : 指定的查询地址
+
+返回值：改地址是否拥有指定Token；true : 拥有；false: 不拥有.
+
+示例如下
+
+```
+wormholed-cli  whc_ownerOfERC721Token 0x01 0x01 qpekwx8g5n4xjgrkpnw5d4lhrgywr9jrngn8r8cvh2
+{
+  "own": false
+}
 ```
 
 
