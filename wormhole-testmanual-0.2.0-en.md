@@ -1,8 +1,8 @@
-Test manual of wormhole version 0.1.3
+Test manual of wormhole version 0.2.0
 
 一、Test environment build
 
-1. Software download：https://github.com/copernet/wormhole/releases/tag/v0.1.3
+1. Software download：https://github.com/copernet/wormhole/releases/tag/v0.2.0
 
 2. Compile and Installation
 
@@ -14,9 +14,9 @@ Test manual of wormhole version 0.1.3
 
 3. Run and data synchronization
 
-   Run the version 0.1.3 using the following command for the first time：`wormholed -startclean=1 -daemon`
+   Run the version 0.2.0 using the following command for the first time：`wormholed -startclean=1 -daemon`
 
-   Use the following command when the software is restarted the next time after the data synchronization is completed for version 0.1.3：`wormholed -daemon`
+   Use the following command when the software is restarted the next time after the data synchronization is completed for version 0.2.0：`wormholed -daemon`
 
 二、Basic environmental preparation
 
