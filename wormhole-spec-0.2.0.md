@@ -29,7 +29,7 @@
 ```
 wormholed-cli whc_getinfo
 {  
-  "wormholeversion_int": 10003000,
+  "wormholeversion_int": 20000000,
   "wormholeversion": "0.2.0",
   "bitcoincoreversion": "0.18.2",
   "block": 1266612,
