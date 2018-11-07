@@ -8,6 +8,7 @@
 2. Add integration testing for ERC721
 3. Add RPC interfaces for ERC721
 4. Modify part of the RPC interface
+5. Support all features of Bitcoin-ABC (v0.18.2)
 
 ## Warning
 
