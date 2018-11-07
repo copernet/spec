@@ -1,39 +1,41 @@
-Test manual of wormhole version 0.1.3
+测试手册WHC version 0.2.0
 
-一、Test environment build
+一、测试环境搭建
 
-1. Software download：https://github.com/copernet/wormhole/releases/tag/v0.1.3
+1. 软件下载：https://github.com/copernet/wormhole/releases/tag/v0.2.0
 
-2. Compile and Installation
+2. 编译安装
 
-   Unix platform：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
+   Unix平台：https://github.com/copernet/wormhole/blob/master/doc/build-unix.md
 
-   OSX platform：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
+   OSX平台：https://github.com/copernet/wormhole/blob/master/doc/build-osx.md
 
-   Windows platform：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
+   Windows平台：https://github.com/copernet/wormhole/blob/master/doc/build-windows.md
 
-3. Run and data synchronization
+3. 运行及数据同步
 
-   Run the version 0.1.3 using the following command for the first time：`wormholed -startclean=1 -daemon`
+   初次运行0.2.0版本的代码，使用如下命令：`wormholed -startclean=1 -daemon`
 
-   Use the following command when the software is restarted the next time after the data synchronization is completed for version 0.1.3：`wormholed -daemon`
+   当0.2.0版本启动，且数据同步完成后，下次软件重启时，使用如下命令：`wormholed -daemon`
 
-二、Basic environmental preparation
+二、基础环境准备
 
-Base environment preparation includes address generation, WHC acquisition.
+基础环境准备包括地址生成，WHC的获取。
 
-As shown in the https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.0.6.md
+详见https://github.com/copernet/spec/blob/master/wormhole-testmanual-0.0.6.md
 
-三、Functional test
+三、功能测试
 
-1. Issue ERC721 property 
+1. 发行ERC721 资产
 
 ```
 wormholed-cli whc_issuanceERC721property bchreg:qq9py4f509ufykpvx556kt3fwyt40mx09q59q0adf2 name nihao ludete wormhole 999
 c9a4ded68b8099b4fdb541fede3293f0d3c5920809c7876ea05f9f72ebba8233
 ```
 
-2. Get transaction information
+
+
+2. 获取交易信息
 
 ```
 wormholed-cli whc_gettransaction c9a4ded68b8099b4fdb541fede3293f0d3c5920809c7876ea05f9f72ebba8233
@@ -57,7 +59,9 @@ wormholed-cli whc_gettransaction c9a4ded68b8099b4fdb541fede3293f0d3c5920809c7876
 }
 ```
 
-3. Get property information
+
+
+3. 获取资产信息
 
 ```
 wormholed-cli whc_getERC721PropertyNews 0x0b
@@ -76,14 +80,18 @@ wormholed-cli whc_getERC721PropertyNews 0x0b
 }
 ```
 
-4. Issue ERC721 property token
+
+
+4. 发行ERC721 Token
 
 ```
 wormholed-cli whc_issuanceERC721Token  qq9py4f509ufykpvx556kt3fwyt40mx09q59q0adf2 qp8xjgy9wjeu7zkn9zxm609wqk6rre76jqv6zupt0v 0x0b 0x01 0x253678 www.ludete.com
 b18ac8cd6efb98a4ccbf9f96331e05851f370ea44193f63260737080b52bed77
 ```
 
-5. Get transaction information
+
+
+5. 获取交易信息
 
 ```
 wormholed-cli whc_gettransaction b18ac8cd6efb98a4ccbf9f96331e05851f370ea44193f63260737080b52bed77
@@ -108,7 +116,9 @@ wormholed-cli whc_gettransaction b18ac8cd6efb98a4ccbf9f96331e05851f370ea44193f63
 }
 ```
 
-6. Get token information
+
+
+6. 获取Token信息
 
 ```
 wormholed-cli whc_getERC721TokenNews 0x0b 0x01
@@ -123,14 +133,18 @@ wormholed-cli whc_getERC721TokenNews 0x0b 0x01
 }
 ```
 
-7. Transfer ERC721 Token
+
+
+7. 转移ERC721 Token
 
 ```
 wormholed-cli whc_transferERC721Token qp8xjgy9wjeu7zkn9zxm609wqk6rre76jqv6zupt0v qq9py4f509ufykpvx556kt3fwyt40mx09q59q0adf2 0x0b 0x01
 8d02a8f940b5a3dae071d0a1af77c6c35525855cc45c773a47e9260bf31930ba
 ```
 
-8. Get transaction information
+
+
+8. 获取交易信息
 
 ```
 wormholed-cli whc_gettransaction 8d02a8f940b5a3dae071d0a1af77c6c35525855cc45c773a47e9260bf31930ba
@@ -155,7 +169,9 @@ wormholed-cli whc_gettransaction 8d02a8f940b5a3dae071d0a1af77c6c35525855cc45c773
 }
 ```
 
-9. Get the ERC721 Token contained in the specified address under the specified property
+
+
+9. 获取指定资产下，指定地址含有的ERC721 Token
 
 ```
 wormholed-cli whc_getERC721AddressTokens qq9py4f509ufykpvx556kt3fwyt40mx09q59q0adf2 0x0b
@@ -169,14 +185,18 @@ wormholed-cli whc_getERC721AddressTokens qq9py4f509ufykpvx556kt3fwyt40mx09q59q0a
 ]
 ```
 
-10. Revoke ERC721 token
+
+
+10. 销毁ERC721 Token
 
 ```
 wormholed-cli whc_destroyERC721Token qq9py4f509ufykpvx556kt3fwyt40mx09q59q0adf2 0x0b 0x01
 a8dcd8e3d741535e359e1ad41655a2945db26aa7a73f487825366d9ce8c860c7
 ```
 
-11. Get transaction information
+
+
+11. 获取交易信息
 
 ```
 wormholed-cli whc_gettransaction a8dcd8e3d741535e359e1ad41655a2945db26aa7a73f487825366d9ce8c860c7
@@ -201,7 +221,9 @@ wormholed-cli whc_gettransaction a8dcd8e3d741535e359e1ad41655a2945db26aa7a73f487
 }
 ```
 
-12. Get token information
+
+
+12. 获取Token信息
 
 ```
 wormholed-cli whc_getERC721TokenNews 0x0b 0x01
@@ -216,7 +238,9 @@ wormholed-cli whc_getERC721TokenNews 0x0b 0x01
 }
 ```
 
-13. Get the ERC721 token that has been destroyed under the specified property
+
+
+13. 获取指定资产下，已被销毁的ERC721 Token 
 
 ```
 wormholed-cli whc_getERC721PropertyDestroyTokens 0x0b
@@ -229,3 +253,6 @@ wormholed-cli whc_getERC721PropertyDestroyTokens 0x0b
   }
 ]
 ```
+
+
+
