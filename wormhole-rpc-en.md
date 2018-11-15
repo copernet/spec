@@ -28,6 +28,7 @@ whc_getERC721TokenNews | Get ERC721 token information
 whc_getERC721AddressTokens | Get the ERC721 token under the specified address and property 
 whc_getERC721PropertyDestroyTokens | Get the destroyed ERC721 tokens under the specified property 
 whc_ownerOfERC721Token | Query whether the Token's owner is the specified address 
+whc_listERC721PropertyTokens | Lists all ERC721Token that specify the ERC721 property issuance 
 
 #### whc_getinfo
 Explanation: Get basic information about the current Wormhole node
@@ -649,7 +650,7 @@ Return value field description
 
 Description：Get the specific ERC721 property information
 
-Call：`wormholed-cli  whc_getERC721PropertyNews 0x01`
+Call：`wormholed-cli  whc_getERC721PropertyNews 1`
 
 parameter：
 
@@ -660,9 +661,9 @@ Return value: property information
 Examples are as follows:
 
 ```
-wormholed-cli whc_getERC721PropertyNews 0x01
+wormholed-cli whc_getERC721PropertyNews 1
 {
-  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "propertyid": "1",
   "owner": "bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx",
   "creationtxid": "9e6691eb08a6e903be567b9209591b50f88d38a872fb0b9e08a3ab5285fbb1af",
   "creationblock": "63a7ff1de8d5e72c720a325681b3475fd2c0d4450c60c65d8886f48fb6ae5c2b",
@@ -680,7 +681,7 @@ wormholed-cli whc_getERC721PropertyNews 0x01
 
 Description: Get ERC721 token information
 
-Call：`wormholed-cli whc_getERC721TokenNews 0x01 0x01 `
+Call：`wormholed-cli whc_getERC721TokenNews 1 1 `
 
 parameter：
 
@@ -692,10 +693,10 @@ Return value: token information
 Examples are as follows:
 
 ```
-wormholed-cli whc_getERC721TokenNews 0x01 0x01
+wormholed-cli whc_getERC721TokenNews 1 1
 {
-  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
-  "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "propertyid": "1",
+  "tokenid": "1",
   "owner": "bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv",
   "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241",
   "creationblock": "4c472fd84343ff63da24d8e34e19bba5c3d891ec2cebff9b1fe25a242f7fa584",
@@ -720,10 +721,10 @@ Return value：token list
 Examples are as follows:
 
 ```
-wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01
+wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 1
 [
   {
-    "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+    "tokenid": "12",
     "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
     "tokenurl": "www.wormhole.cash",
     "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241"
@@ -735,7 +736,7 @@ wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8
 
 Description：Get destroyed ERC721 tokens under the specific property 
 
-Call：`wormholed-cli whc_getERC721PropertyDestroyTokens 0x01`
+Call：`wormholed-cli whc_getERC721PropertyDestroyTokens 1`
 
 parameter： 
 
@@ -746,16 +747,16 @@ Return value：destroyed token list
 Examples are as follows:
 
 ```
-wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
+wormholed-cli whc_getERC721PropertyDestroyTokens 1
 [
   {
-    "tokenid": "0000000000000000000000000000000000000000000000000000000000000002",
+    "tokenid": "2",
     "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
     "tokenurl": "www.wormhole.cash",
     "creationtxid": "20f114826983e2b3216020e503115bf345fcdee4596e0b0a1079bfd84ff7c927"
   },
   {
-    "tokenid": "0000000000000000000000000000000000000000000000000000000000000003",
+    "tokenid": "3",
     "attribute": "0000000000000000000000000000000000000000000000000000000000000323",
     "tokenurl": "www.copernet.com",
     "creationtxid": "f65670326132ee343d0fd6b2ed1fe1d097dd72b33cbe041837ded9f939487cd9"
@@ -769,7 +770,7 @@ wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
 
 Description：Query whether the Token's owner is the specified address
 
-Call：`wormholed-cli whc_ownerOfERC721Token 0x01 0x01 address`
+Call：`wormholed-cli whc_ownerOfERC721Token 1 1 address`
 
 parameter：
 
@@ -782,13 +783,47 @@ Return value：Whether the special ERC721 Token is owned or not by the address�
 Examples are as follows:
 
 ```
-wormholed-cli  whc_ownerOfERC721Token 0x01 0x01 qpekwx8g5n4xjgrkpnw5d4lhrgywr9jrngn8r8cvh2
+wormholed-cli  whc_ownerOfERC721Token 1 1 qpekwx8g5n4xjgrkpnw5d4lhrgywr9jrngn8r8cvh2
 {
   "own": false
 }
 ```
 
 
+
+### whc_listERC721PropertyTokens 
+
+ Description:  Lists all ERC721Token that specify the ERC721 property issuance
+
+Call:  `wormholed-cli  whc_listERC721PropertyTokens 1`
+
+parameter:
+
+- propertyid : ERC721 property id
+
+Return value：Lists all ERC721Token that specify the ERC721 property issuance
+
+Examples are as follows:
+
+```
+wormholed-cli whc_listERC721PropertyTokens  1
+[
+  {
+    "tokenid": "1",
+    "owner": "bchtest:qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5"
+  },
+  {
+    "tokenid": "2",
+    "owner": "bchtest:qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5"
+  },
+  {
+    "tokenid": "3",
+    "owner": "bchtest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqdmwgvnjkt8whc"
+  }
+]
+```
+
+​	
 
 #### Create transaction
 
@@ -1173,8 +1208,8 @@ Parameter:
 
 * issueAddress: issuer address
 * receiveaddress: receiver address
-* propertyID: ERC721 property ID (Note: This field must be a hexadecimal string)
-* tokenID: ERC721 Token ID , optional. (Note: This field must be a hexadecimal string)
+* propertyID: ERC721 property ID (Note: This field be a decimal string)
+* tokenID: ERC721 Token ID , optional. (Note: This field be a decimal string)
 * tokenAttributes: Token attributes (Note: This field must be a hexadecimal string)
 * tokenURL: Token url 
 
@@ -1183,7 +1218,7 @@ Return value: transaction hash
 Examples are as follows:
 
 ```
-wormholed-cli whc_issuanceERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01 0x01 0x023567 www.wormhole.cash
+wormholed-cli whc_issuanceERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 1 1 0x023567 www.wormhole.cash
 e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
 ```
 
@@ -1191,7 +1226,7 @@ e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
 
 Description: transfer specific ERC721 token
 
-Call：`wormholed-cli whc_transferERC721Token "ownerAddress" "receiveaddress" 0x01 0x01 `
+Call：`wormholed-cli whc_transferERC721Token "ownerAddress" "receiveaddress" 1 1 `
 
 Parameter:
 
@@ -1205,7 +1240,7 @@ Return value: transaction hash
 Examples are as follows:
 
 ```
-wormholed-cli whc_transferERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx  bchreg:qraufn9sah7jecdv2xfcmjjrdj8u8l5f3ghvjmsncc 0x01 0x01 
+wormholed-cli whc_transferERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx  bchreg:qraufn9sah7jecdv2xfcmjjrdj8u8l5f3ghvjmsncc 1 1 
 e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
 ```
 
@@ -1213,7 +1248,7 @@ e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
 
 Description: revoke specific ERC721 token 
 
-Call: `wormholed-cli whc_destroyERC721Token "ownerAddress" 0x01 0x01`
+Call: `wormholed-cli whc_destroyERC721Token "ownerAddress" 1 1`
 
 Parametor: 
 
@@ -1226,7 +1261,7 @@ Return value: transaction hash
 Examples are as follows:
 
 ```
- wormholed-cli whc_destroyERC721Token "qqzy3s0ueaxkf8hcffhtgkgew8c7f7g85um9a2g74r" "0x01" "0x02"
+ wormholed-cli whc_destroyERC721Token "qqzy3s0ueaxkf8hcffhtgkgew8c7f7g85um9a2g74r" "1" "2"
  33d27bca6703c0f837e8f51c8ebb3985d36f899349e84bccb78bff852a308c2b
 ```
 
@@ -1567,7 +1602,7 @@ wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.
 
 Description: create ERC721 token
 
-Call: `wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"`
+Call: `wormholed-cli whc_createpayload_issueERC721token 1 2 0x0234 "www.ludete.com"`
 
 Parameter:
 
@@ -1581,7 +1616,7 @@ Return value: the hex-encoded payload
 Example is as follows
 
 ```
-wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"
+wormholed-cli whc_createpayload_issueERC721token 1 2 0x0234 "www.ludete.com"
 00000009020100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000034020000000000000000000000000000000000000000000000000000000000007777772e6c75646574652e636f6d00
 ```
 
@@ -1589,7 +1624,7 @@ wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.co
 
 Description: Transfer ERC721 token
 
-Call: `wormholed-cli whc_createpayload_transferERC721token 0x01 0x01` 
+Call: `wormholed-cli whc_createpayload_transferERC721token 1 1` 
 
 Parameter:
 
@@ -1601,7 +1636,7 @@ Return value: the hex-encoded payload
 Example is as follows
 
 ```
-wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
+wormholed-cli whc_createpayload_transferERC721token 1 1
 000000090301000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
 ```
 
@@ -1609,7 +1644,7 @@ wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
 
 Description: Revoke ERC721 token
 
-Call：`wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01 `
+Call：`wormholed-cli whc_createpayload_destroyERC721token 1 1 `
 
 Parameter:
 
@@ -1621,7 +1656,7 @@ Return value: the hex-encoded payload
 Example is as follows
 
 ```
-wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01
+wormholed-cli whc_createpayload_destroyERC721token 1 1
 000000090401000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
 ```
 

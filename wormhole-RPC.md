@@ -28,6 +28,7 @@ whc_getERC721TokenNews | 获取指定ERC721 Token信息
 whc_getERC721AddressTokens | 获取指定地址、指定资产下，含有的ERC721 Token 
 whc_getERC721PropertyDestroyTokens | 获取指定资产中被销毁的ERC721 Token 
 whc_ownerOfERC721Token | 查询该Token的所有者 是否为指定地址 
+whc_listERC721PropertyTokens | 列出指定ERC721 资产发行的所有ERC721Token 
 
 
 ### whc_getinfo
@@ -738,7 +739,7 @@ wormholed-cli whc_getfrozenbalanceforaddress qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5d
 
 解释：获取指定的ERC721 资产信息
 
-调用：`wormholed-cli  whc_getERC721PropertyNews 0x01`
+调用：`wormholed-cli  whc_getERC721PropertyNews 1`
 
 参数：
 
@@ -749,9 +750,9 @@ wormholed-cli whc_getfrozenbalanceforaddress qqpj0yu8w9ukg7x4h83xx7a4nj8f7mssh5d
 示例如下
 
 ```
-wormholed-cli whc_getERC721PropertyNews 0x01
+wormholed-cli whc_getERC721PropertyNews 1
 {
-  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "propertyid": "1",
   "owner": "bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx",
   "creationtxid": "9e6691eb08a6e903be567b9209591b50f88d38a872fb0b9e08a3ab5285fbb1af",
   "creationblock": "63a7ff1de8d5e72c720a325681b3475fd2c0d4450c60c65d8886f48fb6ae5c2b",
@@ -771,7 +772,7 @@ wormholed-cli whc_getERC721PropertyNews 0x01
 
 解释：获取指定ERC721 Token信息
 
-调用：`wormholed-cli whc_getERC721TokenNews 0x01 0x01 `
+调用：`wormholed-cli whc_getERC721TokenNews 1 1 `
 
 参数：
 
@@ -783,10 +784,10 @@ wormholed-cli whc_getERC721PropertyNews 0x01
 示例如下
 
 ```
-wormholed-cli whc_getERC721TokenNews 0x01 0x01
+wormholed-cli whc_getERC721TokenNews 1 150
 {
-  "propertyid": "0000000000000000000000000000000000000000000000000000000000000001",
-  "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+  "propertyid": "1",
+  "tokenid": "150",
   "owner": "bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv",
   "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241",
   "creationblock": "4c472fd84343ff63da24d8e34e19bba5c3d891ec2cebff9b1fe25a242f7fa584",
@@ -813,10 +814,10 @@ wormholed-cli whc_getERC721TokenNews 0x01 0x01
 示例如下
 
 ```
-wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01
+wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 1
 [
   {
-    "tokenid": "0000000000000000000000000000000000000000000000000000000000000001",
+    "tokenid": "123",
     "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
     "tokenurl": "www.wormhole.cash",
     "creationtxid": "e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241"
@@ -830,7 +831,7 @@ wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8
 
 解释：获取指定资产中被销毁的ERC721 Token
 
-调用：`wormholed-cli whc_getERC721PropertyDestroyTokens 0x01`
+调用：`wormholed-cli whc_getERC721PropertyDestroyTokens 1`
 
 参数： 
 
@@ -841,16 +842,16 @@ wormholed-cli whc_getERC721AddressTokens bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8
 示例如下
 
 ```
-wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
+wormholed-cli whc_getERC721PropertyDestroyTokens 1
 [
   {
-    "tokenid": "0000000000000000000000000000000000000000000000000000000000000002",
+    "tokenid": "2",
     "attribute": "0000000000000000000000000000000000000000000000000000000000023567",
     "tokenurl": "www.wormhole.cash",
     "creationtxid": "20f114826983e2b3216020e503115bf345fcdee4596e0b0a1079bfd84ff7c927"
   },
   {
-    "tokenid": "0000000000000000000000000000000000000000000000000000000000000003",
+    "tokenid": "24",
     "attribute": "0000000000000000000000000000000000000000000000000000000000000323",
     "tokenurl": "www.copernet.com",
     "creationtxid": "f65670326132ee343d0fd6b2ed1fe1d097dd72b33cbe041837ded9f939487cd9"
@@ -864,7 +865,7 @@ wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
 
 解释：查询该Token的所有者 是否为指定地址
 
-调用：`wormholed-cli whc_ownerOfERC721Token 0x01 0x01 address`
+调用：`wormholed-cli whc_ownerOfERC721Token 1 1 address`
 
 参数：
 
@@ -877,10 +878,44 @@ wormholed-cli whc_getERC721PropertyDestroyTokens 0x01
 示例如下
 
 ```
-wormholed-cli  whc_ownerOfERC721Token 0x01 0x01 qpekwx8g5n4xjgrkpnw5d4lhrgywr9jrngn8r8cvh2
+wormholed-cli  whc_ownerOfERC721Token 1 1 qpekwx8g5n4xjgrkpnw5d4lhrgywr9jrngn8r8cvh2
 {
   "own": false
 }
+```
+
+
+
+### whc_listERC721PropertyTokens
+
+描述： 列出指定ERC721 资产发行的所有ERC721Token
+
+调用：`wormholed-cli whc_listERC721PropertyTokens  1`
+
+参数：
+
+* Propertyid: ERC721 资产ID
+
+返回值：列出指定资产发行的所有Token
+
+示例如下：
+
+```
+wormholed-cli whc_listERC721PropertyTokens  1
+[
+  {
+    "tokenid": "1",
+    "owner": "bchtest:qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5"
+  },
+  {
+    "tokenid": "2",
+    "owner": "bchtest:qz04wg2jj75x34tge2v8w0l6r0repfcvcygv3t7sg5"
+  },
+  {
+    "tokenid": "3",
+    "owner": "bchtest:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqdmwgvnjkt8whc"
+  }
+]
 ```
 
 
@@ -1295,7 +1330,7 @@ wormholed-cli whc_issuanceERC721property qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hv
 示例如下：
 
 ```
-wormholed-cli whc_issuanceERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 0x01 0x01 0x023567 www.wormhole.cash
+wormholed-cli whc_issuanceERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx bchreg:qrvq6ddx42a0e7mmm6ry2uqpdf2s8eg8zcp2sfjesv 1 1 0x023567 www.wormhole.cash
 e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
 ```
 
@@ -1305,7 +1340,7 @@ e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
 
 解释：转移指定的ERC721 Token
 
-调用：`wormholed-cli whc_transferERC721Token "ownerAddress" "receiveaddress" 0x01 0x01 `
+调用：`wormholed-cli whc_transferERC721Token "ownerAddress" "receiveaddress" 1 1 `
 
 参数
 
@@ -1319,7 +1354,7 @@ e99b1b419d7cf827d84b9aef99a9aea53420cd54babe25a440c2a1beb382d241
 示例如下
 
 ```
-wormholed-cli whc_transferERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx  bchreg:qraufn9sah7jecdv2xfcmjjrdj8u8l5f3ghvjmsncc 0x01 0x01 
+wormholed-cli whc_transferERC721Token bchreg:qz5jxq9nxqj54ux2afdv670xyzdcpx75ty926hvelx  bchreg:qraufn9sah7jecdv2xfcmjjrdj8u8l5f3ghvjmsncc 1 1 
 e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
 ```
 
@@ -1329,7 +1364,7 @@ e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
 
 解释：销毁指定的ERC721 Token 
 
-调用：`wormholed-cli whc_destroyERC721Token "ownerAddress" 0x01 0x01`
+调用：`wormholed-cli whc_destroyERC721Token "ownerAddress" 1 1`
 
 参数：
 
@@ -1342,7 +1377,7 @@ e0bdaf619da70d23ec042428b797448bd9fd3674b0a5db926ee008956711c161
 示例如下
 
 ```
- wormholed-cli whc_destroyERC721Token "qqzy3s0ueaxkf8hcffhtgkgew8c7f7g85um9a2g74r" "0x01" "0x02"
+ wormholed-cli whc_destroyERC721Token "qqzy3s0ueaxkf8hcffhtgkgew8c7f7g85um9a2g74r" "1" "2"
  33d27bca6703c0f837e8f51c8ebb3985d36f899349e84bccb78bff852a308c2b
 ```
 
@@ -1706,7 +1741,7 @@ wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.
 
 解释： 创建ERC721 Token
 
-调用：`wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"`
+调用：`wormholed-cli whc_createpayload_issueERC721token 1 2 0x0234 "www.ludete.com"`
 
 参数：
 
@@ -1720,7 +1755,7 @@ wormholed-cli whc_createpayload_issueERC721property "name" "symbol" "data" "www.
 示例如下
 
 ```
-wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.com"
+wormholed-cli whc_createpayload_issueERC721token 1 2 0x0234 "www.ludete.com"
 00000009020100000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000034020000000000000000000000000000000000000000000000000000000000007777772e6c75646574652e636f6d00
 ```
 
@@ -1730,7 +1765,7 @@ wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.co
 
 解释：转移ERC721 Token
 
-调用：`wormholed-cli whc_createpayload_transferERC721token 0x01 0x01` 
+调用：`wormholed-cli whc_createpayload_transferERC721token 1 1` 
 
 参数：
 
@@ -1742,7 +1777,7 @@ wormholed-cli whc_createpayload_issueERC721token 0x01 0x02 0x0234 "www.ludete.co
 示例如下
 
 ```
-wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
+wormholed-cli whc_createpayload_transferERC721token 1 1
 000000090301000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
 ```
 
@@ -1752,7 +1787,7 @@ wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
 
 解释： 销毁ERC721 Token
 
-调用：`wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01 `
+调用：`wormholed-cli whc_createpayload_destroyERC721token 1 1 `
 
 参数：
 
@@ -1764,7 +1799,7 @@ wormholed-cli whc_createpayload_transferERC721token 0x01 0x01
 示例如下
 
 ```
-wormholed-cli whc_createpayload_destroyERC721token 0x01 0x01
+wormholed-cli whc_createpayload_destroyERC721token 1 1
 000000090401000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
 ```
 

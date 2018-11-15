@@ -1,14 +1,8 @@
 ## Version upgrade changes
 
 1. Add new RPC interface
-2. Use decimal string to represent the ERC721 PropertyID and ERC721 TokenID in RPC interface.
+2. The representation of the asset ID and TokenID in the parameters and return values of the RPC interface is reformatted from hexadecimal to decimal.
 3. Add check conditions to the RPC interface.
-
-
-
-## Warning
-
-This version does not involve changes to the Wormhole consensus rule, and does not require a mandatory upgrade if you are currently running on a node version of v0.2.1.
 
 
 
@@ -137,7 +131,24 @@ Description: Transfer of ERC721 Token
 
 Description: Destruction of ERC721 Token
 
-#### 
+#### whc_createpayload_issueERC721property 
+
+Description: create ERC721 property
+
+#### whc_createpayload_issueERC721token 
+
+Description: create ERC721 token
+
+#### whc_createpayload_transferERC721token
+
+Description: Transfer ERC721 token
+
+#### whc_createpayload_destroyERC721token
+
+Description: Revoke ERC721 token
+
+
+
 
 ## Wormhole Spec documents
 

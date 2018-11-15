@@ -1,7 +1,7 @@
 ## 版本升级变动
 
 1. 增加 RPC接口
-2. 重新格式化ERC721资产ID与TokenID的表示形式
+2. 将RPC接口的 接收参数和返回值中 资产ID和TokenID的 表现形式从16进制 重新格式化为10进制。
 3. 在创建交易的 RPC 接口实现中添加 检查条件
 
 
@@ -145,6 +145,23 @@ wormholed-cli whc_getERC721TokenNews 2 65536
 #### whc_destroyERC721Token
 
 描述：销毁ERC721 Token
+
+### whc_createpayload_issueERC721property 
+
+解释：创建ERC721 资产
+
+### whc_createpayload_issueERC721token 
+
+解释： 创建ERC721 Token
+
+### whc_createpayload_transferERC721token
+
+解释：转移ERC721 Token
+
+### whc_createpayload_destroyERC721token
+
+解释： 销毁ERC721 Token
+
 
 
 
