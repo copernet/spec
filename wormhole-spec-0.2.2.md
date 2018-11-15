@@ -5,13 +5,6 @@
 3. 在创建交易的 RPC 接口实现中添加 检查条件
 
 
-
-## 强烈建议
-
-该版本不涉及 Wormhole共识规则的变化，如果你当前运行的节点版本为v0.2.1，不要求强制升级。
-
-
-
 ## Bitcoin-Abc 节点兼容
 
 `Wormhole 0.2.2` 节点兼容 `Bitcoin-Abc 0.18.2`版本，Wormhole节点 也可以被用来作为Bitcoin-Abc 节点，支持Bitcoin-Abc 节点的所有功能。
