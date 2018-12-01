@@ -490,7 +490,7 @@ tokenID(Property ID) |Currency identifier|9
 
 
 Filed | Type | Example|
-----| ---| --- | --- 
+----| ---| --- 
 版本(Transaction version) |Transaction version|0|
 交易类型(Transaction type) |Transaction type|50|
 生态体系(Ecosystem)|Ecosystem|1|
