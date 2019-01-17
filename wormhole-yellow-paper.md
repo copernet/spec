@@ -44,7 +44,7 @@ Wormhole节点启动后，会与网络中其它节点(包含：Bitcoin Cash节�
 
 示例：当创建了一笔Wormhole交易，处理流程如下：
 
-![Wormhole-tx运行流程](https://github.com/copernet/spec/raw/master/image/Wormhole-tx.png)
+![Wormhole-tx运行流程](https://github.com/copernet/spec/raw/master/image/wormhole-tx.png)
 
 ### `Wormhole`账户与`Bitcoin Cash`地址
 `Wormhole`协议采用的是账户模型，每个`Bitcoin Cash`地址是一个账户，每个账户可以含有多种类型的Token。
